@@ -1,0 +1,95 @@
+/* styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  height: 100%;
+  background-image: linear-gradient(to top, #123056, #188565);
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+*,
+html {
+  scroll-behavior: smooth !important;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* /styles/tailwind.css */
+
+@layer components {
+  .nav-menu {
+    @apply hidden;
+  }
+
+  .nav-menu-open {
+    @apply block;
+  }
+}
+
+@media (min-width: 768px) {
+  @layer components {
+    .nav-menu {
+      @apply block;
+    }
+
+    .nav-menu-open {
+      @apply hidden;
+    }
+  }
+}
+
+.stretch-background {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.nft-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.area {
+  width: 100%;
+  padding: 16px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.separator {
+  width: 90%;
+  height: 1px;
+  background-color: #ccc;
+  margin: 16px 0;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .area {
+    padding: 8px;
+    font-size: 16px;
+  }
+
+  .separator {
+    margin: 8px 0;
+  }
+}
+
+#__next {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
