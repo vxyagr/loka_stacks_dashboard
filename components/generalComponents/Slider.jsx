@@ -2,7 +2,7 @@ import React, { useState } from "react";
 //import "./Slider.css"; // Import your CSS file for styling
 
 const Slider = () => {
-  const [value, setValue] = useState(50); // Initial value set to 50
+  const [value, setValue] = useState(30000); // Initial value set to 50
 
   const handleSliderChange = (event) => {
     setValue(event.target.value);
@@ -19,7 +19,7 @@ const Slider = () => {
         onChange={handleSliderChange}
         className="slider rounded-lg"
       />
-      <p className="text-white text-xs lg:text-sm p-2 ">
+      <p className="text-[#93a5bf] text-xs lg:text-sm p-2 ">
         Slide left or right to simulate bitcoin price in the future
       </p>
     </div>

@@ -5,16 +5,20 @@ const DurationCard = () => {
   const cards = [
     {
       title: "1 month",
+      val: 1,
     },
     {
       title: "6 months",
+      val: 6,
     },
 
     {
       title: "1 year",
+      val: 12,
     },
     {
       title: "2 years",
+      val: 24,
     },
   ];
   return (

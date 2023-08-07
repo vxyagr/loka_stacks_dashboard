@@ -22,7 +22,7 @@ const BuyLoka: NextPage = () => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;500&family=Open+Sans:wght@300;500&display=swap"
           rel="stylesheet"
         />
       </Head>
