@@ -1,21 +1,30 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import type { NextPage } from "next";
-import NFTDashboard from "../components/home/NFTDashboard";
-import MiningDashboard from "../components/home/MiningDashboard";
-import LKVDashboard from "../components/home/LKVDashboard";
-import NavigationBar from "../components/Navigation";
 
-import Footer from "../components/Footer";
+import NavigationBar from "../../components/Navigation";
+import AmountCard from "../../components/buyLoka/AmountCard";
+import DurationCard from "../../components/buyLoka/DurationCard";
+import ReviewCard from "../../components/buyLoka/ReviewCard";
+import SimulationCard from "../../components/buyLoka/SimulationCard";
+import DashboardMenu from "../../components/DashboardMenu";
+import Footer from "../../components/Footer";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 
-const Home: NextPage = () => {
+const BuyLoka: NextPage = () => {
   return (
     <div className="bg-btc-pattern">
       <Head>
-        <title>Loka Whitelist</title>
-        <meta content="Loka Whitelist" name="Lokaverse Whitelist" />
+        <title>Loka </title>
+        <meta
+          content="Mint Loka Mining Contract"
+          name="int Loka Mining Contract"
+        />
         <link href="/favico_loka.png" rel="icon" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;500&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       {/* Navigation */}
       <nav className="w-full h-20 sm:h-16 bg-custom-blue">
@@ -23,28 +32,39 @@ const Home: NextPage = () => {
         <NavigationBar />
       </nav>
 
-      {/* Dashboard */}
-      <div className="flex-grow flex flex-col md:flex-row lg:max-w-[80%] mx-auto ">
-        <div className="w-full flex-grow flex flex-col justify-center">
-          <section className="p-10 lg:flex justify-center items-center hidden">
-            <img
-              className="w-20 h-20 object-cover "
-              src="loka_icon.png"
-              alt="Card image"
-            />
-          </section>
-          <section className="p-10 lg:flex justify-center items-center">
-            <NFTDashboard />
-          </section>
-          <section className="p-10 lg:flex justify-center items-center">
-            <LKVDashboard />
-          </section>
-          <section className=" p-5">
-            <MiningDashboard />
-          </section>
-          <section className=" p-10">{/*transaction*/}</section>
+      {/* Buy Loka */}
+      <div className="flex-grow flex flex-col md:flex-row h-full w-full  mx-auto">
+        <div className="hidden lg:flex h-full">
+          <DashboardMenu />
+        </div>
+        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[80%] mx-auto ">
+          <div className="w-full flex-grow flex flex-col ">
+            <section className="p-5 pt-10 pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white">
+              BUY LOKA
+            </section>
+            <div className="flex-grow flex flex-col md:flex-row h-full w-full justify-start items-start text-left  mx-auto">
+              <div className=" lg:max-w-[50%] w-full mx-auto justify-start items-start text-center lg:text-left ">
+                <section className="p-0 lg:flex border-b-[1px] border-[#8293aa]">
+                  <AmountCard />
+                </section>
+                <section className="p-0 lg:flex border-b-[1px] border-[#8293aa]">
+                  <DurationCard />
+                </section>
+                <section className="p-0 lg:flex">
+                  <SimulationCard />
+                </section>
+              </div>
+              <div className="sticky-div lg:max-w-[50%] w-full mx-auto  justify-start items-start lg:text-left text-center">
+                <section className="p-0 lg:flex ">
+                  <ReviewCard />
+                </section>
+              </div>
+            </div>
+            <section className=" p-10">{/*transaction*/}</section>
+          </div>
         </div>
       </div>
+
       <footer className="w-full">
         <Footer />
       </footer>
@@ -129,4 +149,4 @@ const Home: NextPage = () => {
   );
 };*/
 
-export default Home;
+export default BuyLoka;

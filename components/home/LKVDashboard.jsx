@@ -1,7 +1,7 @@
 import React from "react";
 import "tailwindcss/tailwind.css";
 
-const NFTDashboard = () => {
+const LKVDashboard = () => {
   return (
     <div className="p-0 w-full rounded-lg flex flex-col md:flex-row bg-dashboard-gray min-h-[200px]">
       {/* {/*<div className="flex flex-col items-stretch w-full bg-dashboard-blue rounded-lg overflow-hidden min-w-[200px]">
@@ -49,12 +49,9 @@ const NFTDashboard = () => {
               0.3
             </div>
             <div className="bg-yellow-400 rounded-md px-2 py-0 m-4 text-gray-800 text-sm">
-              sBTC
+              LKV
             </div>
           </div>
-          <button className="w-full p-2 bg-yellow-500 text-white rounded-md transition duration-300 ease-in-out hover:bg-blue-600 hover:shadow-lg">
-            Claim
-          </button>
         </div>
       </div>
       <div className="w-full flex flex-col lg:w-1/4 p-4">
@@ -79,4 +76,4 @@ const NFTDashboard = () => {
   );
 };
 
-export default NFTDashboard;
+export default LKVDashboard;
