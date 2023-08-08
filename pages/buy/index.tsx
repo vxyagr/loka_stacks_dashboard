@@ -1,15 +1,23 @@
 import type { NextPage } from "next";
-
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import NavigationBar from "../../components/Navigation";
 import AmountCard from "../../components/buyLoka/AmountCard";
 import DurationCard from "../../components/buyLoka/DurationCard";
 import ReviewCard from "../../components/buyLoka/ReviewCard";
 import SimulationCard from "../../components/buyLoka/SimulationCard";
 import DashboardMenu from "../../components/DashboardMenu";
+import BuyButton from "../../components/buyLoka/BuyButton";
 import Footer from "../../components/Footer";
 import Head from "next/head";
 
 const BuyLoka: NextPage = () => {
+  const dispatch = useDispatch();
+  const currentInvestmentValue = useSelector(
+    (state: any) => state.rootReducer.investment
+  );
+
   return (
     <div className="bg-btc-pattern">
       <Head>
@@ -27,27 +35,27 @@ const BuyLoka: NextPage = () => {
         />
       </Head>
       {/* Navigation */}
-      <nav className="w-full h-20 sm:h-16 bg-custom-blue">
+      <nav className="w-full h-20 sm:h-16">
         {/* Navigation content */}
         <NavigationBar />
       </nav>
 
       {/* Buy Loka */}
-      <div className="flex-grow flex flex-col md:flex-row h-full w-full  mx-auto">
+      <div className="flex-grow flex flex-col md:flex-row h-full w-full lg:w-[85%]  mx-auto  ">
         <div className="hidden lg:flex h-full">
           <DashboardMenu />
         </div>
-        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[80%] mx-auto ">
+        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[80%] max-w-[500px] mx-auto  ">
           <div className="w-full flex-grow flex flex-col ">
             <section className="p-5 pt-10 pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white">
               BUY LOKA
             </section>
             <div className="flex-grow flex flex-col md:flex-row h-full w-full justify-start items-start text-left  mx-auto">
-              <div className=" lg:max-w-[50%] w-full mx-auto justify-start items-start text-center lg:text-left ">
-                <section className="p-0 lg:flex border-b-[1px] border-[#8293aa]">
+              <div className="h-full w-full mx-auto justify-start items-start text-center lg:text-left ">
+                <section className="p-0 lg:flex ">
                   <AmountCard />
                 </section>
-                <section className="p-0 lg:flex border-b-[1px] border-[#8293aa]">
+                <section className="p-0 lg:flex ">
                   <DurationCard />
                 </section>
                 <section className="p-0 lg:flex">
@@ -64,10 +72,12 @@ const BuyLoka: NextPage = () => {
           </div>
         </div>
       </div>
-
-      <footer className="w-full">
+      <div className="w-full sticky-bottom lg:hidden md:hidden flex">
+        <BuyButton />
+      </div>
+      {/*<footer className="w-full">
         <Footer />
-      </footer>
+      </footer> */}
     </div>
   );
 };

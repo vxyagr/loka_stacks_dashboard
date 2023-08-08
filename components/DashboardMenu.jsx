@@ -37,7 +37,7 @@ const DashboardMenu = () => {
   return (
     <div className="min-w-[200px] h-full ml-10 mt-20 grid">
       {cards.map((card, index) => (
-        <div key={index} className="rounded-xl bg-slate-700 mt-5 pl-5">
+        <div key={index} className="rounded-xl mt-5 pl-5">
           <h1 className=" p-2 text-white text-md lexend-light opacity-100 items-center justify-items-start text-left">
             {card.title}
           </h1>

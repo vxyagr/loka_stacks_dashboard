@@ -43,7 +43,9 @@ const NFTDashboard = () => {
 
       <div className="w-full flex flex-col lg:w-1/4 bg-dashboard-blue p-4 rounded-lg ">
         <div className="flex flex-col items-stretch w-full p-5 ">
-          <div className="w-full p-2  text-white font-medium">My Bitcoin</div>
+          <div className="w-full p-2  text-white font-medium">
+            Claimable Bitcoin
+          </div>
           <div className="w-full p-2 flex justify-between items-center">
             <div className="text-5xl font-bold text-white w-full text-right">
               0.3

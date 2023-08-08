@@ -42,7 +42,7 @@ const NavBar = () => {
             >
               <FontAwesomeIcon icon={faBars} className="text-gray-600" />
             </button>
-            <ConnectWallet />
+            {/* <ConnectWallet /> */}
           </div>
           {showMenu && (
             <div className="md:hidden mt-4 space-y-4">

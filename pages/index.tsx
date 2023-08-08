@@ -1,48 +1,64 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import type { NextPage } from "next";
-import NFTDashboard from "../components/home/NFTDashboard";
-import MiningDashboard from "../components/home/MiningDashboard";
-import LKVDashboard from "../components/home/LKVDashboard";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import NavigationBar from "../components/Navigation";
+import NFTDashboard from "../components/home/NFTDashboard";
 
+import DashboardMenu from "../components/DashboardMenu";
 import Footer from "../components/Footer";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 
-const Home: NextPage = () => {
+const BuyLoka: NextPage = () => {
+  const dispatch = useDispatch();
+  const currentInvestmentValue = useSelector(
+    (state: any) => state.rootReducer.investment
+  );
+
   return (
     <div className="bg-btc-pattern">
       <Head>
-        <title>Loka Whitelist</title>
-        <meta content="Loka Whitelist" name="Lokaverse Whitelist" />
+        <title>Loka </title>
+        <meta
+          content="Mint Loka Mining Contract"
+          name="int Loka Mining Contract"
+        />
         <link href="/favico_loka.png" rel="icon" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;500&family=Open+Sans:wght@300;500&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       {/* Navigation */}
-      <nav className="w-full h-20 sm:h-16 bg-custom-blue">
+      <nav className="w-full h-20 sm:h-16">
         {/* Navigation content */}
         <NavigationBar />
       </nav>
 
-      {/* Dashboard */}
-      <div className="flex-grow flex flex-col md:flex-row lg:max-w-[80%] mx-auto ">
-        <div className="w-full flex-grow flex flex-col justify-center">
-          <section className="p-10 lg:flex justify-center items-center hidden">
-            <img
-              className="w-20 h-20 object-cover "
-              src="loka_icon.png"
-              alt="Card image"
-            />
-          </section>
-          <section className="p-10 lg:flex justify-center items-center">
-            <NFTDashboard />
-          </section>
-          <section className="p-10 lg:flex justify-center items-center">
-            <LKVDashboard />
-          </section>
-          <section className=" p-5">
-            <MiningDashboard />
-          </section>
-          <section className=" p-10">{/*transaction*/}</section>
+      {/* Buy Loka */}
+      <div className="flex-grow flex flex-col md:flex-row h-full w-full lg:w-[85%]  mx-auto">
+        <div className="hidden lg:flex h-full">
+          <DashboardMenu />
+        </div>
+        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[80%] max-w-[500px] mx-auto mt-20 ">
+          <div className="w-full flex-grow flex flex-col ">
+            <div className="flex-grow flex flex-col md:flex-row h-full w-full justify-start items-start text-left  mx-auto">
+              <div className="h-full w-full mx-auto justify-start items-start text-center lg:text-left ">
+                <section className="p-2  lg:flex ">
+                  <NFTDashboard />
+                </section>
+                <section className="p-2 lg:flex ">
+                  <NFTDashboard />
+                </section>
+                <section className="p-2 lg:flex">
+                  <NFTDashboard />
+                </section>
+              </div>
+            </div>
+            <section className=" p-10">{/*transaction*/}</section>
+          </div>
         </div>
       </div>
       <footer className="w-full">
@@ -129,4 +145,4 @@ const Home: NextPage = () => {
   );
 };*/
 
-export default Home;
+export default BuyLoka;

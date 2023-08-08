@@ -8,9 +8,17 @@ body {
   padding: 0;
   height: 100%;
   @apply min-h-screen;
-  background-image: linear-gradient(to top, #123056, #188565);
+  /*background-image: linear-gradient(to top, #123056, #188565); */
   margin: 0;
   font-family: "Open Sans", sans-serif;
+}
+
+.background-static {
+  background: linear-gradient(25deg, #123056 40%, #188565);
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 *,
 html {
@@ -144,4 +152,22 @@ a {
   cursor: pointer;
   border-radius: 50%;
   border: 2px black solid;
+}
+
+.number-input-container input::-webkit-inner-spin-button,
+.number-input-container input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  display: none;
+}
+
+.number-input-container input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  display: none;
+}
+
+.sticky-bottom {
+  position: sticky;
+  bottom: 0;
 }
