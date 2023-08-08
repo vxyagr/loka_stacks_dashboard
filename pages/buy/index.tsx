@@ -68,7 +68,7 @@ const BuyLoka: NextPage = () => {
                 </section>
               </div>
             </div>
-            <section className=" p-10">{/*transaction*/}</section>
+            <section className=" p-5">{/*transaction*/}</section>
           </div>
         </div>
       </div>

@@ -103,13 +103,13 @@ const ReviewCard = () => {
                 </div>
               </div>
             ))}
-          </div>
-          <div className="lg:flex md:flex hidden py-10 px-10 justify-center items-center w-full text-center ">
-            <button className="bg-[#79D5C6] w-[60%] rounded-xl text-white min-h-[50px]   leading-none tracking-tight hover:bg-left hover:shadow-xl hover:shadow-blue-400/20 active:scale-95 dark:text-gray-900 sm:text-base md:text-base transition duration-300 ease-in-out hover:bg-[#cff0ea]">
-              <span className="text-dashboard-blue text-2xl hero-lexend font-bold ">
-                BUY
-              </span>
-            </button>
+            <div className="lg:flex md:flex hidden py-5 pl-7 px-2  justify-center items-center w-full text-center ">
+              <button className="bg-[#79D5C6] w-full rounded-xl text-white min-h-[50px]   leading-none tracking-tight hover:bg-left hover:shadow-xl hover:shadow-blue-400/20 active:scale-95 dark:text-gray-900 sm:text-base md:text-base transition duration-300 ease-in-out hover:bg-[#cff0ea]">
+                <span className="text-dashboard-blue text-2xl hero-lexend font-bold ">
+                  BUY
+                </span>
+              </button>
+            </div>
           </div>
         </div>{" "}
       </div>
