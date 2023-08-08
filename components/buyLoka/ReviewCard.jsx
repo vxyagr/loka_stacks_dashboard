@@ -67,13 +67,13 @@ const ReviewCard = () => {
             {info_cards.map((card, index) => (
               <div
                 key={index}
-                className="w-full p-2 flex justify-center items-center lexend-light "
+                className="w-full p-1 flex justify-center items-center lexend-light "
               >
                 <div className="w-full  p-0 flex pl-5 flex-wrap justify-start items-start text-left lexend-light">
-                  <div className=" lg:min-w-[300px] min-w-[180px] flex rounded-xl px-2 py-2  justify-start items-start text-[#a7bfdd] text-left text-xs lg:text-sm">
+                  <div className=" lg:min-w-[200px] min-w-[180px] flex rounded-xl px-2 py-1  justify-start items-start text-[#a7bfdd] text-left text-xs lg:text-sm">
                     {card.title}
                   </div>
-                  <div className=" lg:min-w-[140px] min-w-[140px] lg:w-[140px] w-full flex rounded-xl px-2 py-2  lg:justify-end lg:items-end lg:text-right lg:pl-0 pl-10 text-center  text-white  lg:text-sm">
+                  <div className=" lg:min-w-[140px] min-w-[140px] w-full flex rounded-xl px-2 py-1   pl-10 text-center  text-white text-sm  lg:text-lg">
                     {card.val}
                   </div>
                 </div>
