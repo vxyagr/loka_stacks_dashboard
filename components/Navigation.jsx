@@ -23,16 +23,22 @@ const NavBar = () => {
               </a>
             </Link>
             <div className="hidden md:flex space-x-8">
-              <Link href="#howitworks">
+              {/*} <Link href="#howitworks">
                 <a className="text-gray-600 hover:text-gray-800">
                   How it Works
                 </a>
-              </Link>
+  </Link> 
               <Link href="#">
                 <a className="text-gray-600 hover:text-gray-800">Get Loka</a>
-              </Link>
-              <Link href="#">
-                <a className="text-gray-600 hover:text-gray-800">Docs</a>
+              </Link>*/}
+              <Link href="https://lifeandwork.notion.site/Loka-Mining-Platform-Overview-a214238d662c49739d2bdb8761e2addc?pvs=4">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-gray-800"
+                >
+                  Docs
+                </a>
               </Link>
             </div>
             <button
