@@ -61,12 +61,12 @@ const ReviewCard = () => {
     {
       title: "Energy",
       info: "216 LET ($6.48) x 30 days",
-      val: "$194.4",
+      val: "TBA",
     },
     {
       title: "Hashrate",
       info: "TH/s x 360 days",
-      val: "$2880",
+      val: "TBA",
     },
   ];
   return (
