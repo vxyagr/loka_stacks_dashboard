@@ -1,7 +1,19 @@
 import React from "react";
 import "tailwindcss/tailwind.css";
+import { useSelector, useDispatch } from "react-redux";
+import { changeDuration, changeDurationTitle } from "../../redux/actions";
 
+import { useState, useEffect } from "react";
 const DurationCard = () => {
+  const dispatch = useDispatch();
+  const [durationValue, setDurationValue] = useState(12);
+
+  const handleClick = (newValue, newValue2) => {
+    dispatch(changeDuration(newValue));
+    dispatch(changeDurationTitle(newValue2));
+    setDurationValue(newValue);
+  };
+
   const cards = [
     {
       title: "1 month",
@@ -29,7 +41,7 @@ const DurationCard = () => {
     <div className="p-5 pb-0 w-full rounded-lg  md:flex-row min-h-[100px]">
       {" "}
       <div>
-        <div className="w-full flex flex-col text-white  p-2    ">
+        <div className="w-full flex flex-col text-white  p-2 pl-0    ">
           Choose mining duration
         </div>
         <div className="w-full flex flex-col p-0 rounded-lg ">
@@ -37,15 +49,35 @@ const DurationCard = () => {
             <div className="w-full p-0 flex flex-col justify-center items-center lexend-light">
               <div className="w-full p-0 flex flex-wrap justify-center items-center text-center lexend-light">
                 {cards.map((card, index) => (
-                  <div
+                  <button
+                    onClick={() => handleClick(card.val, card.title)}
                     key={index}
-                    className=" bg-dashboard-blue grid lg:min-w-[120px] min-w-[80px]  rounded-xl px-2 py-2 m-2 justify-center items-center text-white text-center text-xs lg:text-base"
+                    className={`grid lg:min-w-[120px] min-w-[80px]  rounded-xl px-2 py-2 m-2 justify-center items-center text-white text-center text-xs lg:text-base cursor-pointer transition duration-300 ease-in-out
+                    ${
+                      durationValue == card.val
+                        ? "bg-dashboard-gold  text-dashboard-blue font-bold"
+                        : "text-white bg-dashboard-blue  hover:bg-dashboard-gold hover:shadow-blue-400/20 border-[#245366] border-[1px]"
+                    }`}
                   >
-                    <div>{card.title}</div>
-                    <div className="text-xs text-yellow-400">
+                    <div
+                      className={`${
+                        durationValue == card.val
+                          ? "  text-dashboard-blue font-bold"
+                          : "text-white  "
+                      }`}
+                    >
+                      {card.title}
+                    </div>
+                    <div
+                      className={`text-xs ${
+                        durationValue == card.val
+                          ? "  text-dashboard-blue font-bold"
+                          : "text-yellow-400  "
+                      }`}
+                    >
                       {card.discount}
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>

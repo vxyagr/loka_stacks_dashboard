@@ -1,41 +1,32 @@
 import React from "react";
 import "tailwindcss/tailwind.css";
-import { useSelector, useDispatch } from "react-redux";
+
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-
+import { useSelector, useDispatch } from "react-redux";
+import { changeInvestment } from "../../redux/actions";
 const AmountCard = () => {
-  const currentInvestmentValue = useSelector(
-    (state) => state.rootReducer.investment
-  );
   const dispatch = useDispatch();
   const [investmentValue, setInvestmentValue] = useState(100);
-
-  const updateInvestmentValue = async () => {
-    dispatch({
-      type: "SET_INVESTMENT",
-      //payload: investmentValue,
-      payload: investmentValue,
-    });
-  };
-
-  const [value, setValue] = useState(100); // Initial value set to 100
 
   const handleMinusClick = () => {
     const newValue = Math.max(investmentValue - 100, 100); // Ensure the value is at least 100
     setInvestmentValue(newValue);
-    updateInvestmentValue;
+    dispatch(changeInvestment(newValue));
   };
 
   const handlePlusClick = () => {
-    setInvestmentValue(investmentValue + 100);
-    updateInvestmentValue;
+    var newValue = investmentValue + 100;
+
+    dispatch(changeInvestment(newValue));
+    setInvestmentValue(newValue);
   };
 
   const handleInputChange = (event) => {
     const newValue = Math.max(Number(event.target.value), 100); // Ensure the value is at least 100
+    dispatch(changeInvestment(newValue));
     setInvestmentValue(newValue);
   };
 
@@ -43,7 +34,7 @@ const AmountCard = () => {
     <div className="p-5 pb-0 w-full rounded-lg  md:flex-row min-h-[100px]">
       {" "}
       <div>
-        <div className="w-full flex flex-col text-white  p-4   ">
+        <div className="w-full flex flex-col text-white  p-4 pl-0   ">
           Enter your investment amount
         </div>
         <div className="w-full flex flex-col  bg-dashboard-blue p-4 rounded-2xl border-[#245366] border-[1px] ">

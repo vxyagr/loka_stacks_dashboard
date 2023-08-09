@@ -19,7 +19,7 @@ const BuyLoka: NextPage = () => {
   );
 
   return (
-    <div className="bg-btc-pattern">
+    <div className="bg-btc-pattern w-full">
       <Head>
         <title>Loka </title>
         <meta
@@ -41,28 +41,29 @@ const BuyLoka: NextPage = () => {
       </nav>
 
       {/* Buy Loka */}
-      <div className="flex-grow flex flex-col md:flex-row h-full w-full lg:w-[85%]  mx-auto  ">
-        <div className="hidden lg:flex h-full">
-          <DashboardMenu />
-        </div>
-        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[80%] max-w-[500px] mx-auto  ">
+      <div className="flex-grow flex flex-col md:flex-row h-full w-full lg:px-20   mx-auto justify-center items-start text-center">
+        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%] max-w-[500px] mx-auto  ">
           <div className="w-full flex-grow flex flex-col ">
-            <section className="p-5 pt-10 pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white">
-              BUY LOKA
-            </section>
             <div className="flex-grow flex flex-col md:flex-row h-full w-full justify-start items-start text-left  mx-auto">
+              <div className="hidden lg:flex items-end ">
+                <DashboardMenu selectedMenu={"Buy Loka"} />
+              </div>
               <div className="h-full w-full mx-auto justify-start items-start text-center lg:text-left ">
-                <section className="p-0 lg:flex ">
+                <section className="lg:min-h-[80px]p-5 pt-10 pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white">
+                  BUY LOKA
+                </section>
+                <section className="lg:flex ">
                   <AmountCard />
                 </section>
-                <section className="p-0 lg:flex ">
+                <section className="lg:flex ">
                   <DurationCard />
                 </section>
-                <section className="p-0 lg:flex">
+                <section className="lg:flex">
                   <SimulationCard />
                 </section>
               </div>
-              <div className="sticky-div lg:max-w-[50%] w-full mx-auto  justify-start items-start lg:text-left text-center">
+              <div className="sticky-div lg:max-w-[50%] w-full mx-auto mt-20  justify-start items-start lg:text-left text-center">
+                <section className="lg:min-h-[80px]p-5  pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white"></section>
                 <section className="p-0 lg:flex ">
                   <ReviewCard />
                 </section>
@@ -72,7 +73,7 @@ const BuyLoka: NextPage = () => {
           </div>
         </div>
       </div>
-      <div className="w-full sticky-bottom lg:hidden md:hidden flex">
+      <div className="w-full sticky-bottom  lg:hidden md:hidden flex bg-custom-blue  min-h-[120px]">
         <BuyButton />
       </div>
       {/*<footer className="w-full">

@@ -6,10 +6,13 @@ import { HYDRATE, createWrapper } from "next-redux-wrapper";
 const initialState = {
   globalVariable: "",
   stacksAddress: "",
-  btcPriceToday: 0,
-  btcSimulated: 0,
-  investment: 0,
+  btcPriceToday: 30000,
+  btcSimulated: 30000,
+  investment: 100,
   duration: 12,
+  durationTitle: "1 year",
+  exchangeResult: 7,
+  miningResult: 7,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -26,6 +29,12 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, investment: action.payload };
     case "SET_DURATION":
       return { ...state, duration: action.payload };
+    case "SET_DURATION_TITLE":
+      return { ...state, durationTitle: action.payload };
+    case "SET_EXCHANGE_RESULT":
+      return { ...state, exchangeResult: action.payload };
+    case "SET_MINING_RESULT":
+      return { ...state, miningResult: action.payload };
     default:
       return state;
   }

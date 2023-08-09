@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 //import "./Slider.css"; // Import your CSS file for styling
 
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { changeBTCSimulated } from "../../redux/actions";
+
 const Slider = () => {
   const [value, setValue] = useState(30000); // Initial value set to 50
+  const dispatch = useDispatch();
 
   const handleSliderChange = (event) => {
     setValue(event.target.value);
+
+    dispatch(changeBTCSimulated(event.target.value));
   };
 
   return (

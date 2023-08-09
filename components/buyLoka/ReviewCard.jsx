@@ -1,7 +1,29 @@
 import React from "react";
 import "tailwindcss/tailwind.css";
-
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 const ReviewCard = () => {
+  const currentInvestmentValue = useSelector(
+    (state) => state.rootReducer.investment
+  );
+  const currentDurationValue = useSelector(
+    (state) => state.rootReducer.duration
+  );
+  const currentDuration = useSelector(
+    (state) => state.rootReducer.durationTitle
+  );
+
+  const [investmentValue, setInvestmentValue] = useState(0);
+  useEffect(() => {
+    setInvestmentValue(currentInvestmentValue);
+  }, [currentInvestmentValue]);
+
+  const [durationValue, setDurationValue] = useState(0);
+  const [duration, setDuration] = useState(0);
+  useEffect(() => {
+    setDurationValue(currentDurationValue);
+    setDuration(currentDuration);
+  }, [currentDurationValue, currentDuration]);
   const info_cards = [
     {
       title: "Predicted BTC yield",
@@ -48,28 +70,34 @@ const ReviewCard = () => {
     },
   ];
   return (
-    <div className="p-5 w-full rounded-lg  md:flex-row min-h-[100px]">
+    <div className="p-5 lg:pl-10 w-full rounded-lg  md:flex-row min-h-[100px]">
       {" "}
       <div>
         <div className="w-full flex flex-col text-white  p-4 pl-0  ">
           Review
         </div>
         <div className="w-full flex flex-col h-full  bg-dashboard-blue p-0 rounded-lg border-[#245366] border-[1px]  ">
-          <div className="flex flex-col items-stretch w-full p-2 ">
-            <div className="w-full p-2 flex justify-center items-center hero-lexend text-white text-2xl">
-              $3000
+          <div className="flex flex-col items-stretch w-full p-2 pl-10 ">
+            <div className="w-full p-2 flex justify-start items-start hero-lexend text-white text-2xl">
+              {new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(investmentValue)}
             </div>
-            <div className="w-full p-2 flex text-[#FACC15] justify-center items-center text-center hero-lexend text-xl">
-              1 year contract
+            <div className="w-full p-2 flex text-[#FACC15] justify-start items-start text-left hero-lexend text-xl">
+              {duration} contract
             </div>
           </div>
-          <div className="grid flex-col  w-full p-5 m-0 min-h-[200px]  justify-center items-center text-center">
+          <div className="px-10 py-4">
+            <div className="border-t-[1px]"></div>
+          </div>
+          <div className="grid flex-col  w-full pl-10 m-0 min-h-[200px]  justify-start items-start text-left">
             {info_cards.map((card, index) => (
               <div
                 key={index}
                 className="w-full p-1 flex justify-center items-center lexend-light "
               >
-                <div className="w-full  p-0 flex pl-5 flex-wrap justify-start items-start text-left lexend-light">
+                <div className="w-full  p-0 flex  flex-wrap justify-start items-start text-left lexend-light">
                   <div className=" lg:min-w-[200px] min-w-[180px] flex rounded-xl px-2 py-1  justify-start items-start text-[#a7bfdd] text-left text-xs lg:text-sm">
                     {card.title}
                   </div>
@@ -97,7 +125,7 @@ const ReviewCard = () => {
                   <div className=" lg:min-w-[300px] min-w-[180px] flex rounded-xl px-2 py-2  justify-start items-start text-[#a7bfdd] text-left text-xs lg:text-sm">
                     {card.title}
                   </div>
-                  <div className=" lg:min-w-[140px] min-w-[140px] lg:w-[140px] w-full flex rounded-xl px-2 py-2  lg:justify-end lg:items-end lg:text-right lg:pl-0 pl-10 text-center  text-white  lg:text-sm">
+                  <div className=" lg:min-w-[140px] min-w-[140px] lg:w-[140px] w-full flex rounded-xl px-2 py-2  lg:justify-end lg:items-end lg:text-right lg:pl-0 pl-10 text-center  text-white  lg:text-lg">
                     {card.val}
                   </div>
                 </div>

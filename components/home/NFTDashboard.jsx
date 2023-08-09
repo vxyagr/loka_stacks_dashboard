@@ -54,8 +54,8 @@ const NFTDashboard = () => {
               sBTC
             </div>
           </div>
-          <button className="w-full p-2 bg-yellow-500 text-white rounded-md transition duration-300 ease-in-out hover:bg-blue-600 hover:shadow-lg">
-            Claim
+          <button className="w-full p-2 text-yellow-400  rounded-md transition duration-300 ease-in-out hover:bg-blue-600 hover:shadow-lg">
+            $9,000
           </button>
         </div>
       </div>

@@ -4,9 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import NavigationBar from "../components/Navigation";
 import NFTDashboard from "../components/home/NFTDashboard";
-
 import DashboardMenu from "../components/DashboardMenu";
-import Footer from "../components/Footer";
+
 import Head from "next/head";
 
 const BuyLoka: NextPage = () => {
@@ -16,13 +15,10 @@ const BuyLoka: NextPage = () => {
   );
 
   return (
-    <div className="bg-btc-pattern">
+    <div className="bg-btc-pattern w-full">
       <Head>
-        <title>Loka </title>
-        <meta
-          content="Mint Loka Mining Contract"
-          name="int Loka Mining Contract"
-        />
+        <title>Loka</title>
+        <meta content="Loka" name="description" />
         <link href="/favico_loka.png" rel="icon" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -38,32 +34,36 @@ const BuyLoka: NextPage = () => {
       </nav>
 
       {/* Buy Loka */}
-      <div className="flex-grow flex flex-col md:flex-row h-full w-full lg:w-[85%]  mx-auto">
-        <div className="hidden lg:flex h-full">
-          <DashboardMenu />
-        </div>
-        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[80%] max-w-[500px] mx-auto mt-20 ">
+      <div className="flex-grow flex flex-col md:flex-row h-full w-full lg:px-20   mx-auto justify-center items-start text-center">
+        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%] max-w-[500px] mx-auto  ">
           <div className="w-full flex-grow flex flex-col ">
             <div className="flex-grow flex flex-col md:flex-row h-full w-full justify-start items-start text-left  mx-auto">
+              <div className="hidden lg:flex items-end ">
+                <DashboardMenu selectedMenu={"Dashboard"} />
+              </div>
               <div className="h-full w-full mx-auto justify-start items-start text-center lg:text-left ">
-                <section className="p-2  lg:flex ">
+                <section className="lg:min-h-[80px]p-5 pt-10 pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white">
+                  DASHBOARD
+                </section>
+                <section className="lg:flex p-5 ">
                   <NFTDashboard />
                 </section>
-                <section className="p-2 lg:flex ">
+                <section className="lg:flex p-5 ">
                   <NFTDashboard />
                 </section>
-                <section className="p-2 lg:flex">
+                <section className="lg:flex p-5">
                   <NFTDashboard />
                 </section>
               </div>
             </div>
-            <section className=" p-10">{/*transaction*/}</section>
+            <section className=" p-5">{/*transaction*/}</section>
           </div>
         </div>
       </div>
-      <footer className="w-full">
+
+      {/*<footer className="w-full">
         <Footer />
-      </footer>
+      </footer> */}
     </div>
   );
 };
