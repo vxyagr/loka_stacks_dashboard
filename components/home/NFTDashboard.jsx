@@ -48,34 +48,34 @@ const NFTDashboard = () => {
           </div>
           <div className="w-full p-2 flex justify-between items-center">
             <div className="text-5xl font-bold text-white w-full text-right">
-              0.3
+              TBA
             </div>
             <div className="bg-yellow-400 rounded-md px-2 py-0 m-4 text-gray-800 text-sm">
               sBTC
             </div>
           </div>
           <button className="w-full p-2 text-yellow-400  rounded-md transition duration-300 ease-in-out hover:bg-blue-600 hover:shadow-lg">
-            $9,000
+            $TBA
           </button>
         </div>
       </div>
       <div className="w-full flex flex-col lg:w-1/4 p-4">
         <div className="w-full p-2 text-center  text-white font-medium">
-          24h
+          24 yield
         </div>
-        <div className="text-white text-center">coming soon</div>
+        <div className="text-white text-center">TBA</div>
       </div>
       <div className="w-full flex flex-col lg:w-1/4 p-4">
         <div className="w-full p-2 text-center  text-white font-medium">
           Hashrate
         </div>
-        <div className="text-white text-center">coming soon</div>
+        <div className="text-white text-center">TBA</div>
       </div>
       <div className="w-full flex flex-col lg:w-1/4 p-4">
         <div className="w-full p-2 text-center  text-white font-medium">
           ROI
         </div>
-        <div className="text-white text-center">coming soon</div>
+        <div className="text-white text-center">TBA</div>
       </div>
     </div>
   );

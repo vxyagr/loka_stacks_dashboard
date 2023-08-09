@@ -48,12 +48,8 @@ const BuyLoka: NextPage = () => {
                 <section className="lg:flex p-5 ">
                   <NFTDashboard />
                 </section>
-                <section className="lg:flex p-5 ">
-                  <NFTDashboard />
-                </section>
-                <section className="lg:flex p-5">
-                  <NFTDashboard />
-                </section>
+                <section className="lg:flex p-5 "></section>
+                <section className="lg:flex p-5"></section>
               </div>
             </div>
             <section className=" p-5">{/*transaction*/}</section>
