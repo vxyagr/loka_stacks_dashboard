@@ -62,7 +62,7 @@ const ChartCard = ({ btcPrice, investment, btcPriceSimulation }) => {
   const hashPerDay = 0.05;
   const dollarPerTH = 20;
   const days = durationValue * 28;
-  const satsPerHashDay = 5400;
+  const satsPerHashDay = 2700;
   const difficultyFactor = 1.025;
   const [lokaMiningYieldSeries, setLokaMiningYieldSeries] = useState([]);
   const [lokaUSDYieldSeries, setLokaUSDYieldSeries] = useState([]);
