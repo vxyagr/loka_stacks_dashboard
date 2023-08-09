@@ -27,7 +27,7 @@ const ReviewCard = () => {
   const info_cards = [
     {
       title: "Predicted BTC yield",
-      val: 0.15,
+      val: "TBA",
     },
     {
       title: "Energy price",
@@ -35,7 +35,7 @@ const ReviewCard = () => {
     },
     {
       title: "Total Energy Consumption",
-      val: "78,840 LET ($788.4)",
+      val: "TBA",
     },
 
     {
@@ -49,7 +49,7 @@ const ReviewCard = () => {
 
     {
       title: "Energy cost per day",
-      val: "216 LET ($6.48)",
+      val: "TBA",
     },
     {
       title: "Mining Location",
