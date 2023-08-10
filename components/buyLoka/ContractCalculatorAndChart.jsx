@@ -138,7 +138,11 @@ const ContractCalculatorAndChart = ({
         // console.log("increasing difficulty");
       }
       var weeklyYield = (yieldPerDay / difficulty) * 100 * 7;
-      var weeklyYieldinUSD = weeklyYield * satsUSD - electricityCostPerWeek;
+      var weeklyYieldinUSD =
+        i >= 4
+          ? weeklyYield * satsUSD - electricityCostPerWeek
+          : weeklyYield * satsUSD;
+
       compound += weeklyYield;
       usdCompound += weeklyYieldinUSD;
 

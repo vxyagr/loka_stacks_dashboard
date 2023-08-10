@@ -29,6 +29,12 @@ const SimulationCard = () => {
   const exchangeResult = useSelector(
     (state) => state.rootReducer.exchangeResult
   );
+  const powerPerDay = useSelector(
+    (state) => state.rootReducer.electricityPerDay
+  );
+  const electricityCostPerKwh = useSelector(
+    (state) => state.rootReducer.electricityCostPerKwh
+  );
 
   const [currentMiningResult, setCurrentMiningResult] = useState(0);
   const [currentExchangeResult, setCurrentExchangeResult] = useState(0);
@@ -107,7 +113,13 @@ const SimulationCard = () => {
                         </div>
                         <div className="text-xl lg:text-xl">
                           {(
-                            ((currentMiningResult - investmentValue) /
+                            ((currentMiningResult -
+                              (investmentValue +
+                                (
+                                  (powerPerDay / 1000) *
+                                  electricityCostPerKwh
+                                ).toFixed(2) *
+                                  28)) /
                               investmentValue) *
                             100
                           ).toFixed(2)}
