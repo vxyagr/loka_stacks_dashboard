@@ -45,7 +45,7 @@ const BuyLoka: NextPage = () => {
         <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%] max-w-[500px] mx-auto  ">
           <div className="w-full flex-grow flex flex-col ">
             <div className="flex-grow flex flex-col md:flex-row h-full w-full justify-start items-start text-left  mx-auto">
-              <div className="hidden lg:flex items-end ">
+              <div className="sticky-div hidden lg:flex items-end ">
                 <DashboardMenu selectedMenu={"Buy Loka"} />
               </div>
               <div className="h-full w-full mx-auto justify-start items-start text-center lg:text-left ">
