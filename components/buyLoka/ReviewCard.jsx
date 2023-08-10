@@ -79,7 +79,7 @@ const ReviewCard = () => {
     {
       title: "Energy",
       info: LETperDay * durationValue * 28 * 1000 + " LET ($6.48) x 30 days",
-      val: "$" + (LETperDay * 30).toFixed(2),
+      val: "$" + (LETperDay * 28).toFixed(2),
     },
     {
       title: "Hashrate",

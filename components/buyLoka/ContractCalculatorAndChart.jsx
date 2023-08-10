@@ -58,7 +58,7 @@ const ContractCalculatorAndChart = ({
   const dollarPerTH = 20;
 
   const satsPerHashDay = 240;
-  const difficultyFactor = 1.01;
+
   const currentInvestmentValue = investment;
   useEffect(() => {
     setInvestmentValue(currentInvestmentValue);
@@ -116,6 +116,7 @@ const ContractCalculatorAndChart = ({
     //const yieldPerDay = (investmentValue / dollarPerTH) * satsPerHashDay;
     const yieldPerDay = THrented * satsPerHashDay;
     var weeks = (currentDurationValue * 28) / 7;
+    const difficultyFactor = 1.01;
     var difficulty = 100;
     var initialBTCPrice = btcPrice;
     var exchangeBTC = investmentValue / initialBTCPrice;
@@ -134,6 +135,7 @@ const ContractCalculatorAndChart = ({
         difficulty *= difficultyFactor;
       }
       compound += (yieldPerDay / difficulty) * 100 * 7;
+
       exchange_compound += steps;
       yieldSeries.push(compound);
       //var USDvalue = parseFloat(compound) * parseFloat(satsUSD);
@@ -142,6 +144,16 @@ const ContractCalculatorAndChart = ({
         : exchange.push(endSimulationBTC);
 
       usdSeries.push(compound * satsUSD - electricityCostPerWeek);
+      console.log(
+        "yield per day " +
+          yieldPerDay * 7 +
+          " - " +
+          ((yieldPerDay / difficulty) * 100 * 7).toFixed(0) +
+          " usd " +
+          compound * satsUSD +
+          " elPerweek " +
+          electricityCostPerWeek
+      );
       var week_index = i + 1;
       label_.push("Week " + week_index);
     }
