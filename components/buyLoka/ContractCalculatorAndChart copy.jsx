@@ -149,8 +149,7 @@ const ContractCalculatorAndChart = ({
         ? exchange.push(exchange_compound)
         : exchange.push(endSimulationBTC);
 
-      //usdSeries.push(compound * satsUSD - electricityCostPerWeek);
-      usdSeries.push(usdCompound);
+      usdSeries.push(compound * satsUSD - electricityCostPerWeek);
       // console.log("usd " + (yieldPerDay / difficulty) * 100 * 7);
       //if (i > 0)
 
@@ -187,8 +186,8 @@ const ContractCalculatorAndChart = ({
     datasets: [
       {
         label: "exchange",
-        data: exchangeSeries,
-        //data: lokaUSDYieldSeries,
+        // data: exchangeSeries,
+        data: lokaUSDYieldSeries,
         borderColor: "#778CA9",
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         color: "#FFFFFF",
