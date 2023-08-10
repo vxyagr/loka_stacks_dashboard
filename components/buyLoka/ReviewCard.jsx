@@ -44,7 +44,7 @@ const ReviewCard = () => {
   }, [currentDurationValue, currentDuration]);
   const info_cards = [
     {
-      title: "Predicted BTC yield",
+      title: "Projected BTC yield",
       val: currentBTCMined + " BTC (" + currentSatsMined + " sats)",
     },
     {
@@ -53,7 +53,7 @@ const ReviewCard = () => {
     },
     {
       title: "Total Energy Consumption",
-      val: powerPerDay.toFixed(0) + " W per hour",
+      val: powerPerDay.toFixed(0) + " W per day",
     },
 
     {
