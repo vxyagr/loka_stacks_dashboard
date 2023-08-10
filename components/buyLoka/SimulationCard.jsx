@@ -111,7 +111,7 @@ const SimulationCard = () => {
                               investmentValue) *
                             100
                           ).toFixed(2)}
-                          % APR
+                          % ROI
                         </div>
                       </div>
                       <div className=" bg-dashboard-blue grid min-w-[48%]   px-2 pl-0 py-2  justify-center items-center text-white text-center text-xs lg:text-base">
@@ -125,7 +125,7 @@ const SimulationCard = () => {
                               investmentValue) *
                             100
                           ).toFixed(2)}
-                          % APR
+                          % ROI
                         </div>
                       </div>
                     </div>
