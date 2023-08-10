@@ -52,7 +52,7 @@ const ContractCalculatorAndChart = ({
   const dollarPerTH = 20;
 
   const satsPerHashDay = 240;
-  const difficultyFactor = 1.025;
+  const difficultyFactor = 1.01;
   const currentInvestmentValue = investment;
   useEffect(() => {
     setInvestmentValue(currentInvestmentValue);
