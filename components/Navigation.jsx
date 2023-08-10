@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Logo from "./Logo";
+import DashboardMenuMobile from "../components/DashboardMenuMobile";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import ConnectWallet from "../components/ConnectHiroWallet";
 const NavBar = () => {
@@ -50,26 +51,7 @@ const NavBar = () => {
             </button>
             {/* <ConnectWallet /> */}
           </div>
-          {showMenu && (
-            <div className="md:hidden mt-4 space-y-4">
-              <Link href="#howitworks">
-                <a className="block text-gray-600 hover:text-gray-800">
-                  How It Works
-                </a>
-              </Link>
-              <Link href="#">
-                <a className="block text-gray-600 hover:text-gray-800">
-                  Get Loka
-                </a>
-              </Link>
-              <Link href="#">
-                <a className="block text-gray-600 hover:text-gray-800">
-                  Link 3
-                </a>
-              </Link>
-              <Link href="#"></Link>
-            </div>
-          )}
+          {showMenu && <DashboardMenuMobile />}
         </div>
       </nav>
     </header>

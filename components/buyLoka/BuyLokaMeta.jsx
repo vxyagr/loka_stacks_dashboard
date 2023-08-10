@@ -24,7 +24,7 @@ const BuyLokaMeta = ({}) => {
       />
       <meta
         property="og:image"
-        content="https://lokamining.com/loka_icon_1.png"
+        content="https://lokamining.com/loka_icon.png"
       />
 
       {/* <!-- Twitter Meta Tags --> */}
