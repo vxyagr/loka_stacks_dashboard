@@ -128,13 +128,19 @@ const ContractCalculatorAndChart = ({
     var exchange_compound = investmentValue;
     var label_ = [0];
     var compound = 0;
+    var usdCompound = 0;
     var usdSeries = [0];
     var yieldSeries = [0];
+
     for (var i = 0; i < weeks; i++) {
-      if (i % 2 == 0) {
+      if (i % 2 == 0 && i > 0) {
         difficulty *= difficultyFactor;
+        // console.log("increasing difficulty");
       }
-      compound += (yieldPerDay / difficulty) * 100 * 7;
+      var weeklyYield = (yieldPerDay / difficulty) * 100 * 7;
+      var weeklyYieldinUSD = weeklyYield * satsUSD - electricityCostPerWeek;
+      compound += weeklyYield;
+      usdCompound += weeklyYieldinUSD;
 
       exchange_compound += steps;
       yieldSeries.push(compound);
@@ -143,17 +149,21 @@ const ContractCalculatorAndChart = ({
         ? exchange.push(exchange_compound)
         : exchange.push(endSimulationBTC);
 
-      usdSeries.push(compound * satsUSD - electricityCostPerWeek);
-      console.log(
-        "yield per day " +
-          yieldPerDay * 7 +
-          " - " +
-          ((yieldPerDay / difficulty) * 100 * 7).toFixed(0) +
-          " usd " +
-          compound * satsUSD +
-          " elPerweek " +
-          electricityCostPerWeek
-      );
+      usdSeries.push(usdCompound);
+      // console.log("usd " + (yieldPerDay / difficulty) * 100 * 7);
+      //if (i > 0)
+
+      /* i > 0
+        ? usdSeries.push(
+            usdSeries[i - 1] +
+              (yieldPerDay / difficulty) * 100 * 7 * satsUSD -
+              electricityCostPerWeek
+          )
+        : usdSeries.push(
+            (yieldPerDay / difficulty) * 100 * 7 * satsUSD -
+              electricityCostPerWeek
+          ); */
+
       var week_index = i + 1;
       label_.push("Week " + week_index);
     }
