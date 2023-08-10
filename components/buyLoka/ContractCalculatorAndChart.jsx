@@ -1,7 +1,13 @@
 import { Line } from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { changeMiningResult, changeExchangeResult } from "../../redux/actions";
+import {
+  changeMiningResult,
+  changeExchangeResult,
+  changeSatsMined,
+  changeElectricityPerDay,
+  changeTotalTHRented,
+} from "../../redux/actions";
 
 const ContractCalculatorAndChart = ({
   btcPrice,
@@ -28,7 +34,7 @@ const ContractCalculatorAndChart = ({
   useEffect(() => {
     setDurationValue(currentDurationValue);
     setDuration(currentDuration);
-    generateDataSets(currentDurationValue, currentInvestmentValue);
+    calculateAndgenerateDataSets(currentDurationValue, currentInvestmentValue);
     //console.log("current duration discount " + currentDurationDiscount);
   }, [
     currentDurationValue,
@@ -56,33 +62,35 @@ const ContractCalculatorAndChart = ({
   const currentInvestmentValue = investment;
   useEffect(() => {
     setInvestmentValue(currentInvestmentValue);
-    generateDataSets(currentDurationValue, currentInvestmentValue);
+    calculateAndgenerateDataSets(currentDurationValue, currentInvestmentValue);
     dispatch(changeMiningResult(miningResult));
     dispatch(changeExchangeResult(exchangeResult));
   }, [miningResult, exchangeResult]);
 
   useEffect(() => {
     setBtcSim(btcPriceSimulation);
-    generateDataSets(currentDurationValue, currentInvestmentValue);
+    calculateAndgenerateDataSets(currentDurationValue, currentInvestmentValue);
   }, [btcPriceSimulation]);
 
   useEffect(() => {
     setInvestmentValue(currentInvestmentValue);
-    generateDataSets(currentDurationValue, currentInvestmentValue);
+    calculateAndgenerateDataSets(currentDurationValue, currentInvestmentValue);
     //console.log("investment value " + currentInvestmentValue);
   }, [currentInvestmentValue, btcPrice, investmentValue]);
 
-  const generateDataSets = (duration, investment) => {
+  const calculateAndgenerateDataSets = (duration, investment) => {
     const days = currentDurationValue * 28;
-
     const THrented =
       investmentValue /
       days /
       currentThRentPerDay /
-      (1 - currentDurationDiscount / 100);
-    const electricityPerDay = THrented * hardwareEfficiency * 24;
-    const electricityCostPerDay = (electricityPerDay / 1000) * 0.03;
-    const electricityCostPerWeek = electricityCostPerDay * 7;
+      (1 - currentDurationDiscount / 100); //TH's with discount
+
+    dispatch(changeTotalTHRented(THrented.toFixed(0)));
+    const electricityPerDay = THrented * hardwareEfficiency * 24; // Watt
+    dispatch(changeElectricityPerDay(electricityPerDay));
+    const electricityCostPerDay = (electricityPerDay / 1000) * 0.03; //$ value per day
+    const electricityCostPerWeek = electricityCostPerDay * 7; //value per week
     {
       /*console.log(
       " investment " +
@@ -120,30 +128,34 @@ const ContractCalculatorAndChart = ({
     var label_ = [0];
     var compound = 0;
     var usdSeries = [0];
+    var yieldSeries = [0];
     for (var i = 0; i < weeks; i++) {
       if (i % 2 == 0) {
         difficulty *= difficultyFactor;
       }
       compound += (yieldPerDay / difficulty) * 100 * 7;
       exchange_compound += steps;
-      //yieldSeries.push(compound);
+      yieldSeries.push(compound);
       //var USDvalue = parseFloat(compound) * parseFloat(satsUSD);
       i < weeks - 1
         ? exchange.push(exchange_compound)
         : exchange.push(endSimulationBTC);
 
-      usdSeries.push(compound * satsUSD - electricityCostPerDay);
+      usdSeries.push(compound * satsUSD - electricityCostPerWeek);
       var week_index = i + 1;
       label_.push("Week " + week_index);
     }
 
-    //setLokaMiningYieldSeries(yieldSeries);
-
+    setLokaMiningYieldSeries(yieldSeries);
     setLabels(label_);
     setExchangeSeries(exchange);
     setLokaUSDYieldSeries(usdSeries);
     dispatch(changeMiningResult(usdSeries[weeks]));
     dispatch(changeExchangeResult(endSimulationBTC));
+    //console.log(lokaMiningYieldSeries);
+    dispatch(
+      changeSatsMined(yieldSeries[weeks] ? yieldSeries[weeks].toFixed(0) : 0)
+    );
     // /console.log("dispatched ");
   };
 

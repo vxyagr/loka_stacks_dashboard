@@ -16,7 +16,20 @@ const ReviewCard = () => {
   const currentDuration = useSelector(
     (state) => state.rootReducer.durationTitle
   );
+  const powerPerDay = useSelector(
+    (state) => state.rootReducer.electricityPerDay
+  );
+  const electricityCostPerKwh = useSelector(
+    (state) => state.rootReducer.electricityCostPerKwh
+  );
+  const totalTHRented = useSelector((state) => state.rootReducer.totalTHRented);
+  const currentDurationDiscount = useSelector(
+    (state) => state.rootReducer.durationDiscount
+  );
 
+  //constants
+  const currentSatsMined = useSelector((state) => state.rootReducer.satsMined);
+  const currentBTCMined = (currentSatsMined * 0.00000001).toFixed(6);
   const [investmentValue, setInvestmentValue] = useState(0);
   useEffect(() => {
     setInvestmentValue(currentInvestmentValue);
@@ -24,6 +37,7 @@ const ReviewCard = () => {
 
   const [durationValue, setDurationValue] = useState(0);
   const [duration, setDuration] = useState(0);
+  const LETperDay = ((powerPerDay / 1000) * electricityCostPerKwh).toFixed(2);
   useEffect(() => {
     setDurationValue(currentDurationValue);
     setDuration(currentDuration);
@@ -31,7 +45,7 @@ const ReviewCard = () => {
   const info_cards = [
     {
       title: "Predicted BTC yield",
-      val: "TBA",
+      val: currentBTCMined + " BTC (" + currentSatsMined + " sats)",
     },
     {
       title: "Energy price",
@@ -39,7 +53,7 @@ const ReviewCard = () => {
     },
     {
       title: "Total Energy Consumption",
-      val: "TBA",
+      val: powerPerDay.toFixed(0) + " W per hour",
     },
 
     {
@@ -53,7 +67,7 @@ const ReviewCard = () => {
 
     {
       title: "Energy cost per day",
-      val: "TBA",
+      val: "$" + ((powerPerDay / 1000) * electricityCostPerKwh).toFixed(2),
     },
     {
       title: "Mining Location",
@@ -64,13 +78,19 @@ const ReviewCard = () => {
   const price_cards = [
     {
       title: "Energy",
-      info: "216 LET ($6.48) x 30 days",
-      val: "TBA",
+      info: LETperDay * durationValue * 28 * 1000 + " LET ($6.48) x 30 days",
+      val: "$" + (LETperDay * 30).toFixed(2),
     },
     {
       title: "Hashrate",
-      info: "TH/s x 360 days",
-      val: "TBA",
+      info: totalTHRented + "TH/s x " + currentDurationValue * 28 + " days",
+      /*val:
+        "$" +
+        (
+          (totalTHRented * 0.03 * currentDurationValue * 28) /
+          (1 + currentDurationDiscount / 100)
+        ).toFixed(2),*/
+      val: "$" + investmentValue,
     },
   ];
   return (
@@ -86,7 +106,7 @@ const ReviewCard = () => {
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
-              }).format(investmentValue)}
+              }).format(investmentValue + LETperDay * 30)}
             </div>
             <div className="w-full p-2 flex text-[#FACC15] justify-start items-start text-left hero-lexend text-xl">
               {duration} contract

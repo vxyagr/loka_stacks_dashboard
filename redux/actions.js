@@ -31,3 +31,18 @@ export const changeDurationDiscount = (newValue) => ({
   type: "SET_DURATION_DISCOUNT",
   payload: newValue,
 });
+
+export const changeSatsMined = (newValue) => ({
+  type: "SET_SATS_MINED",
+  payload: newValue,
+});
+
+export const changeElectricityPerDay = (newValue) => ({
+  type: "SET_ELECTRICITY_PERDAY",
+  payload: newValue,
+});
+
+export const changeTotalTHRented = (newValue) => ({
+  type: "SET_TOTAL_TH_RENTED",
+  payload: newValue,
+});

@@ -17,6 +17,10 @@ const initialState = {
   thRentPerDay: 0.03,
   hardwareEfficiency: 38,
   durationDiscount: 10,
+  electricityCostPerKwh: 0.03,
+  satsMined: 0.0,
+  electricityPerDay: 0,
+  totalTHRented: 0,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -41,6 +45,12 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, miningResult: action.payload };
     case "SET_DURATION_DISCOUNT":
       return { ...state, durationDiscount: action.payload };
+    case "SET_SATS_MINED":
+      return { ...state, satsMined: action.payload };
+    case "SET_ELECTRICITY_PERDAY":
+      return { ...state, electricityPerDay: action.payload };
+    case "SET_TOTAL_TH_RENTED":
+      return { ...state, totalTHRented: action.payload };
     default:
       return state;
   }
