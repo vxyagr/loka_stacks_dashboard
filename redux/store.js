@@ -16,7 +16,7 @@ const initialState = {
   satsPerDay: 5400,
   thRentPerDay: 0.03,
   hardwareEfficiency: 38,
-  durationDiscount: 10,
+  durationDiscount: 20,
   electricityCostPerKwh: 0.03,
   satsMined: 0.0,
   electricityPerDay: 0,

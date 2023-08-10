@@ -12,7 +12,7 @@ const DurationCard = () => {
   const dispatch = useDispatch();
   const [durationValue, setDurationValue] = useState(12);
   const [durationTitle, setDurationTitle] = useState("1 year");
-  const [durationDiscount, setDurationDiscount] = useState(10);
+  const [durationDiscount, setDurationDiscount] = useState(20);
 
   const handleClick = (newValue, newValue2, discount_value) => {
     //dispatch(changeDuration(newValue));

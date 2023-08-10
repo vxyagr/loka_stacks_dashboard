@@ -41,6 +41,7 @@ const SimulationCard = () => {
   useEffect(() => {
     setCurrentExchangeResult(exchangeResult);
     setCurrentMiningResult(miningResult);
+    //console.log("rsult " + miningResult + " " + exchangeResult);
   }, [miningResult, exchangeResult, btcPriceToday]);
 
   const [btcUSD, setBtcUSD] = useState(30000);
@@ -109,11 +110,11 @@ const SimulationCard = () => {
                           <Logo />
                         </div>
                         <div className="text-2xl lg:text-3xl text-[#FACC15] font-bold">
-                          ${currentMiningResult.toFixed(2)}
+                          ${miningResult.toFixed(2)}
                         </div>
                         <div className="text-xl lg:text-xl">
                           {(
-                            ((currentMiningResult -
+                            ((miningResult -
                               (investmentValue +
                                 (
                                   (powerPerDay / 1000) *
@@ -129,11 +130,11 @@ const SimulationCard = () => {
                       <div className=" bg-dashboard-blue grid min-w-[48%]   px-2 pl-0 py-2  justify-center items-center text-white text-center text-xs lg:text-base">
                         <div className="text-xl lg:text-2xl pb-4">EXCHANGE</div>
                         <div className="text-2xl lg:text-3xl text-[#FACC15] font-bold">
-                          ${currentExchangeResult.toFixed(2)}
+                          ${exchangeResult.toFixed(2)}
                         </div>
                         <div className="text-xl lg:text-xl">
                           {(
-                            ((currentExchangeResult - investmentValue) /
+                            ((exchangeResult - investmentValue) /
                               investmentValue) *
                             100
                           ).toFixed(2)}

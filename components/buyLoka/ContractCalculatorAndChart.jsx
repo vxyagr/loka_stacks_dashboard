@@ -91,8 +91,8 @@ const ContractCalculatorAndChart = ({
     dispatch(changeElectricityPerDay(electricityPerDay));
     const electricityCostPerDay = (electricityPerDay / 1000) * 0.03; //$ value per day
     const electricityCostPerWeek = electricityCostPerDay * 7; //value per week
-    {
-      /*console.log(
+
+    console.log(
       " investment " +
         investmentValue +
         " days " +
@@ -111,8 +111,8 @@ const ContractCalculatorAndChart = ({
         electricityCostPerDay +
         " electricity cost per week " +
         electricityCostPerDay
-    );*/
-    }
+    );
+
     //const yieldPerDay = (investmentValue / dollarPerTH) * satsPerHashDay;
     const yieldPerDay = THrented * satsPerHashDay;
     var weeks = (currentDurationValue * 28) / 7;
@@ -183,7 +183,9 @@ const ContractCalculatorAndChart = ({
     dispatch(
       changeSatsMined(yieldSeries[weeks] ? yieldSeries[weeks].toFixed(0) : 0)
     );
-    // /console.log("dispatched ");
+    console.log(
+      "dispatched " + usdSeries[weeks] + " mining " + endSimulationBTC
+    );
   };
 
   const data = {
