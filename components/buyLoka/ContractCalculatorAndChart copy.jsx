@@ -57,7 +57,7 @@ const ContractCalculatorAndChart = ({
   const hashPerDay = 0.05;
   const dollarPerTH = 20;
 
-  const satsPerHashDay = 240;
+  const satsPerHashDay = 240 * (10 / 100);
 
   const currentInvestmentValue = investment;
   useEffect(() => {
