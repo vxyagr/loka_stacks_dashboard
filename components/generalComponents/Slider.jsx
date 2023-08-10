@@ -8,12 +8,14 @@ import { changeBTCSimulated } from "../../redux/actions";
 const Slider = () => {
   const [value, setValue] = useState(30000); // Initial value set to 50
   const dispatch = useDispatch();
+  const btcPriceToday = useSelector((state) => state.rootReducer.btcPriceToday);
 
   const handleSliderChange = (event) => {
     setValue(event.target.value);
-
-    dispatch(changeBTCSimulated(event.target.value));
   };
+  useEffect(() => {
+    dispatch(changeBTCSimulated(value));
+  }, [value]);
 
   return (
     <div className="slider-container">

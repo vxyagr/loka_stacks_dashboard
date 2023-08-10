@@ -14,7 +14,7 @@ const BuyLokaMeta = ({}) => {
   return (
     <>
       {/* <!-- Facebook Meta Tags --> */}
-      <meta property="og:url" content="https://app.lokamining.com/" />
+      <meta property="og:url" content="https://dev-dashboard.lokamining.com/" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content="Loka Mining" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,7 +24,7 @@ const BuyLokaMeta = ({}) => {
       />
       <meta
         property="og:image"
-        content="https://lokamining.com/loka_icon.png"
+        content="hhttps://dev-dashboard.lokamining.com/loka_icon.png"
       />
 
       {/* <!-- Twitter Meta Tags --> */}

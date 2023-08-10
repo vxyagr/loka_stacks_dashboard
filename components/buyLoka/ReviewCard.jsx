@@ -2,7 +2,11 @@ import React from "react";
 import "tailwindcss/tailwind.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+
 const ReviewCard = () => {
+  const hardwareEfficiency = useSelector(
+    (state) => state.rootReducer.hardwareEfficiency
+  );
   const currentInvestmentValue = useSelector(
     (state) => state.rootReducer.investment
   );
@@ -44,7 +48,7 @@ const ReviewCard = () => {
     },
     {
       title: "Hardware efficiency",
-      val: "30 Joule/TH/s",
+      val: hardwareEfficiency + " Joule/TH/s",
     },
 
     {

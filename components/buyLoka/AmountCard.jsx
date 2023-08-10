@@ -14,21 +14,25 @@ const AmountCard = () => {
   const handleMinusClick = () => {
     const newValue = Math.max(investmentValue - 100, 100); // Ensure the value is at least 100
     setInvestmentValue(newValue);
-    dispatch(changeInvestment(newValue));
+    //dispatch(changeInvestment(newValue));
   };
 
   const handlePlusClick = () => {
     var newValue = investmentValue + 100;
 
-    dispatch(changeInvestment(newValue));
+    //dispatch(changeInvestment(newValue));
     setInvestmentValue(newValue);
   };
 
   const handleInputChange = (event) => {
     const newValue = Math.max(Number(event.target.value), 100); // Ensure the value is at least 100
-    dispatch(changeInvestment(newValue));
+    //dispatch(changeInvestment(newValue));
     setInvestmentValue(newValue);
   };
+
+  useEffect(() => {
+    dispatch(changeInvestment(investmentValue));
+  }, [investmentValue]);
 
   return (
     <div className="p-5 pb-0 w-full rounded-lg  md:flex-row min-h-[100px]">

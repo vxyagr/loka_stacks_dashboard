@@ -1,39 +1,58 @@
 import React from "react";
 import "tailwindcss/tailwind.css";
 import { useSelector, useDispatch } from "react-redux";
-import { changeDuration, changeDurationTitle } from "../../redux/actions";
+import {
+  changeDuration,
+  changeDurationTitle,
+  changeDurationDiscount,
+} from "../../redux/actions";
 
 import { useState, useEffect } from "react";
 const DurationCard = () => {
   const dispatch = useDispatch();
   const [durationValue, setDurationValue] = useState(12);
+  const [durationTitle, setDurationTitle] = useState("1 year");
+  const [durationDiscount, setDurationDiscount] = useState(10);
 
-  const handleClick = (newValue, newValue2) => {
-    dispatch(changeDuration(newValue));
-    dispatch(changeDurationTitle(newValue2));
+  const handleClick = (newValue, newValue2, discount_value) => {
+    //dispatch(changeDuration(newValue));
+    //dispatch(changeDurationTitle(newValue2));
     setDurationValue(newValue);
+    setDurationTitle(newValue2);
+    setDurationDiscount(discount_value);
   };
+
+  useEffect(() => {
+    dispatch(changeDuration(durationValue));
+    dispatch(changeDurationTitle(durationTitle));
+    dispatch(changeDurationDiscount(durationDiscount));
+    //console.log("discount " + durationDiscount);
+  }, [durationValue]);
 
   const cards = [
     {
       title: "1 month",
       discount: "",
+      discount_value: 0,
       val: 1,
     },
     {
       title: "6 months",
       discount: "5% discount",
+      discount_value: 5,
       val: 6,
     },
 
     {
       title: "1 year",
       discount: "10% discount",
+      discount_value: 10,
       val: 12,
     },
     {
       title: "2 years",
       discount: "20% discount",
+      discount_value: 20,
       val: 24,
     },
   ];
@@ -50,7 +69,9 @@ const DurationCard = () => {
               <div className="w-full p-0 flex flex-wrap justify-center items-center text-center lexend-light">
                 {cards.map((card, index) => (
                   <button
-                    onClick={() => handleClick(card.val, card.title)}
+                    onClick={() =>
+                      handleClick(card.val, card.title, card.discount_value)
+                    }
                     key={index}
                     className={`grid lg:min-w-[120px] min-w-[80px]  rounded-xl px-2 py-2 m-2 justify-center items-center text-white text-center text-xs lg:text-base cursor-pointer transition duration-300 ease-in-out
                     ${

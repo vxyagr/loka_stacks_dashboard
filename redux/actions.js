@@ -26,3 +26,8 @@ export const changeExchangeResult = (newValue) => ({
   type: "SET_EXCHANGE_RESULT",
   payload: newValue,
 });
+
+export const changeDurationDiscount = (newValue) => ({
+  type: "SET_DURATION_DISCOUNT",
+  payload: newValue,
+});

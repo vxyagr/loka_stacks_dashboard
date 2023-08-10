@@ -1,6 +1,6 @@
 import React from "react";
 import "tailwindcss/tailwind.css";
-import ChartCard from "./ChartCard";
+import ContractCalculatorAndChart from "./ContractCalculatorAndChart";
 import Slider from "../../components/generalComponents/Slider";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
@@ -35,20 +35,12 @@ const SimulationCard = () => {
   useEffect(() => {
     setCurrentExchangeResult(exchangeResult);
     setCurrentMiningResult(miningResult);
-    console.log(
-      "change detected " +
-        miningResult +
-        " " +
-        exchangeResult +
-        " " +
-        btcPriceToday
-    );
   }, [miningResult, exchangeResult, btcPriceToday]);
 
   const [btcUSD, setBtcUSD] = useState(30000);
   useEffect(() => {
     setBtcUSD(currentBTCSimulated);
-    console.log("btc slide " + currentBTCSimulated);
+    //console.log("btc slide " + currentBTCSimulated);
   }, [currentBTCSimulated]);
 
   const [investmentValue, setInvestmentValue] = useState(0);
@@ -61,6 +53,7 @@ const SimulationCard = () => {
   useEffect(() => {
     setDurationValue(currentDurationValue);
     setDuration(currentDuration);
+    //console.log("duration " + durationValue);
   }, [currentDurationValue, currentDuration]);
 
   return (
@@ -81,7 +74,7 @@ const SimulationCard = () => {
           <div className="flex flex-col items-stretch w-full p-0 ">
             <div className="w-full min-h-[300px] p-0  rounded-t-lg pb-4 flex justify-start items-left  text-center lexend-light text-white ">
               <div className="p-2 w-full bg-[#1b3a61] rounded-lg border-[#2f5381] border-[1px]">
-                <ChartCard
+                <ContractCalculatorAndChart
                   btcPrice={btcPriceToday}
                   investment={investmentValue}
                   btcPriceSimulation={btcUSD}

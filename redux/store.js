@@ -13,6 +13,10 @@ const initialState = {
   durationTitle: "1 year",
   exchangeResult: 7,
   miningResult: 7,
+  satsPerDay: 5400,
+  thRentPerDay: 0.03,
+  hardwareEfficiency: 38,
+  durationDiscount: 10,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -35,6 +39,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, exchangeResult: action.payload };
     case "SET_MINING_RESULT":
       return { ...state, miningResult: action.payload };
+    case "SET_DURATION_DISCOUNT":
+      return { ...state, durationDiscount: action.payload };
     default:
       return state;
   }

@@ -61,19 +61,19 @@ const NFTDashboard = () => {
       </div>
       <div className="w-full flex flex-col lg:w-1/4 p-4">
         <div className="w-full p-2 text-center  text-white font-medium">
-          24 yield
+          Loka Contracts
         </div>
         <div className="text-white text-center">TBA</div>
       </div>
       <div className="w-full flex flex-col lg:w-1/4 p-4">
         <div className="w-full p-2 text-center  text-white font-medium">
-          Hashrate
+          Status
         </div>
         <div className="text-white text-center">TBA</div>
       </div>
       <div className="w-full flex flex-col lg:w-1/4 p-4">
         <div className="w-full p-2 text-center  text-white font-medium">
-          ROI
+          Total BTC Claimed
         </div>
         <div className="text-white text-center">TBA</div>
       </div>
