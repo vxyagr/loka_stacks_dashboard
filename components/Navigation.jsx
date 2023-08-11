@@ -5,7 +5,10 @@ import Link from "next/link";
 import Logo from "./Logo";
 import DashboardMenuMobile from "../components/DashboardMenuMobile";
 import ConnectWallet from "../components/generalComponents/ConnectHiroWallet";
+import { useSelector, useDispatch } from "react-redux";
+
 const NavBar = () => {
+  const btcPriceToday = useSelector((state) => state.rootReducer.btcPriceToday);
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
@@ -31,7 +34,16 @@ const NavBar = () => {
               <Link href="#">
                 <a className="text-gray-600 hover:text-gray-800">Get Loka</a>
               </Link>*/}
-              <Link href="https://lifeandwork.notion.site/Loka-Mining-Platform-Overview-a214238d662c49739d2bdb8761e2addc?pvs=4">
+              <div className="text-white">
+                BTC/USD :{" "}
+                <span className="text-[#79D5C6]">
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }).format(btcPriceToday)}
+                </span>
+              </div>
+              {/*} <Link href="https://lifeandwork.notion.site/Loka-Mining-Platform-Overview-a214238d662c49739d2bdb8761e2addc?pvs=4">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -39,7 +51,7 @@ const NavBar = () => {
                 >
                   Docs
                 </a>
-              </Link>
+                </Link> */}
             </div>
             <button
               className="md:hidden focus:outline-none"

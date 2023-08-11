@@ -71,7 +71,7 @@ const ContractCalculatorAndChart = ({
 
   useEffect(() => {
     setBtcSim(btcSliderValue);
-    console.log("slider value " + btcSliderValue);
+    //console.log("slider value " + btcSliderValue);
     calculateAndgenerateDataSets(currentDurationValue, currentInvestmentValue);
   }, [btcPriceSimulation, btcSliderValue]);
 
@@ -82,12 +82,6 @@ const ContractCalculatorAndChart = ({
   }, [currentInvestmentValue, btcSim, investmentValue]);
 
   function recalculate(investment, duration, thrented, electricityperday) {
-    console.log(
-      "initial TH " + thrented + " initial elec " + electricityperday
-    );
-    console.log(
-      "intial total investment " + (investment + 28 * electricityperday)
-    );
     var check = false;
     var threntupdate = thrented;
     var electricityupdate = 0;
@@ -106,13 +100,11 @@ const ContractCalculatorAndChart = ({
       var electricityCostPerDay_ = (electricityPerDay_ / 1000) * 0.03; //$ value per day
       var totalNewInvestment = newInvestment + 28 * electricityCostPerDay_;
       check = totalNewInvestment < investment ? true : false;
-      console.log("new " + newInvestment + " check " + check);
+      //console.log("new " + newInvestment + " check " + check);
       threntupdate = THrented_;
       electricityupdate = electricityCostPerDay_;
     }
-    console.log(
-      "new TH " + threntupdate + " electricity cost " + electricityupdate
-    );
+
     //return { threntupdate, electricityupdate };
     var THrented = threntupdate; // thrented;
     var electricityCostPerDay = electricityupdate; // electricityperday;
@@ -126,7 +118,7 @@ const ContractCalculatorAndChart = ({
       days /
       currentThRentPerDay /
       (1 - currentDurationDiscount / 100); //TH's with discount
-    console.log("rented " + THrented);
+    //console.log("rented " + THrented);
     if (THrented_ <= 0) return;
 
     const electricityPerDay = THrented_ * hardwareEfficiency * 24; // Watt
@@ -145,7 +137,7 @@ const ContractCalculatorAndChart = ({
       THrented_,
       electricityCostPerDay_
     );
-    console.log("thrent " + THrented);
+    //console.log("thrent " + THrented);
     dispatch(changeTotalTHRented(THrented.toFixed(0)));
     dispatch(changeElectricityPerDay(electricityPerDay));
 

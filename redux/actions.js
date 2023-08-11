@@ -17,6 +17,11 @@ export const changeBTCSimulated = (newValue) => ({
   type: "SET_BTC_SIMULATED",
   payload: newValue,
 });
+
+export const changeBTCPriceToday = (newValue) => ({
+  type: "SET_BTC_PRICE_TODAY",
+  payload: newValue,
+});
 export const changeMiningResult = (newValue) => ({
   type: "SET_MINING_RESULT",
   payload: newValue,

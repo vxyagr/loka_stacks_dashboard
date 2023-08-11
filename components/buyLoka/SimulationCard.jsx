@@ -36,6 +36,8 @@ const SimulationCard = () => {
     (state) => state.rootReducer.electricityCostPerKwh
   );
 
+  const currentBTC = useSelector((state) => state.rootReducer.btcPriceToday);
+
   const [currentMiningResult, setCurrentMiningResult] = useState(0);
   const [currentExchangeResult, setCurrentExchangeResult] = useState(0);
   useEffect(() => {
@@ -44,11 +46,11 @@ const SimulationCard = () => {
     //console.log("rsult " + miningResult + " " + exchangeResult);
   }, [miningResult, exchangeResult, btcPriceToday]);
 
-  const [btcUSD, setBtcUSD] = useState(30000);
+  const [btcUSD, setBtcUSD] = useState(currentBTC);
   useEffect(() => {
     setBtcUSD(currentBTCSimulated);
     //console.log("btc slide " + currentBTCSimulated);
-  }, [currentBTCSimulated]);
+  }, [currentBTCSimulated, currentBTC]);
 
   const [investmentValue, setInvestmentValue] = useState(0);
   useEffect(() => {
@@ -98,7 +100,7 @@ const SimulationCard = () => {
           <div className="flex flex-col  w-full p-0 justify-center items-center text-center ">
             <div className="p-2 w-full bg-[#1b3a61] rounded-lg border-[#2f5381] border-[1px] max-w-[98%] min-h-[300px] justify-center items-center text-center">
               <ContractCalculatorAndChart
-                btcPrice={btcPriceToday}
+                btcPrice={currentBTC}
                 investment={investmentValue}
                 btcPriceSimulation={btcUSD}
               />

@@ -21,6 +21,7 @@
     "@stacks/transactions": "^6.5.0",
     "@use-it/interval": "^1.0.0",
     "autoprefixer": "^10.4.14",
+    "axios": "^1.4.0",
     "ethers": "^5.0.0",
     "next": "^12.1.6",
     "next-redux-wrapper": "^8.1.0",

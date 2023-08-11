@@ -10,6 +10,8 @@ import SimulationCard from "../../components/buyLoka/SimulationCard";
 import DashboardMenu from "../../components/DashboardMenu";
 import BuyButton from "../../components/buyLoka/BuyButton";
 import ConnectWalletPrompt from "../../components/generalComponents/ConnectWalletPrompt";
+import { changeBTCPriceToday } from "../../redux/actions";
+import axios from "axios";
 import { useConnect } from "@stacks/connect-react";
 import { cvToString } from "@stacks/transactions";
 import { StacksMocknet } from "@stacks/network";
@@ -24,14 +26,33 @@ import { userSession } from "../../components/generalComponents/ConnectHiroWalle
 import Head from "next/head";
 
 const BuyLoka: NextPage = () => {
-  /*const stacksAddress = useSelector(
-    (state: any) => state.rootReducer.stacksAddress
-  ); */
   const stacksAddress = 1;
   const dispatch = useDispatch();
   const currentInvestmentValue = useSelector(
     (state: any) => state.rootReducer.investment
   );
+  const [bitcoinPrice, setBitcoinPrice] = useState(null);
+
+  useEffect(() => {
+    // Fetch Bitcoin price from CoinGecko API
+    axios
+      .get(
+        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
+      )
+      .then((response) => {
+        var btc = response.data.bitcoin.usd;
+        setBitcoinPrice(btc);
+        dispatch(changeBTCPriceToday(btc));
+        console.log("btc price today " + btc);
+      })
+      .catch((error) => {
+        console.error("Error fetching Bitcoin price:", error);
+      });
+  }, []);
+
+  /*const stacksAddress = useSelector(
+    (state: any) => state.rootReducer.stacksAddress
+  ); */
 
   return (
     <div className="bg-btc-pattern w-full">
