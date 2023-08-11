@@ -84,7 +84,7 @@ const ReviewCard = () => {
   ];
 
   const price_cards = [
-    {
+    /*  {
       title: "Energy",
       info:
         LETperDay.toFixed(0) +
@@ -92,7 +92,7 @@ const ReviewCard = () => {
         electricityCostPerDay +
         ") x 28 days",
       val: "$" + ((LETperDay * 28) / 1000).toFixed(2),
-    },
+    },*/
     {
       title: "Hashrate",
       info: totalTHRented + "TH/s x " + currentDurationValue * 28 + " days",
@@ -118,7 +118,7 @@ const ReviewCard = () => {
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
-              }).format(investmentValue + electricityCostPerDay * 28)}
+              }).format(investmentValue)}
             </div>
             <div className="w-full p-2 flex text-[#09a668] justify-start items-start text-left hero-lexend text-xl">
               {totalTHRented} TH/s
@@ -179,7 +179,7 @@ const ReviewCard = () => {
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
-              }).format(investmentValue + electricityCostPerDay * 28)}
+              }).format(investmentValue)}
             </div>
             <div className="lg:flex md:flex hidden py-5 pl-7 px-2  justify-center items-center w-full text-center ">
               <button className="bg-[#79D5C6] w-full rounded-xl text-white min-h-[50px]   leading-none tracking-tight hover:bg-left hover:shadow-xl hover:shadow-blue-400/20 active:scale-95 dark:text-gray-900 sm:text-base md:text-base transition duration-300 ease-in-out hover:bg-[#cff0ea]">

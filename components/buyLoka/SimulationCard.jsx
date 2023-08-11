@@ -63,6 +63,23 @@ const SimulationCard = () => {
     //console.log("duration " + durationValue);
   }, [currentDurationValue, currentDuration]);
 
+  function calculateBudgetSplit(budget, duration) {
+    // Define constants for artist fee per day and tool fee per artist
+    const HashrateRentPerday = 100;
+    const electricityPerKwh = 50;
+
+    // Calculate the number of artists needed based on duration
+    const numberOfHashrate = Math.ceil(
+      budget / (HashrateRentPerday * duration)
+    );
+
+    // Calculate artist fee and tool fee
+    const hashrateFee = HashrateRentPerday * numberOfHashrate * duration;
+    const electricityFee = electricityPerKwh * numberOfArtists;
+
+    return { hashrateFee, electricityFee };
+  }
+
   return (
     <div className="p-5 lg:pl-10 w-full rounded-lg  md:flex-row min-h-[100px]">
       {" "}
@@ -123,13 +140,7 @@ const SimulationCard = () => {
                         </div>
                         <div className="text-xl lg:text-xl">
                           {(
-                            ((currentMiningResult -
-                              (investmentValue +
-                                (
-                                  (powerPerDay / 1000) *
-                                  electricityCostPerKwh
-                                ).toFixed(2) *
-                                  28)) /
+                            ((currentMiningResult - investmentValue) /
                               investmentValue) *
                             100
                           ).toFixed(2)}
