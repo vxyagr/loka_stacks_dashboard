@@ -100,6 +100,16 @@ const SimulationCard = () => {
                 }).format(investmentValue)}{" "}
                 of investment after {duration}
               </div>
+              <div className="text-white  pb-4">
+                +
+                <span className="text-[#09a668]">
+                  {" $"}
+                  {((powerPerDay / 1000) * electricityCostPerKwh * 28).toFixed(
+                    2
+                  )}
+                </span>{" "}
+                for the first 28 days electricity cost
+              </div>
               <div className="w-full flex flex-col p-0 rounded-lg pb-4 ">
                 <div className="flex flex-col items-stretch w-full p-0 ">
                   <div className="w-full p-0 flex flex-col justify-center items-center lexend-light">
@@ -109,11 +119,11 @@ const SimulationCard = () => {
                           <Logo />
                         </div>
                         <div className="text-2xl lg:text-3xl text-[#FACC15] font-bold">
-                          ${miningResult.toFixed(2)}
+                          ${currentMiningResult.toFixed(2)}
                         </div>
                         <div className="text-xl lg:text-xl">
                           {(
-                            ((miningResult -
+                            ((currentMiningResult -
                               (investmentValue +
                                 (
                                   (powerPerDay / 1000) *
@@ -129,11 +139,11 @@ const SimulationCard = () => {
                       <div className=" bg-dashboard-blue grid min-w-[48%]   px-2 pl-0 py-2  justify-center items-center text-white text-center text-xs lg:text-base">
                         <div className="text-xl lg:text-2xl pb-4">EXCHANGE</div>
                         <div className="text-2xl lg:text-3xl text-[#FACC15] font-bold">
-                          ${exchangeResult.toFixed(2)}
+                          ${currentExchangeResult.toFixed(2)}
                         </div>
                         <div className="text-xl lg:text-xl">
                           {(
-                            ((exchangeResult - investmentValue) /
+                            ((currentExchangeResult - investmentValue) /
                               investmentValue) *
                             100
                           ).toFixed(2)}

@@ -31,6 +31,7 @@ const ContractCalculatorAndChart = ({
   const currentDurationDiscount = useSelector(
     (state) => state.rootReducer.durationDiscount
   );
+  const btcSliderValue = useSelector((state) => state.rootReducer.btcSimulated);
   useEffect(() => {
     setDurationValue(currentDurationValue);
     setDuration(currentDuration);
@@ -54,11 +55,12 @@ const ContractCalculatorAndChart = ({
   const [duration, setDuration] = useState(0);
   const [investmentValue, setInvestmentValue] = useState(0);
   const satsUSD = btcSim / 100006400;
+  const maxSatsUSD = 60000 / 100006400;
   const hashPerDay = 0.05;
   const dollarPerTH = 20;
-
+  var maxY = 0;
   const satsPerHashDay = 240;
-
+  const [maxYScale, setMaxYScale] = useState(500);
   const currentInvestmentValue = investment;
   useEffect(() => {
     setInvestmentValue(currentInvestmentValue);
@@ -68,15 +70,16 @@ const ContractCalculatorAndChart = ({
   }, [miningResult, exchangeResult]);
 
   useEffect(() => {
-    setBtcSim(btcPriceSimulation);
+    setBtcSim(btcSliderValue);
+    console.log("slider value " + btcSliderValue);
     calculateAndgenerateDataSets(currentDurationValue, currentInvestmentValue);
-  }, [btcPriceSimulation]);
+  }, [btcPriceSimulation, btcSliderValue]);
 
   useEffect(() => {
     setInvestmentValue(currentInvestmentValue);
     calculateAndgenerateDataSets(currentDurationValue, currentInvestmentValue);
     //console.log("investment value " + currentInvestmentValue);
-  }, [currentInvestmentValue, btcPrice, investmentValue]);
+  }, [currentInvestmentValue, btcSim, investmentValue]);
 
   const calculateAndgenerateDataSets = (duration, investment) => {
     const days = currentDurationValue * 28;
@@ -91,9 +94,9 @@ const ContractCalculatorAndChart = ({
     dispatch(changeElectricityPerDay(electricityPerDay));
     const electricityCostPerDay = (electricityPerDay / 1000) * 0.03; //$ value per day
     const electricityCostPerWeek = electricityCostPerDay * 7; //value per week
-
+    /*
     console.log(
-      " investment " +
+      "investment " +
         investmentValue +
         " days " +
         days +
@@ -112,7 +115,7 @@ const ContractCalculatorAndChart = ({
         " electricity cost per week " +
         electricityCostPerDay
     );
-
+*/
     //const yieldPerDay = (investmentValue / dollarPerTH) * satsPerHashDay;
     const yieldPerDay = THrented * satsPerHashDay;
     var weeks = (currentDurationValue * 28) / 7;
@@ -143,6 +146,11 @@ const ContractCalculatorAndChart = ({
           ? weeklyYield * satsUSD - electricityCostPerWeek
           : weeklyYield * satsUSD;
 
+      var maxWeeklyYieldinUSD =
+        i >= 4
+          ? weeklyYield * maxSatsUSD - electricityCostPerWeek
+          : weeklyYield * maxSatsUSD;
+
       compound += weeklyYield;
       usdCompound += weeklyYieldinUSD;
 
@@ -172,20 +180,27 @@ const ContractCalculatorAndChart = ({
       var week_index = i + 1;
       label_.push("Week " + week_index);
     }
-
+    maxY = 1.1 * compound * maxSatsUSD - electricityCostPerWeek * (weeks - 4);
+    maxY = Math.round(maxY / 100) * 100;
     setLokaMiningYieldSeries(yieldSeries);
     setLabels(label_);
     setExchangeSeries(exchange);
     setLokaUSDYieldSeries(usdSeries);
+    setMaxYScale(maxY);
     dispatch(changeMiningResult(usdSeries[weeks]));
     dispatch(changeExchangeResult(endSimulationBTC));
     //console.log(lokaMiningYieldSeries);
     dispatch(
       changeSatsMined(yieldSeries[weeks] ? yieldSeries[weeks].toFixed(0) : 0)
     );
-    console.log(
-      "dispatched " + usdSeries[weeks] + " mining " + endSimulationBTC
-    );
+    /*console.log(
+      "dispatched " +
+        usdSeries[weeks] +
+        " mining " +
+        endSimulationBTC +
+        " maxY " +
+        maxY
+    ); */
   };
 
   const data = {
@@ -244,6 +259,7 @@ const ContractCalculatorAndChart = ({
         },
       },
       y: {
+        max: maxYScale,
         position: "right", // Move the x-axis to the right side
         beginAtZero: true,
         border: {

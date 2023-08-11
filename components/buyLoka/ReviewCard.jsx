@@ -22,6 +22,7 @@ const ReviewCard = () => {
   const electricityCostPerKwh = useSelector(
     (state) => state.rootReducer.electricityCostPerKwh
   );
+
   const totalTHRented = useSelector((state) => state.rootReducer.totalTHRented);
   const currentDurationDiscount = useSelector(
     (state) => state.rootReducer.durationDiscount
@@ -37,7 +38,10 @@ const ReviewCard = () => {
 
   const [durationValue, setDurationValue] = useState(0);
   const [duration, setDuration] = useState(0);
-  const LETperDay = ((powerPerDay / 1000) * electricityCostPerKwh).toFixed(2);
+
+  const LETperDay =
+    ((powerPerDay / 1000) * electricityCostPerKwh).toFixed(2) * 1000;
+  const electricityCostPerDay = LETperDay / 1000;
   useEffect(() => {
     setDurationValue(currentDurationValue);
     setDuration(currentDuration);
@@ -67,7 +71,11 @@ const ReviewCard = () => {
 
     {
       title: "Energy cost per day",
-      val: "$" + ((powerPerDay / 1000) * electricityCostPerKwh).toFixed(2),
+      val:
+        LETperDay +
+        " LET ($" +
+        ((powerPerDay / 1000) * electricityCostPerKwh).toFixed(2) +
+        ")",
     },
     {
       title: "Mining Location",
@@ -78,8 +86,12 @@ const ReviewCard = () => {
   const price_cards = [
     {
       title: "Energy",
-      info: LETperDay * durationValue * 28 * 1000 + " LET ($6.48) x 30 days",
-      val: "$" + (LETperDay * 28).toFixed(2),
+      info:
+        LETperDay.toFixed(0) +
+        " LET ($" +
+        electricityCostPerDay +
+        ") x 28 days",
+      val: "$" + ((LETperDay * 28) / 1000).toFixed(2),
     },
     {
       title: "Hashrate",
@@ -149,21 +161,25 @@ const ReviewCard = () => {
                 className="w-full p-2 flex justify-center items-center lexend-light "
               >
                 <div className="w-full  p-0 flex pl-5 flex-wrap justify-start items-start text-left lexend-light">
-                  <div className=" lg:min-w-[300px] min-w-[180px] flex rounded-xl px-2 py-2  justify-start items-start text-[#a7bfdd] text-left text-xs lg:text-sm">
-                    {card.title}
+                  <div className="grid lg:min-w-[300px] min-w-[180px] rounded-xl px-2 py-2  justify-start items-start text-[#a7bfdd] text-left text-xs lg:text-sm">
+                    <span className="text-sm font-bold lg:text-base text-[#09a668]">
+                      {card.title}
+                    </span>
+                    <br />
+                    {card.info}
                   </div>
-                  <div className=" lg:min-w-[140px] min-w-[140px] lg:w-[140px] w-full flex rounded-xl px-2 py-2  lg:justify-end lg:items-end lg:text-right lg:pl-0 pl-10 text-center  text-white  lg:text-lg">
+                  <div className=" lg:min-w-[140px] min-w-[140px] lg:w-[140px] w-full flex rounded-xl px-2 py-2  lg:justify-end lg:items-end lg:text-right lg:pl-0 pl-10 text-left  text-white  lg:text-lg">
                     {card.val}
                   </div>
                 </div>
               </div>
             ))}
-            <div className="w-full flex flex-col text-[#09a668]  p-4 pl-0 lg:text-lg ">
+            <div className="w-full flex flex-col text-[#09a668] font-bold  p-4 pl-0 lg:text-xl ">
               Total{" "}
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
-              }).format(investmentValue + LETperDay * 28)}
+              }).format(investmentValue + electricityCostPerDay * 28)}
             </div>
             <div className="lg:flex md:flex hidden py-5 pl-7 px-2  justify-center items-center w-full text-center ">
               <button className="bg-[#79D5C6] w-full rounded-xl text-white min-h-[50px]   leading-none tracking-tight hover:bg-left hover:shadow-xl hover:shadow-blue-400/20 active:scale-95 dark:text-gray-900 sm:text-base md:text-base transition duration-300 ease-in-out hover:bg-[#cff0ea]">
