@@ -209,14 +209,16 @@ const ContractCalculatorAndChart = ({
       },
     ],
   };
-  const rero = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120];
+  {
+    /*} const rero = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120];
 
   const customTooltips = {
     callbacks: {
       title: (tooltipItems) => `Custom Title: ${tooltipItems[0].label}`,
       label: (tooltipItems) => `Custom Value: ${rero[tooltipItems.dataIndex]}`,
     },
-  };
+  }; */
+  }
 
   const options = {
     responsive: true,

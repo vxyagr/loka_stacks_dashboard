@@ -24,9 +24,10 @@ import { userSession } from "../../components/generalComponents/ConnectHiroWalle
 import Head from "next/head";
 
 const BuyLoka: NextPage = () => {
-  const stacksAddress = useSelector(
+  /*const stacksAddress = useSelector(
     (state: any) => state.rootReducer.stacksAddress
-  );
+  ); */
+  const stacksAddress = 1;
   const dispatch = useDispatch();
   const currentInvestmentValue = useSelector(
     (state: any) => state.rootReducer.investment
@@ -76,10 +77,11 @@ const BuyLoka: NextPage = () => {
                   </section>
                   <section className="lg:flex ">
                     <DurationCard />
-                  </section>
+                  </section>{" "}
+                  {/**/}
                   <section className="lg:flex">
                     <SimulationCard />
-                  </section>
+                  </section>{" "}
                 </div>
               ) : (
                 <div className="h-full w-full mx-auto justify-center items-center text-center ">

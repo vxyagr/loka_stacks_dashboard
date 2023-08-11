@@ -64,7 +64,7 @@ const SimulationCard = () => {
   }, [currentDurationValue, currentDuration]);
 
   return (
-    <div className="p-5 pb-0 w-full rounded-lg  md:flex-row min-h-[100px]">
+    <div className="p-5 lg:pl-10 w-full rounded-lg  md:flex-row min-h-[100px]">
       {" "}
       <div>
         <div className="w-full flex flex-col text-white  p-2 pl-0   ">
@@ -78,16 +78,15 @@ const SimulationCard = () => {
             }).format(investmentValue)}{" "}
             <span className="text-white px-2"> Investment for </span> {duration}
           </div>
-          <div className="flex flex-col items-stretch w-full p-0 ">
-            <div className="w-full min-h-[300px] p-0  rounded-t-lg pb-4 flex justify-start items-left  text-center lexend-light text-white ">
-              <div className="p-2 w-full bg-[#1b3a61] rounded-lg border-[#2f5381] border-[1px]">
-                <ContractCalculatorAndChart
-                  btcPrice={btcPriceToday}
-                  investment={investmentValue}
-                  btcPriceSimulation={btcUSD}
-                />
-              </div>
+          <div className="flex flex-col  w-full p-0 justify-center items-center text-center ">
+            <div className="p-2 w-full bg-[#1b3a61] rounded-lg border-[#2f5381] border-[1px] max-w-[98%] min-h-[300px] justify-center items-center text-center">
+              <ContractCalculatorAndChart
+                btcPrice={btcPriceToday}
+                investment={investmentValue}
+                btcPriceSimulation={btcUSD}
+              />
             </div>
+
             <div className=" w-full p-0 flex justify-start items-left text-center lexend-light">
               <Slider />
             </div>

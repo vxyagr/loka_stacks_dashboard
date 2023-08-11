@@ -19,14 +19,15 @@ import {
 import { userSession } from "../components/generalComponents/ConnectHiroWallet";
 import Head from "next/head";
 
-const BuyLoka: NextPage = () => {
+const Dashboard: NextPage = () => {
   const dispatch = useDispatch();
   const currentInvestmentValue = useSelector(
     (state: any) => state.rootReducer.investment
   );
-  const stacksAddress = useSelector(
+  /*const stacksAddress = useSelector(
     (state: any) => state.rootReducer.stacksAddress
-  );
+  ); */
+  const stacksAddress = 1;
   return (
     <div className="bg-btc-pattern w-full">
       <Head>
@@ -161,4 +162,4 @@ const BuyLoka: NextPage = () => {
   );
 };*/
 
-export default BuyLoka;
+export default Dashboard;
