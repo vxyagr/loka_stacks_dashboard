@@ -35,7 +35,7 @@ const AmountCard = () => {
   }, [investmentValue]);
 
   return (
-    <div className="p-5 pb-0 w-full rounded-lg  md:flex-row min-h-[100px]">
+    <div className="p-5 lg:pl-10 w-full rounded-lg  md:flex-row min-h-[100px]">
       {" "}
       <div>
         <div className="w-full flex flex-col text-white  p-4 pl-0   ">
@@ -50,9 +50,9 @@ const AmountCard = () => {
               >
                 <FontAwesomeIcon icon={faMinusCircle} size="2xl" />
               </button>
-              <div className="lg:text-3xl text-2xl  text-white lg:min-w-[200px] min-w-[120px] text-center hero-lexend">
+              <div className="lg:text-3xl text-2xl  text-white lg:min-w-[200px] min-w-[100px] text-center hero-lexend">
                 <input
-                  className="lg:w-[200px] w-[120px] number-input-container bg-transparent lg:text-3xl text-2xl  text-white text-center  "
+                  className="lg:w-[200px] w-[100px] number-input-container bg-transparent lg:text-3xl text-2xl  text-white text-center  "
                   type="number"
                   value={investmentValue}
                   onChange={handleInputChange}

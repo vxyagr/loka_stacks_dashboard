@@ -67,7 +67,7 @@ const SimulationCard = () => {
     <div className="p-5 lg:pl-10 w-full rounded-lg  md:flex-row min-h-[100px]">
       {" "}
       <div>
-        <div className="w-full flex flex-col text-white  p-2 pl-0   ">
+        <div className="w-full flex flex-col text-white  p-4 pl-0   ">
           Simulation
         </div>
         <div className="w-full flex flex-col min-h-[500px]  bg-dashboard-blue p-4 rounded-lg border-[#245366] border-[1px] ">
@@ -79,7 +79,7 @@ const SimulationCard = () => {
             <span className="text-white px-2"> Investment for </span> {duration}
           </div>
           <div className="flex flex-col  w-full p-0 justify-center items-center text-center ">
-            <div className="p-2 w-full bg-[#1b3a61] rounded-lg border-[#2f5381] border-[1px] max-w-[93%] min-h-[300px] justify-center items-center text-center">
+            <div className="p-2 w-full bg-[#1b3a61] rounded-lg border-[#2f5381] border-[1px] max-w-[98%] min-h-[300px] justify-center items-center text-center">
               <ContractCalculatorAndChart
                 btcPrice={btcPriceToday}
                 investment={investmentValue}
