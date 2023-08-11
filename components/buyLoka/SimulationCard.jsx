@@ -79,7 +79,7 @@ const SimulationCard = () => {
             <span className="text-white px-2"> Investment for </span> {duration}
           </div>
           <div className="flex flex-col  w-full p-0 justify-center items-center text-center ">
-            <div className="p-2 w-full bg-[#1b3a61] rounded-lg border-[#2f5381] border-[1px] max-w-[98%] min-h-[300px] justify-center items-center text-center">
+            <div className="p-2 w-full bg-[#1b3a61] rounded-lg border-[#2f5381] border-[1px] max-w-[93%] min-h-[300px] justify-center items-center text-center">
               <ContractCalculatorAndChart
                 btcPrice={btcPriceToday}
                 investment={investmentValue}
