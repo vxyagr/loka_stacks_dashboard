@@ -62,7 +62,7 @@ const ReviewCard = () => {
     },
     {
       title: "Hardware efficiency",
-      val: hardwareEfficiency + " Joule/TH/s",
+      val: hardwareEfficiency + " Joule/TH",
     },
 
     {

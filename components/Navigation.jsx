@@ -4,8 +4,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Logo from "./Logo";
 import DashboardMenuMobile from "../components/DashboardMenuMobile";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import ConnectWallet from "../components/ConnectHiroWallet";
+import ConnectWallet from "../components/generalComponents/ConnectHiroWallet";
 const NavBar = () => {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -49,7 +48,7 @@ const NavBar = () => {
             >
               <FontAwesomeIcon icon={faBars} className="text-gray-600" />
             </button>
-            {/* <ConnectWallet /> */}
+            <ConnectWallet />
           </div>
           {showMenu && <DashboardMenuMobile />}
         </div>

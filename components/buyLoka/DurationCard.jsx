@@ -51,8 +51,8 @@ const DurationCard = () => {
     },
     {
       title: "2 years",
-      discount: "40% discount",
-      discount_value: 40,
+      discount: "38% discount",
+      discount_value: 38,
       val: 24,
     },
   ];

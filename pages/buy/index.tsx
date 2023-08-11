@@ -9,10 +9,24 @@ import ReviewCard from "../../components/buyLoka/ReviewCard";
 import SimulationCard from "../../components/buyLoka/SimulationCard";
 import DashboardMenu from "../../components/DashboardMenu";
 import BuyButton from "../../components/buyLoka/BuyButton";
-import Footer from "../../components/Footer";
+import ConnectWalletPrompt from "../../components/generalComponents/ConnectWalletPrompt";
+import { useConnect } from "@stacks/connect-react";
+import { cvToString } from "@stacks/transactions";
+import { StacksMocknet } from "@stacks/network";
+import {
+  AnchorMode,
+  standardPrincipalCV,
+  callReadOnlyFunction,
+  makeStandardSTXPostCondition,
+  FungibleConditionCode,
+} from "@stacks/transactions";
+import { userSession } from "../../components/generalComponents/ConnectHiroWallet";
 import Head from "next/head";
 
 const BuyLoka: NextPage = () => {
+  const stacksAddress = useSelector(
+    (state: any) => state.rootReducer.stacksAddress
+  );
   const dispatch = useDispatch();
   const currentInvestmentValue = useSelector(
     (state: any) => state.rootReducer.investment
@@ -45,29 +59,43 @@ const BuyLoka: NextPage = () => {
         <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%] max-w-[500px] mx-auto  ">
           <div className="w-full flex-grow flex flex-col ">
             <div className="flex-grow flex flex-col md:flex-row h-full w-full justify-start items-start text-left  mx-auto">
-              <div className="sticky-div hidden lg:flex items-end ">
-                <DashboardMenu selectedMenu={"Buy Loka"} />
-              </div>
-              <div className="h-full w-full mx-auto justify-start items-start text-center lg:text-left ">
-                <section className="lg:min-h-[80px]p-5 pt-10 pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white">
-                  BUY LOKA
-                </section>
-                <section className="lg:flex ">
-                  <AmountCard />
-                </section>
-                <section className="lg:flex ">
-                  <DurationCard />
-                </section>
-                <section className="lg:flex">
-                  <SimulationCard />
-                </section>
-              </div>
-              <div className="sticky-div lg:max-w-[50%] w-full mx-auto mt-20  justify-start items-start lg:text-left text-center">
-                <section className="lg:min-h-[80px]p-5  pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white"></section>
-                <section className="p-0 lg:flex ">
-                  <ReviewCard />
-                </section>
-              </div>
+              {stacksAddress ? (
+                <div className="sticky-div hidden lg:flex md:flex items-end ">
+                  <DashboardMenu selectedMenu={"Buy Loka"} />
+                </div>
+              ) : (
+                <></>
+              )}
+              {stacksAddress ? (
+                <div className="h-full w-full mx-auto justify-start items-start text-center lg:text-left ">
+                  <section className="lg:min-h-[80px]p-5 pt-10 pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white">
+                    BUY LOKA
+                  </section>
+                  <section className="lg:flex ">
+                    <AmountCard />
+                  </section>
+                  <section className="lg:flex ">
+                    <DurationCard />
+                  </section>
+                  <section className="lg:flex">
+                    <SimulationCard />
+                  </section>
+                </div>
+              ) : (
+                <div className="h-full w-full mx-auto justify-center items-center text-center ">
+                  <ConnectWalletPrompt />
+                </div>
+              )}
+              {stacksAddress ? (
+                <div className="sticky-div lg:max-w-[50%] w-full mx-auto mt-20  justify-start items-start lg:text-left text-center">
+                  <section className="lg:min-h-[80px]p-5  pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white"></section>
+                  <section className="p-0 lg:flex ">
+                    <ReviewCard />
+                  </section>
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
             <section className=" p-5">{/*transaction*/}</section>
           </div>
