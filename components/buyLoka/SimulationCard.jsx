@@ -117,16 +117,7 @@ const SimulationCard = () => {
                 }).format(investmentValue)}{" "}
                 of investment after {duration}
               </div>
-              <div className="text-white  pb-4">
-                +
-                <span className="text-[#09a668]">
-                  {" $"}
-                  {((powerPerDay / 1000) * electricityCostPerKwh * 28).toFixed(
-                    2
-                  )}
-                </span>{" "}
-                for the first 28 days electricity cost
-              </div>
+
               <div className="w-full flex flex-col p-0 rounded-lg pb-4 ">
                 <div className="flex flex-col items-stretch w-full p-0 ">
                   <div className="w-full p-0 flex flex-col justify-center items-center lexend-light">
