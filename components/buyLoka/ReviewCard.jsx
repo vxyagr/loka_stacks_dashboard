@@ -118,7 +118,7 @@ const ReviewCard = () => {
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
-              }).format(investmentValue + LETperDay * 28)}
+              }).format(investmentValue + electricityCostPerDay * 28)}
             </div>
             <div className="w-full p-2 flex text-[#09a668] justify-start items-start text-left hero-lexend text-xl">
               {totalTHRented} TH/s
