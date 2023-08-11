@@ -101,9 +101,13 @@ const BuyLoka: NextPage = () => {
           </div>
         </div>
       </div>
-      <div className="w-full sticky-bottom  lg:hidden md:hidden flex bg-custom-blue  min-h-[120px]">
-        <BuyButton />
-      </div>
+      {stacksAddress ? (
+        <div className="w-full sticky-bottom  lg:hidden md:hidden flex bg-custom-blue  min-h-[120px]">
+          <BuyButton />
+        </div>
+      ) : (
+        <></>
+      )}
       {/*<footer className="w-full">
         <Footer />
       </footer> */}
