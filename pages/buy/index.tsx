@@ -28,6 +28,9 @@ import Head from "next/head";
 const BuyLoka: NextPage = () => {
   const stacksAddress = 1;
   const dispatch = useDispatch();
+  /*const stacksAddress = useSelector(
+    (state: any) => state.rootReducer.stacksAddress
+  ); */
   const currentInvestmentValue = useSelector(
     (state: any) => state.rootReducer.investment
   );
@@ -49,10 +52,6 @@ const BuyLoka: NextPage = () => {
         console.error("Error fetching Bitcoin price:", error);
       });
   }, []);
-
-  /*const stacksAddress = useSelector(
-    (state: any) => state.rootReducer.stacksAddress
-  ); */
 
   return (
     <div className="bg-btc-pattern w-full">
@@ -78,7 +77,7 @@ const BuyLoka: NextPage = () => {
 
       {/* Buy Loka */}
       <div className="flex-grow flex flex-col md:flex-row h-full w-full lg:px-20   mx-auto justify-center items-start text-center">
-        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%] max-w-[500px] mx-auto  ">
+        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%]  mx-auto  ">
           <div className="w-full flex-grow flex flex-col ">
             <div className="flex-grow flex flex-col md:flex-row h-full w-full justify-start items-start text-left  mx-auto">
               {stacksAddress ? (

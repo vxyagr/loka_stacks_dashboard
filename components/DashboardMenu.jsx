@@ -14,7 +14,7 @@ const DashboardMenu = ({ selectedMenu }) => {
     },
     {
       title: "My Loka",
-      link_address: "#",
+      link_address: "/myloka",
     },
     {
       title: "Staking",

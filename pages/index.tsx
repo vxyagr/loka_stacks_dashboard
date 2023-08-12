@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import NavigationBar from "../components/Navigation";
 import NFTDashboard from "../components/home/NFTDashboard";
+import TokenDashboard from "../components/home/TokenDashboard";
+import MiningDashboard from "../components/home/MiningDashboard";
 import DashboardMenu from "../components/DashboardMenu";
 import ConnectWalletPrompt from "../components/generalComponents/ConnectWalletPrompt";
 import { useConnect } from "@stacks/connect-react";
@@ -48,7 +50,7 @@ const Dashboard: NextPage = () => {
       </nav>
 
       {/* Buy Loka */}
-      <div className="flex-grow flex flex-col md:flex-row h-full w-full lg:px-20   mx-auto justify-center items-start text-center">
+      <div className=" h-full w-full lg:px-20   mx-auto justify-center items-start text-center">
         <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%] max-w-[500px] mx-auto  ">
           <div className="w-full flex-grow flex flex-col ">
             {" "}
@@ -64,8 +66,12 @@ const Dashboard: NextPage = () => {
                   <section className="lg:flex p-5 ">
                     <NFTDashboard />
                   </section>
-                  <section className="lg:flex p-5 "></section>
-                  <section className="lg:flex p-5"></section>
+                  <section className="lg:flex p-5 ">
+                    <TokenDashboard />
+                  </section>
+                  <section className="lg:flex p-5">
+                    <MiningDashboard />
+                  </section>
                 </div>
               </div>
             ) : (

@@ -27,12 +27,12 @@ const NavBar = () => {
             </Link>
             <div className="hidden md:flex space-x-8">
               {/*} <Link href="#howitworks">
-                <a className="text-gray-600 hover:text-gray-800">
+                <a className="text-gray-500 hover:text-gray-800">
                   How it Works
                 </a>
   </Link> 
               <Link href="#">
-                <a className="text-gray-600 hover:text-gray-800">Get Loka</a>
+                <a className="text-gray-500 hover:text-gray-800">Get Loka</a>
               </Link>*/}
               <div className="text-white">
                 BTC/USD :{" "}
@@ -47,7 +47,7 @@ const NavBar = () => {
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-gray-800"
+                  className="text-gray-500 hover:text-gray-800"
                 >
                   Docs
                 </a>
@@ -58,7 +58,7 @@ const NavBar = () => {
               type="button"
               onClick={toggleMenu}
             >
-              <FontAwesomeIcon icon={faBars} className="text-gray-600" />
+              <FontAwesomeIcon icon={faBars} className="text-gray-500" />
             </button>
             <ConnectWallet />
           </div>
