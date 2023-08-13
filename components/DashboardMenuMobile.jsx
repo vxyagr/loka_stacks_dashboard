@@ -21,7 +21,15 @@ const DashboardMenuMobile = () => {
       link_address: "#",
     },
     {
+      title: "Transaction History",
+      link_address: "#",
+    },
+    {
       title: "Guides",
+      link_address: "#",
+    },
+    {
+      title: "Testnet STX Faucet",
       link_address: "#",
     },
   ];
