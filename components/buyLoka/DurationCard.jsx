@@ -57,10 +57,10 @@ const DurationCard = () => {
     },
   ];
   return (
-    <div className="p-5 pb-0 w-full rounded-lg  md:flex-row min-h-[100px]">
+    <div className="p-5 pb-0 w-full rounded-lg lg:pl-10  md:flex-row min-h-[100px]">
       {" "}
       <div>
-        <div className="w-full flex flex-col text-white  p-2 pl-0    ">
+        <div className="w-full flex flex-col text-white  p-4 pl-0    ">
           Choose mining duration
         </div>
         <div className="w-full flex flex-col p-0 rounded-lg ">

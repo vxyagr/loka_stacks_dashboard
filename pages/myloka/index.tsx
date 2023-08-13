@@ -65,7 +65,10 @@ const MyLoka: NextPage = () => {
                     MY LOKA
                   </section>
                   <section className="lg:flex p-5 ">
-                    <ContractDashboard />
+                    <ContractDashboard image={"lokaNFT.png"} />
+                  </section>
+                  <section className="lg:flex p-5 ">
+                    <ContractDashboard image={"lokaNFT_2.png"} />
                   </section>
                 </div>
               </div>

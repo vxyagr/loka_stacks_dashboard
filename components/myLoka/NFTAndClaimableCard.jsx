@@ -1,21 +1,21 @@
 import SmallButton from "../../components/generalComponents/SmallButton";
 
-const NFTAndClaimableCard = () => {
+const NFTAndClaimableCard = ({ image }) => {
   return (
     <div className="flex flex-col items-stretch w-full p-0 ">
       <div className="w-full p-0  text-white font-medium rounded-xl">
         <img
-          className=" rounded-tl-lg rounded-l-lg rounded-r-none rounded-br-none rounded-tr-none"
-          src="./lokaNFT.png"
-          style={{ width: "500px", height: "200px" }}
+          className="rounded-tl-lg rounded-tr-lg lg:rounded-tr-none "
+          src={"./" + image}
+          style={{ width: "500px", height: "180px" }}
         ></img>
       </div>
       <div className="w-full p-2 grid ">
-        <div className="text-xl p-4 pb-0   text-white w-full lg:text-left">
+        <div className="text-xl p-2 pb-0   text-white w-full lg:text-left">
           Rewards
         </div>
 
-        <div className=" flex rounded-md  p-4 text-sm text-left justify-left items-left">
+        <div className=" flex rounded-md  p-2 text-sm text-left justify-left items-left">
           <div className="grid w-2/5">
             <div className="flex-row">
               <div className="inline-block rounded-md pr-2  py-2 text-base text-left text-white">
