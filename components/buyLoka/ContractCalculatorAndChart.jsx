@@ -113,17 +113,50 @@ const ContractCalculatorAndChart = ({
 
   const calculateAndgenerateDataSets = (duration, investment) => {
     const days = currentDurationValue * 28;
-    const THrented_ =
+    const base2YearsTH =
+      investmentValue / (28 * 24) / currentThRentPerDay / (1 - 70 / 100); //TH's with discount from base 2 years
+
+    const sats2Years = base2YearsTH * satsPerHashDay * (28 * 24);
+    const baseUSDProfit = sats2Years * satsUSD - investmentValue;
+    //const baseMonthlySats = satsBase / 28;
+    const baseMonthlyUSDProfit = baseUSDProfit / 24;
+
+    const durationROIFactor =
+      currentDurationValue == 1
+        ? 25
+        : currentDurationValue == 6
+        ? 70
+        : currentDurationValue == 12
+        ? 80
+        : 100;
+
+    const finalSats =
+      ((durationROIFactor / 100) * baseMonthlyUSDProfit * currentDurationValue +
+        investmentValue) /
+      satsUSD;
+    console.log(
+      "monthly profit " +
+        (durationROIFactor / 100) * baseMonthlyUSDProfit +
+        " " +
+        currentDurationValue +
+        " final sats " +
+        finalSats
+    );
+    const THrented_ = finalSats / (currentDurationValue * 28) / satsPerHashDay;
+
+    {
+      /*} const THrented_ =
       investmentValue /
       days /
       currentThRentPerDay /
       (1 - currentDurationDiscount / 100); //TH's with discount
-    //console.log("rented " + THrented);
+  //console.log("rented " + THrented); */
+    }
     if (THrented_ <= 0) return;
 
-    const electricityPerDay = THrented_ * hardwareEfficiency * 24; // Watt
+    const electricityPerDay_ = THrented_ * hardwareEfficiency * 24; // Watt
 
-    const electricityCostPerDay_ = (electricityPerDay / 1000) * 0.03; //$ value per day
+    const electricityCostPerDay_ = (electricityPerDay_ / 1000) * 0.03; //$ value per day
 
     if (
       isNaN(electricityCostPerDay_) ||
@@ -131,40 +164,24 @@ const ContractCalculatorAndChart = ({
       electricityCostPerDay_ <= 0
     )
       return;
-    const { THrented, electricityCostPerDay } = recalculate(
+    {
+      /*const { THrented, electricityCostPerDay } = recalculate(
       investmentValue,
       currentDurationValue,
       THrented_,
       electricityCostPerDay_
-    );
+    ); */
+    }
+
+    const THrented = THrented_;
+    const electricityCostPerDay = electricityCostPerDay_;
     //console.log("thrent " + THrented);
+    const electricityPerDay = THrented * hardwareEfficiency * 24; // Watt
     dispatch(changeTotalTHRented(THrented.toFixed(0)));
     dispatch(changeElectricityPerDay(electricityPerDay));
 
     const electricityCostPerWeek = electricityCostPerDay * 7; //value per week
-    /*
-    console.log(
-      "investment " +
-        investmentValue +
-        " days " +
-        days +
-        " discount " +
-        currentDurationDiscount +
-        " current TH rate " +
-        currentThRentPerDay +
-        " THrented " +
-        THrented +
-        " hardware " +
-        hardwareEfficiency +
-        " electricity " +
-        electricityPerDay +
-        " electricity cost per week " +
-        electricityCostPerDay +
-        " electricity cost per week " +
-        electricityCostPerDay
-    );
-*/
-    //const yieldPerDay = (investmentValue / dollarPerTH) * satsPerHashDay;
+
     const yieldPerDay = THrented * satsPerHashDay;
     var weeks = (currentDurationValue * 28) / 7;
     const difficultyFactor = 1.01;
@@ -204,26 +221,12 @@ const ContractCalculatorAndChart = ({
 
       exchange_compound += steps;
       yieldSeries.push(compound);
-      //var USDvalue = parseFloat(compound) * parseFloat(satsUSD);
+
       i < weeks - 1
         ? exchange.push(exchange_compound)
         : exchange.push(endSimulationBTC);
 
-      //usdSeries.push(compound * satsUSD - electricityCostPerWeek);
       usdSeries.push(usdCompound);
-      // console.log("usd " + (yieldPerDay / difficulty) * 100 * 7);
-      //if (i > 0)
-
-      /* i > 0
-        ? usdSeries.push(
-            usdSeries[i - 1] +
-              (yieldPerDay / difficulty) * 100 * 7 * satsUSD -
-              electricityCostPerWeek
-          )
-        : usdSeries.push(
-            (yieldPerDay / difficulty) * 100 * 7 * satsUSD -
-              electricityCostPerWeek
-          ); */
 
       var week_index = i + 1;
       label_.push("Week " + week_index);
@@ -241,14 +244,6 @@ const ContractCalculatorAndChart = ({
     dispatch(
       changeSatsMined(yieldSeries[weeks] ? yieldSeries[weeks].toFixed(0) : 0)
     );
-    /*console.log(
-      "dispatched " +
-        usdSeries[weeks] +
-        " mining " +
-        endSimulationBTC +
-        " maxY " +
-        maxY
-    ); */
   };
 
   const data = {

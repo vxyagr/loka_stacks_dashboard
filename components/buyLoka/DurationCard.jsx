@@ -35,12 +35,14 @@ const DurationCard = () => {
       discount: "",
       discount_value: 0,
       val: 1,
+      ROIfactor: 70,
     },
     {
       title: "6 months",
       discount: "10% discount",
       discount_value: 10,
       val: 6,
+      ROIfactor: 80,
     },
 
     {
@@ -48,12 +50,14 @@ const DurationCard = () => {
       discount: "20% discount",
       discount_value: 20,
       val: 12,
+      ROIfactor: 90,
     },
     {
       title: "2 years",
       discount: "38% discount",
-      discount_value: 38,
+      discount_value: 70,
       val: 24,
+      ROIfactor: 100,
     },
   ];
   return (
@@ -89,7 +93,7 @@ const DurationCard = () => {
                     >
                       {card.title}
                     </div>
-                    <div
+                    {/*<div
                       className={`text-xs ${
                         durationValue == card.val
                           ? "  text-dashboard-blue font-bold"
@@ -97,7 +101,7 @@ const DurationCard = () => {
                       }`}
                     >
                       {card.discount}
-                    </div>
+                    </div>*/}
                   </button>
                 ))}
               </div>
