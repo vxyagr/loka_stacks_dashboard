@@ -38,7 +38,8 @@ const ReviewCard = () => {
 
   const [durationValue, setDurationValue] = useState(0);
   const [duration, setDuration] = useState(0);
-
+  const THRentPrice =
+    currentInvestmentValue / (totalTHRented * currentDurationValue * 28);
   const LETperDay =
     ((powerPerDay / 1000) * electricityCostPerKwh).toFixed(2) * 1000;
   const electricityCostPerDay = LETperDay / 1000;
@@ -49,20 +50,24 @@ const ReviewCard = () => {
   const info_cards = [
     {
       title: "Projected BTC yield",
-      val: currentBTCMined + " BTC (" + currentSatsMined + " sats)",
+      val:
+        currentBTCMined.toLocaleString() +
+        " BTC (" +
+        currentSatsMined.toLocaleString() +
+        " sats)",
     },
     {
       title: "Energy price",
       val: "3 LET ($0.03)/KWh",
     },
     {
-      title: "Total Energy Consumption",
-      val: powerPerDay.toFixed(0) + " W per day",
+      title: "Energy Consumption",
+      val: powerPerDay.toLocaleString() + " W per day",
     },
 
     {
       title: "Price per TH/s per day",
-      val: "$0.035",
+      val: "$" + THRentPrice.toFixed(2),
     },
     {
       title: "Hardware efficiency",

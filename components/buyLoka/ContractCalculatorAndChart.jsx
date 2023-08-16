@@ -54,6 +54,7 @@ const ContractCalculatorAndChart = ({
   const [durationValue, setDurationValue] = useState(0);
   const [duration, setDuration] = useState(0);
   const [investmentValue, setInvestmentValue] = useState(0);
+  const baseSatsUSD = btcPrice / 100006400;
   const satsUSD = btcSim / 100006400;
   const maxSatsUSD = 60000 / 100006400;
   const hashPerDay = 0.05;
@@ -117,7 +118,7 @@ const ContractCalculatorAndChart = ({
       investmentValue / (28 * 24) / currentThRentPerDay / (1 - 70 / 100); //TH's with discount from base 2 years
 
     const sats2Years = base2YearsTH * satsPerHashDay * (28 * 24);
-    const baseUSDProfit = sats2Years * satsUSD - investmentValue;
+    const baseUSDProfit = sats2Years * baseSatsUSD - investmentValue;
     //const baseMonthlySats = satsBase / 28;
     const baseMonthlyUSDProfit = baseUSDProfit / 24;
 
@@ -133,15 +134,8 @@ const ContractCalculatorAndChart = ({
     const finalSats =
       ((durationROIFactor / 100) * baseMonthlyUSDProfit * currentDurationValue +
         investmentValue) /
-      satsUSD;
-    console.log(
-      "monthly profit " +
-        (durationROIFactor / 100) * baseMonthlyUSDProfit +
-        " " +
-        currentDurationValue +
-        " final sats " +
-        finalSats
-    );
+      baseSatsUSD;
+
     const THrented_ = finalSats / (currentDurationValue * 28) / satsPerHashDay;
 
     {
@@ -232,12 +226,16 @@ const ContractCalculatorAndChart = ({
       label_.push("Week " + week_index);
     }
     maxY = 1.1 * compound * maxSatsUSD - electricityCostPerWeek * (weeks - 4);
+    var normalPrice = compound * baseSatsUSD;
+    var maxPrice = compound * maxSatsUSD;
+    var elecprice = electricityCostPerWeek * (weeks - 4);
     maxY = Math.round(maxY / 100) * 100;
     setLokaMiningYieldSeries(yieldSeries);
     setLabels(label_);
     setExchangeSeries(exchange);
     setLokaUSDYieldSeries(usdSeries);
     setMaxYScale(maxY);
+
     dispatch(changeMiningResult(usdSeries[weeks]));
     dispatch(changeExchangeResult(endSimulationBTC));
     //console.log(lokaMiningYieldSeries);
