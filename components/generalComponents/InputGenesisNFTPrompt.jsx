@@ -7,7 +7,8 @@ import { faMinus, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { changeInvestment } from "../../redux/actions";
-const ConnectWalletPrompt = () => {
+import SmallButton from "./SmallButton";
+const InputGenesisNFTPrompt = () => {
   const dispatch = useDispatch();
   const [investmentValue, setInvestmentValue] = useState(100);
 
@@ -35,10 +36,21 @@ const ConnectWalletPrompt = () => {
   }, [investmentValue]);
 
   return (
-    <div className="p-5 pb-0 w-full justify-center items-center text-center text-white rounded-lg  md:flex-row min-h-[200px] h-full flex flex-col  pl-0 ">
-      Connect Your Hiro Wallet
+    <div className="p-5 pb-0 w-full flex justify-center items-center text-center text-white rounded-lg   min-h-[200px] h-full flex-col text-white pl-0">
+      Input Loka Genesis NFT ID
+      <div className="p-10 lg:text-3xl text-2xl w-full text-white lg:min-w-[300px] min-w-[200px] text-center hero-lexend">
+        <input
+          className="lg:w-[200px] w-[100px] number-input-container  lg:text-2xl text-xl rounded-xl  text-black text-center  "
+          type=""
+        />
+      </div>
+      <div className="flex w-full justify-center items-center text-center">
+        <div className="w-[100px] justify-center items-center text-center">
+          <SmallButton buttonText={"Check"} className="w-[100px]" />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default ConnectWalletPrompt;
+export default InputGenesisNFTPrompt;

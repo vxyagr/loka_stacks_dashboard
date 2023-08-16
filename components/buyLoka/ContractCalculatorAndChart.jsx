@@ -124,7 +124,7 @@ const ContractCalculatorAndChart = ({
 
     const durationROIFactor =
       currentDurationValue == 1
-        ? 25
+        ? 20
         : currentDurationValue == 6
         ? 70
         : currentDurationValue == 12
