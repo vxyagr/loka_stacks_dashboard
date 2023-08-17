@@ -26,7 +26,7 @@ const NFTDashboard = () => {
         <div className="w-full p-2 text-center  text-[#09A668] font-lg">
           Loka Contracts
         </div>
-        <div className="text-white text-center text-3xl">16</div>
+        <div className="text-white text-center text-3xl">TBA</div>
         <div className="text-white w-full text-center justify-start items-center">
           <div className="text-white flex-wrap inline-block text-center min-w-[50px] px-2  rounded-full bg-custom-green border-[#4c7766] border-[1px]">
             $TBA invested

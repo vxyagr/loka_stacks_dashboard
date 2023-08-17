@@ -89,7 +89,7 @@ const BuyLoka: NextPage = () => {
               ) : (
                 <></>
               )}
-              {stacksAddress && genesisNFT ? (
+              {stacksAddress ? (
                 <div className="h-full w-full mx-auto justify-start items-start text-center lg:text-left ">
                   <section className="lg:min-h-[80px]p-5 pt-10 pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white">
                     BUY LOKA
@@ -107,22 +107,14 @@ const BuyLoka: NextPage = () => {
                 </div>
               ) : (
                 <div className="h-full w-full mx-auto justify-center items-center text-center ">
-                  {stacksAddress ? (
-                    genesisNFT ? (
-                      ""
-                    ) : (
-                      <InputGenesisNFTPrompt />
-                    )
-                  ) : (
-                    <ConnectWalletPrompt />
-                  )}
+                  {stacksAddress ? "" : <ConnectWalletPrompt />}
                 </div>
               )}
-              {stacksAddress && genesisNFT ? (
+              {stacksAddress ? (
                 <div className="sticky-div lg:max-w-[50%] w-full mx-auto mt-20  justify-start items-start lg:text-left text-center">
                   <section className="lg:min-h-[80px]p-5  pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white"></section>
                   <section className="p-0 lg:flex ">
-                    <ReviewCard />
+                    <ReviewCard genesisNFT={genesisNFT} />
                   </section>
                 </div>
               ) : (
