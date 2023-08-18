@@ -19,6 +19,7 @@ const ContractCalculatorAndChart = ({
   const currentDurationValue = useSelector(
     (state) => state.rootReducer.duration
   );
+  const btcPriceToday = useSelector((state) => state.rootReducer.btcPriceToday);
   const currentDuration = useSelector(
     (state) => state.rootReducer.durationTitle
   );
@@ -54,7 +55,7 @@ const ContractCalculatorAndChart = ({
   const [durationValue, setDurationValue] = useState(0);
   const [duration, setDuration] = useState(0);
   const [investmentValue, setInvestmentValue] = useState(0);
-  const baseSatsUSD = btcPrice / 100006400;
+  const baseSatsUSD = btcPriceToday / 100006400;
   const satsUSD = btcSim / 100006400;
   const maxSatsUSD = 60000 / 100006400;
   const hashPerDay = 0.05;

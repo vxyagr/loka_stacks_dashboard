@@ -102,7 +102,7 @@ const SimulationCard = () => {
               <ContractCalculatorAndChart
                 btcPrice={currentBTC}
                 investment={investmentValue}
-                btcPriceSimulation={btcUSD}
+                btcPriceSimulation={currentBTCSimulated}
               />
             </div>
 
