@@ -38,7 +38,16 @@ const Slider = () => {
 
   return (
     <div className="slider-container">
-      <p className="text-white lg:text-md">USD {value}</p>
+      {/*<p className="text-[#93a5bf] text-xs lg:text-sm p-2 "> */}
+      <p className="text-yellow-400 text-xs lg:text-sm p-2 ">
+        Slide left or right to simulate bitcoin price in the future
+      </p>
+      <p className="text-white lg:text-base">
+        {new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(value)}
+      </p>
       <input
         type="range"
         min="25000"
@@ -47,9 +56,6 @@ const Slider = () => {
         onChange={handleSliderChange}
         className="slider rounded-lg"
       />
-      <p className="text-[#93a5bf] text-xs lg:text-sm p-2 ">
-        Slide left or right to simulate bitcoin price in the future
-      </p>
     </div>
   );
 };
