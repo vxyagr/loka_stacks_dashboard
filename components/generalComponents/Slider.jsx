@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeBTCSimulated } from "../../redux/actions";
-
+import { changeBTCPriceToday } from "../../redux/actions";
+import axios from "axios";
 const Slider = () => {
   // Initial value set to 50
   const dispatch = useDispatch();
@@ -13,6 +14,24 @@ const Slider = () => {
   const handleSliderChange = (event) => {
     setValue(event.target.value);
   };
+
+  useEffect(() => {
+    // Fetch Bitcoin price from CoinGecko API
+    axios
+      .get(
+        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
+      )
+      .then((response) => {
+        var btc = response.data.bitcoin.usd;
+        setValue(btc);
+
+        console.log("btc price today " + btc);
+      })
+      .catch((error) => {
+        console.error("Error fetching Bitcoin price:", error);
+      });
+  }, []);
+
   useEffect(() => {
     dispatch(changeBTCSimulated(value));
   }, [value]);
