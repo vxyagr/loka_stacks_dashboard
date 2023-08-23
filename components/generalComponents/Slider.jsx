@@ -54,7 +54,7 @@ const Slider = () => {
         max="60000"
         value={value}
         onChange={handleSliderChange}
-        className="slider rounded-lg"
+        className="slider rounded-lg "
       />
     </div>
   );

@@ -132,6 +132,7 @@ a {
   outline: none;
   opacity: 0.7;
   transition: opacity 0.2s;
+  animation: glowing 2s infinite;
 }
 
 .slider::-webkit-slider-thumb {
@@ -143,6 +144,7 @@ a {
   border: 2px white solid;
   cursor: pointer;
   border-radius: 50%;
+  animation: glowing 2s infinite;
 }
 
 .slider::-moz-range-thumb {
@@ -152,6 +154,17 @@ a {
   cursor: pointer;
   border-radius: 50%;
   border: 2px black solid;
+  animation: glowing 2s infinite;
+}
+
+@keyframes glowing {
+  0%,
+  100% {
+    box-shadow: 0 0 10px #3d8c55, 0 0 20px #3d8c55, 0 0 30px #3d8c55;
+  }
+  50% {
+    box-shadow: 0 0 20px white, 0 0 40px white, 0 0 60px white;
+  }
 }
 
 .number-input-container input::-webkit-inner-spin-button,
