@@ -56,11 +56,11 @@ const MyLoka: NextPage = () => {
           <div className="w-full flex-grow flex flex-col ">
             {" "}
             {stacksAddress ? (
-              <div className="flex-grow flex flex-col md:flex-row h-full w-full justify-start items-start text-left  mx-auto">
+              <div className="flex-grow flex flex-col md:flex-row h-full w-full justify-start items-start text-left  mx-auto ">
                 <div className="sticky-div hidden lg:flex items-end ">
                   <DashboardMenu selectedMenu={"My Loka"} />
                 </div>
-                <div className="h-full w-full mx-auto justify-start items-start text-center lg:text-left ">
+                <div className="h-full w-full mx-auto justify-start items-start text-center lg:text-left md:min-w-[700px] ">
                   <section className="lg:min-h-[80px]p-5 pt-10 pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white">
                     MY LOKA
                   </section>
