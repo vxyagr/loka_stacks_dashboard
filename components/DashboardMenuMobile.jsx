@@ -34,7 +34,7 @@ const DashboardMenuMobile = () => {
     },
   ];
   return (
-    <div className="md:hidden h-[100vh] bg-opacity-20 mt-4 space-y-4 p-5 text-center justify-center transition duration-300 ease-in-out">
+    <div className="h-[100vh] bg-opacity-20 mt-4 space-y-4 p-5 text-center justify-center transition duration-300 ease-in-out">
       {cards.map((card, index) => (
         <div key={index} className="rounded-xl mt-5 ">
           <Link href={card.link_address}>

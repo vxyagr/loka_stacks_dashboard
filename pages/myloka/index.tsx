@@ -51,8 +51,8 @@ const MyLoka: NextPage = () => {
       </nav>
 
       {/* Buy Loka */}
-      <div className=" h-full w-full lg:px-20   mx-auto justify-center items-start text-center">
-        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%] max-w-[500px] mx-auto  ">
+      <div className="flex-grow flex flex-col h-full w-full lg:px-20   mx-auto justify-center items-start text-center">
+        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%]  mx-auto  ">
           <div className="w-full flex-grow flex flex-col ">
             {" "}
             {stacksAddress ? (

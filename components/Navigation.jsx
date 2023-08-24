@@ -20,7 +20,7 @@ const NavBar = () => {
   return (
     <header className="fixed min-h-20 top-0 z-50 w-full bg-custom-blue">
       <nav className="bg-custom-blue backdrop-blur-md h-full">
-        <div className="w-full lg:hidden  container mx-auto px-4 md:px-6 flex min-h-[50px] justify-between items-center text-center">
+        <div className="w-full lg:hidden md:flex  container mx-auto px-4 md:px-6 flex min-h-[50px] justify-between items-center text-center">
           <div className="w-15  justify-center items-center text-center p-4">
             <Link href="/">
               <a className="text-xl font-semibold">
@@ -41,6 +41,7 @@ const NavBar = () => {
             </button>
           </div>
         </div>
+
         <div className="container mx-auto px-4 md:px-6  ">
           <div className=" justify-between items-center py-4 hidden lg:flex ">
             <Link href="/">
