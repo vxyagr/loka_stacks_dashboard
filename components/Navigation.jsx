@@ -20,7 +20,7 @@ const NavBar = () => {
   return (
     <header className="fixed min-h-20 top-0 z-50 w-full bg-custom-blue">
       <nav className="bg-custom-blue backdrop-blur-md h-full">
-        <div className="w-full lg:hidden md:hidden container mx-auto px-4 md:px-6 flex min-h-[50px] justify-between items-center text-center">
+        <div className="w-full lg:hidden  container mx-auto px-4 md:px-6 flex min-h-[50px] justify-between items-center text-center">
           <div className="w-15  justify-center items-center text-center p-4">
             <Link href="/">
               <a className="text-xl font-semibold">
@@ -33,7 +33,7 @@ const NavBar = () => {
           </div>
           <div className="w-12 h-12 justify-center items-center text-center p-4 pt-3">
             <button
-              className="md:hidden focus:outline-none"
+              className=" focus:outline-none"
               type="button"
               onClick={toggleMenu}
             >
@@ -42,7 +42,7 @@ const NavBar = () => {
           </div>
         </div>
         <div className="container mx-auto px-4 md:px-6  ">
-          <div className=" justify-between items-center py-4 hidden lg:flex md:flex">
+          <div className=" justify-between items-center py-4 hidden lg:flex ">
             <Link href="/">
               <a className="text-xl font-semibold">
                 <Logo />

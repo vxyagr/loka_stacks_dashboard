@@ -51,11 +51,11 @@ const Dashboard: NextPage = () => {
 
       {/* Buy Loka */}
       <div className=" h-full w-full lg:px-20   mx-auto justify-center items-start text-center">
-        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%] max-w-[500px] mx-auto  ">
+        <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%]  mx-auto  ">
           <div className="w-full flex-grow flex flex-col ">
             {" "}
             {stacksAddress ? (
-              <div className="flex-grow flex flex-col md:flex-row h-full w-full justify-start items-start text-left  mx-auto">
+              <div className="flex-grow flex flex-col md:flex-row md:min-w-[700px] h-full w-full justify-start items-start text-left  mx-auto">
                 <div className="hidden lg:flex items-end ">
                   <DashboardMenu selectedMenu={"Dashboard"} />
                 </div>
