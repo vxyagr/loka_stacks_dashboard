@@ -11,7 +11,7 @@ const StatsCard = () => {
             0.5
           </div>
           <div className="text-dashboard-blue flex-wrap inline-block text-xs text-center min-w-[50px] px-2  rounded-full bg-yellow-400 ">
-            sBTC
+            ckBTC
           </div>
         </div>
         <div className="flex-row">

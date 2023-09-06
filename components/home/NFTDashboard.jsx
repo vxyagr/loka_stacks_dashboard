@@ -14,7 +14,7 @@ const NFTDashboard = () => {
               TBA
             </div>
             <div className="bg-yellow-400 rounded-md px-2 py-0 m-4 text-gray-800 text-sm">
-              sBTC
+              ckBTC
             </div>
           </div>
           <button className="w-full p-2 text-yellow-400  rounded-md transition duration-300 ease-in-out hover:shadow-lg">

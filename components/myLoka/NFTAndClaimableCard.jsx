@@ -22,7 +22,7 @@ const NFTAndClaimableCard = ({ image }) => {
                 0.022
               </div>
               <div className="text-dashboard-blue flex-wrap inline-block text-xs text-center min-w-[50px] px-2  rounded-full bg-yellow-400 ">
-                sBTC
+                ckBTC
               </div>
             </div>
             <div className=" flex-row  rounded-md  py-0 text-sm text-left">
