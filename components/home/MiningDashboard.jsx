@@ -2,6 +2,7 @@ import React from "react";
 import "tailwindcss/tailwind.css";
 
 const MiningDashboard = () => {
+  const calculateBTCStats = () => {};
   return (
     <div className="p-0 w-full rounded-lg flex flex-col md:flex-row bg-dashboard-gray min-h-[200px] ">
       <div className="w-full grid lg:w-1/4 p-4">
