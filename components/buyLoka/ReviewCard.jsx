@@ -178,7 +178,7 @@ const ReviewCard = ({ genesisNFT }) => {
                       onClick={() => setShowOverlay(false)}
                       className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 ml-4"
                     >
-                      Go to My Loka
+                      Close
                     </button>
                   </p>
                 )}
