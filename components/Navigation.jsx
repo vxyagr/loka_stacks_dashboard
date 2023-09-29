@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Logo from "./Logo";
 import Icon from "./Icon";
 import DashboardMenuMobile from "../components/DashboardMenuMobile";
-import ConnectWallet from "../components/generalComponents/ConnectHiroWallet";
-import ConnectWalletMobile from "../components/generalComponents/ConnectHiroWalletMobile";
+//import ConnectWallet from "../components/generalComponents/ConnectHiroWallet";
+import ConnectWallet from "../components/generalComponents/ConnectICPWallet";
+//import ConnectWalletMobile from "../components/generalComponents/ConnectHiroWalletMobile";
+import ConnectWalletMobile from "../components/generalComponents/ConnectICPWalletMobile";
 import { useSelector, useDispatch } from "react-redux";
 
 const NavBar = () => {
   const btcPriceToday = useSelector((state) => state.rootReducer.btcPriceToday);
   const [showMenu, setShowMenu] = useState(false);
+  const [grt, setGrt] = useState("");
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);

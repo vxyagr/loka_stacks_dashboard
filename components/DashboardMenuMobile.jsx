@@ -21,6 +21,10 @@ const DashboardMenuMobile = () => {
       link_address: "#",
     },
     {
+      title: "Referral Rewards",
+      link_address: "#",
+    },
+    {
       title: "Transaction History",
       link_address: "#",
     },
@@ -29,7 +33,7 @@ const DashboardMenuMobile = () => {
       link_address: "#",
     },
     {
-      title: "Testnet STX Faucet",
+      title: "Testnet Token Faucet",
       link_address: "#",
     },
   ];

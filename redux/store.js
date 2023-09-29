@@ -21,6 +21,8 @@ const initialState = {
   satsMined: 0.0,
   electricityPerDay: 0,
   totalTHRented: 0,
+  icpAddress: "",
+  lokaCanister: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -51,6 +53,10 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, electricityPerDay: action.payload };
     case "SET_TOTAL_TH_RENTED":
       return { ...state, totalTHRented: action.payload };
+    case "SET_ICP_ADDRESS":
+      return { ...state, icpAddress: action.payload };
+    case "SET_LOKA_CANISTER":
+      return { ...state, lokaCanister: action.payload };
     default:
       return state;
   }

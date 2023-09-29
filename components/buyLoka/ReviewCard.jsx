@@ -2,6 +2,7 @@ import React from "react";
 import "tailwindcss/tailwind.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 const ReviewCard = ({ genesisNFT }) => {
   const hardwareEfficiency = useSelector(
@@ -22,6 +23,11 @@ const ReviewCard = ({ genesisNFT }) => {
   const electricityCostPerKwh = useSelector(
     (state) => state.rootReducer.electricityCostPerKwh
   );
+  const currentICPAddress = useSelector(
+    (state) => state.rootReducer.icpAddress
+  );
+
+  const loka = useSelector((state) => state.rootReducer.lokaCanister);
 
   const totalTHRented = useSelector((state) => state.rootReducer.totalTHRented);
   const currentDurationDiscount = useSelector(
@@ -38,6 +44,9 @@ const ReviewCard = ({ genesisNFT }) => {
 
   const [durationValue, setDurationValue] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [latestNFTid, setLatestNFTid] = useState(0);
+  const [loading, setLoading] = useState(false);
   const THRentPrice =
     currentInvestmentValue / (totalTHRented * currentDurationValue * 28);
   const LETperDay =
@@ -88,6 +97,33 @@ const ReviewCard = ({ genesisNFT }) => {
     },
   ];
 
+  const buyLoka = async () => {
+    // overlay();
+    //setShowOverlay(true);
+    setLoading(true);
+    setShowOverlay(true);
+    //amount_: Nat, duration_: Nat, hashrate_ : Nat, elec_ : Nat, genesis_ : Nat, start_ : Nat, end_ : N
+    console.log("minting " + parseInt(totalTHRented));
+    const mint = await loka.mintContract(
+      investmentValue,
+      currentDurationValue * 28,
+      currentDuration.toString(),
+      parseInt(totalTHRented),
+      parseInt(Math.ceil(LETperDay).toFixed(0)),
+      0,
+      1,
+      1
+    );
+
+    setLatestNFTid(parseInt(mint));
+    setLoading(false);
+    console.log("NFT id " + mint + " " + latestNFTid);
+  };
+
+  const hideOverlay = () => {
+    setShowOverlay(false);
+  };
+
   const price_cards = [
     /*  {
       title: "Energy",
@@ -112,7 +148,45 @@ const ReviewCard = ({ genesisNFT }) => {
   ];
   return (
     <div className="p-5 lg:pl-10 w-full rounded-lg  md:flex-row min-h-[100px]">
-      {" "}
+      {showOverlay && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md backdrop-opacity-50 bg-gray-800">
+          <div className="bg-white p-6 rounded-md shadow-lg">
+            {" "}
+            <div>
+              <h3 className="text-xl font-semibold items-center justify-center text-center">
+                {loading ? (
+                  "Mining contract minting in progress..."
+                ) : (
+                  <p>
+                    <div className="p-2">
+                      Successfully minted Loka NFT ID#{latestNFTid}
+                    </div>
+                    <div className="p-2">
+                      Contract amount{" "}
+                      {new Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      }).format(investmentValue)}{" "}
+                      for {currentDuration}
+                    </div>
+                    <div className="p-2">
+                      hashrate of{" "}
+                      {new Intl.NumberFormat("en-US", {}).format(totalTHRented)}{" "}
+                      TH
+                    </div>
+                    <button
+                      onClick={() => setShowOverlay(false)}
+                      className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 ml-4"
+                    >
+                      Go to My Loka
+                    </button>
+                  </p>
+                )}
+              </h3>
+            </div>
+          </div>
+        </div>
+      )}{" "}
       <div>
         <div className="w-full flex flex-col text-white  p-4 pl-0  ">
           Review
@@ -188,7 +262,10 @@ const ReviewCard = ({ genesisNFT }) => {
             </div>
             <div className="lg:flex md:flex hidden py-5 pl-7 px-2  justify-center items-center w-full text-center ">
               {genesisNFT ? (
-                <button className="bg-[#79D5C6] w-full rounded-xl text-white min-h-[50px]   leading-none tracking-tight hover:bg-left hover:shadow-xl hover:shadow-blue-400/20 active:scale-95 dark:text-gray-900 sm:text-base md:text-base transition duration-300 ease-in-out hover:bg-[#cff0ea]">
+                <button
+                  onClick={buyLoka}
+                  className="bg-[#79D5C6] w-full rounded-xl text-white min-h-[50px]   leading-none tracking-tight hover:bg-left hover:shadow-xl hover:shadow-blue-400/20 active:scale-95 dark:text-gray-900 sm:text-base md:text-base transition duration-300 ease-in-out hover:bg-[#cff0ea]"
+                >
                   <span className="text-dashboard-blue text-2xl hero-lexend font-bold ">
                     BUY
                   </span>

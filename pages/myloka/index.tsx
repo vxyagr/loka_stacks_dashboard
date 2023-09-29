@@ -12,6 +12,7 @@ import ConnectWalletPrompt from "../../components/generalComponents/ConnectWalle
 import { useConnect } from "@stacks/connect-react";
 import { cvToString } from "@stacks/transactions";
 import { StacksMocknet } from "@stacks/network";
+
 import {
   AnchorMode,
   standardPrincipalCV,
@@ -24,12 +25,32 @@ import Head from "next/head";
 
 const MyLoka: NextPage = () => {
   const dispatch = useDispatch();
+  const [nftList, setNFTList] = useState([]);
   const currentInvestmentValue = useSelector(
     (state: any) => state.rootReducer.investment
   );
+
+  const currentICPAddress = useSelector(
+    (state: any) => state.rootReducer.icpAddress
+  );
+
+  const loka = useSelector((state: any) => state.rootReducer.lokaCanister);
   /*const stacksAddress = useSelector(
     (state: any) => state.rootReducer.stacksAddress
+
   ); */
+
+  const getNFTList = async () => {
+    if (loka && currentICPAddress) {
+      const nftList_ = await loka.getOwnedContracts();
+      setNFTList(nftList_);
+      console.log(nftList);
+    }
+  };
+
+  useEffect(() => {
+    getNFTList();
+  }, [loka]);
   const stacksAddress = 1;
   return (
     <div className="bg-btc-pattern w-full">
@@ -51,7 +72,7 @@ const MyLoka: NextPage = () => {
       </nav>
 
       {/* Buy Loka */}
-      <div className="flex-grow flex flex-col h-full w-full lg:px-20   mx-auto justify-center items-start text-center">
+      <div className="flex-grow flex flex-col md:flex-row h-full w-full lg:px-20   mx-auto justify-center items-start text-center">
         <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%]  mx-auto  ">
           <div className="w-full flex-grow flex flex-col ">
             {" "}
@@ -60,16 +81,15 @@ const MyLoka: NextPage = () => {
                 <div className="sticky-div hidden lg:flex items-end ">
                   <DashboardMenu selectedMenu={"My Loka"} />
                 </div>
-                <div className="h-full w-full mx-auto justify-start items-start text-center lg:text-left md:min-w-[700px] ">
+                <div className="h-full w-full mx-auto justify-start items-start text-center lg:text-left md:min-w-[900px] lg:min-w-[900px] ">
                   <section className="lg:min-h-[80px]p-5 pt-10 pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white">
                     MY LOKA
                   </section>
-                  <section className="lg:flex p-5 ">
-                    <ContractDashboard image={"lokaNFT.png"} />
-                  </section>
-                  <section className="lg:flex p-5 ">
-                    <ContractDashboard image={"lokaNFT_2.png"} />
-                  </section>
+                  {nftList.map((nft, index) => (
+                    <section key={index} className="lg:flex p-5 ">
+                      <ContractDashboard image={"lokaNFT.png"} nft={nft} />
+                    </section>
+                  ))}
                 </div>
               </div>
             ) : (

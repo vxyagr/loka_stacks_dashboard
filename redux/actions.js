@@ -51,3 +51,13 @@ export const changeTotalTHRented = (newValue) => ({
   type: "SET_TOTAL_TH_RENTED",
   payload: newValue,
 });
+
+export const changeICPAddress = (newValue) => ({
+  type: "SET_ICP_ADDRESS",
+  payload: newValue,
+});
+
+export const changeLokaCanister = (newValue) => ({
+  type: "SET_LOKA_CANISTER",
+  payload: newValue,
+});

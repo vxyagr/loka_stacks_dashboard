@@ -1,17 +1,17 @@
-const ROICard = () => {
+const ROICard = ({ nft, update }) => {
   return (
     <div className="flex-col w-full py-4   ">
       <div className="w-full p-0  text-white font-medium ">
         <div className="grid w-full justify-center items-center  ">
           <div className="w-full justify-start text-lg text-yellow-400 text-left p-2 ">
-            $12,000
+            ${nft.amount.toString()}
           </div>
           <div className="w-full justify-start text-center text-sm text-[#e68e46] p-0 ">
-            11 TH/s
+            {nft.hashrate.toString()} TH/s
           </div>
           <div className="w-full justify-start text-right pb-2  ">
             <div className="bg-custom-green rounded-xl  px-2 text-sm  text-white text-right">
-              3 months
+              {nft.durationText.toString()}
             </div>
           </div>
         </div>
@@ -23,10 +23,14 @@ const ROICard = () => {
             BTC Mined
           </div>
           <div className="flex-col w-full justify-start text-3xl text-yellow-400 text-center p-2 ">
-            <div>0.16</div>
+            <div>
+              {(
+                parseInt(nft.claimedBTC) + parseInt(nft.claimableBTC)
+              ).toString()}
+            </div>
             <div className="w-full justify-start h-full text-right  ">
-              <div className="bg-custom-green rounded-xl inline-block px-2 text-sm   text-white text-center">
-                $4800
+              <div className="bg-custom-green w-full rounded-xl inline-block px-2 text-sm   text-white text-center">
+                $
               </div>
             </div>
           </div>
@@ -35,7 +39,7 @@ const ROICard = () => {
       <div className="w-full p-0 grid pt-4   border-t-[1px] border-gray-500 h-1/6">
         <div className="grid w-full justify-center items-center ">
           <div className="w-full justify-start text-sm text-white text-center p-2">
-            75 days left
+            {nft.daysLeft.toString()} days left
           </div>
         </div>
       </div>

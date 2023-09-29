@@ -36,7 +36,7 @@ const ConnectWalletPrompt = () => {
 
   return (
     <div className="p-5 pb-0 w-full justify-center items-center text-center text-white rounded-lg  md:flex-row min-h-[200px] h-full flex flex-col  pl-0 ">
-      Connect Your Hiro Wallet
+      Connect Your Wallet
     </div>
   );
 };

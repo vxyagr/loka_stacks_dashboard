@@ -26,6 +26,9 @@ const Dashboard: NextPage = () => {
   const currentInvestmentValue = useSelector(
     (state: any) => state.rootReducer.investment
   );
+  const currentICPAddress = useSelector(
+    (state: any) => state.rootReducer.icpAddress
+  );
   /*const stacksAddress = useSelector(
     (state: any) => state.rootReducer.stacksAddress
   ); */
@@ -54,7 +57,7 @@ const Dashboard: NextPage = () => {
         <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%]  mx-auto  ">
           <div className="w-full flex-grow flex flex-col ">
             {" "}
-            {stacksAddress ? (
+            {currentICPAddress != "" ? (
               <div className="flex-grow flex flex-col md:flex-row md:min-w-[700px] h-full w-full justify-start items-start text-left  mx-auto">
                 <div className="hidden lg:flex items-end ">
                   <DashboardMenu selectedMenu={"Dashboard"} />

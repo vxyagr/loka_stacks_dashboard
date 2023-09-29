@@ -1,7 +1,8 @@
 import "../styles/globals.css";
 
 import type { AppProps } from "next/app";
-
+import { createActor } from "../ic/icloka";
+//import { StoicIdentity } from "ic-stoic-identity";
 import { library, config } from "@fortawesome/fontawesome-svg-core";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -46,7 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Connect
         authOptions={{
           appDetails: {
-            name: "Stacks Next.js Template",
+            name: "Loka",
             icon,
           },
           redirectTo: "/",
