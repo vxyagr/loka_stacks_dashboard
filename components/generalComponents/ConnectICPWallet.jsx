@@ -31,6 +31,7 @@ const ConnectWallet = () => {
   const [identity, setIdentity] = useState(false);
   const [connected, setConnected] = useState(false);
   const [stoicWallet, setStoicWallet] = useState(null);
+  const [ICPaddr, setICPaddr] = useState(null);
 
   useEffect(() => {
     // Load the client side components dynamically ONLY after the window is loaded
@@ -57,7 +58,8 @@ const ConnectWallet = () => {
         if (identity !== false) {
           //ID is a already connected wallet!
           setIdentity(identity);
-          setConnected(true);
+          setICPaddr(identity.getPrincipal().toText());
+          //setConnected(true);
         }
       });
     }
@@ -92,14 +94,15 @@ const ConnectWallet = () => {
       if (identity !== false) {
         //ID is a already connected wallet!
         setIdentity(identity);
-        setConnected(true);
+        //setConnected(true);
       } else {
         //No existing connection, lets make one!
         identity_ = await stoicWallet.connect();
         setIdentity(identity_);
-        setConnected(true);
+        //setConnected(true);
       }
       dispatch(changeICPAddress(identity_.getPrincipal().toText()));
+      setICPaddr(identity_.getPrincipal().toText());
       //Lets display the connected principal!
     });
   };
@@ -111,7 +114,11 @@ const ConnectWallet = () => {
   }
   const [appLoaded, setAppLoaded] = useState(false);
 
-  React.useEffect(() => {}, [appLoaded]);
+  useEffect(() => {
+    if (ICPaddr) setConnected(true);
+    console.log("ip " + ICPaddr);
+    dispatch(changeICPAddress(ICPaddr));
+  }, [ICPaddr]);
 
   const stacksAddress = useSelector((state) => state.rootReducer.stacksAddress);
   const dispatch = useDispatch();
