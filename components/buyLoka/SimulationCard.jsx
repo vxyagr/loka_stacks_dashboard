@@ -6,7 +6,7 @@ import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import Logo from "../Logo";
+import Logo from "../generalComponents/Logo";
 
 Chart.register(CategoryScale);
 Chart.defaults.color = "#93a5bf";

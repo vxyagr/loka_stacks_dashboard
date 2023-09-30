@@ -4,11 +4,11 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Logo from "./Logo";
 import Icon from "./Icon";
-import DashboardMenuMobile from "../components/DashboardMenuMobile";
+import DashboardMenuMobile from "./DashboardMenuMobile";
 //import ConnectWallet from "../components/generalComponents/ConnectHiroWallet";
-import ConnectWallet from "../components/generalComponents/ConnectICPWallet";
+import ConnectWallet from "./ConnectICPWallet";
 //import ConnectWalletMobile from "../components/generalComponents/ConnectHiroWalletMobile";
-import ConnectWalletMobile from "../components/generalComponents/ConnectICPWalletMobile";
+import ConnectWalletMobile from "./ConnectICPWalletMobile";
 import { useSelector, useDispatch } from "react-redux";
 
 const NavBar = () => {

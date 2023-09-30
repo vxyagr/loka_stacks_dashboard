@@ -2,12 +2,12 @@ import type { NextPage } from "next";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import NavigationBar from "../../components/Navigation";
+import NavigationBar from "../../components/generalComponents/Navigation";
 import AmountCard from "../../components/buyLoka/AmountCard";
 import DurationCard from "../../components/buyLoka/DurationCard";
 import ReviewCard from "../../components/buyLoka/ReviewCard";
 import SimulationCard from "../../components/buyLoka/SimulationCard";
-import DashboardMenu from "../../components/DashboardMenu";
+import DashboardMenu from "../../components/generalComponents/DashboardMenu";
 import BuyButton from "../../components/buyLoka/BuyButton";
 import ConnectWalletPrompt from "../../components/generalComponents/ConnectWalletPrompt";
 import InputGenesisNFTPrompt from "../../components/generalComponents/InputGenesisNFTPrompt";
@@ -23,10 +23,15 @@ import {
   makeStandardSTXPostCondition,
   FungibleConditionCode,
 } from "@stacks/transactions";
-import { userSession } from "../../components/generalComponents/ConnectHiroWallet";
+
 import Head from "next/head";
 
 const BuyLoka: NextPage = () => {
+  const currentICPAddress = useSelector(
+    (state: any) => state.rootReducer.icpAddress
+  );
+
+  const loka = useSelector((state: any) => state.rootReducer.lokaCanister);
   const stacksAddress = 1;
   const genesisNFT = true;
   const dispatch = useDispatch();
@@ -54,6 +59,14 @@ const BuyLoka: NextPage = () => {
         console.error("Error fetching Bitcoin price:", error);
       });
   }, []);
+  const [connected, setConnected] = useState(false);
+  useEffect(() => {
+    if (currentICPAddress != "" && currentICPAddress != null) {
+      setConnected(true);
+    } else {
+      setConnected(false);
+    }
+  }, [currentICPAddress]);
 
   return (
     <div className="bg-btc-pattern w-full">
@@ -81,15 +94,12 @@ const BuyLoka: NextPage = () => {
       <div className="flex-grow flex flex-col md:flex-row h-full w-full lg:px-20   mx-auto justify-center items-start text-center">
         <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%]  mx-auto  ">
           <div className="w-full flex-grow flex flex-col ">
-            <div className="flex-grow flex flex-col md:flex-row h-full w-full justify-start items-start text-left  mx-auto">
-              {stacksAddress ? (
+            {connected ? ( //check if connected
+              <div className="flex-grow flex flex-col md:flex-row h-full w-full justify-start items-start text-left  mx-auto">
                 <div className="sticky-div hidden lg:flex  items-end ">
                   <DashboardMenu selectedMenu={"Buy Loka"} />
                 </div>
-              ) : (
-                <></>
-              )}
-              {stacksAddress ? (
+
                 <div className="h-full w-full mx-auto justify-start items-start text-center lg:text-left ">
                   <section className="lg:min-h-[80px]p-5 pt-10 pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white">
                     BUY LOKA
@@ -105,27 +115,26 @@ const BuyLoka: NextPage = () => {
                     <SimulationCard />
                   </section>{" "}
                 </div>
-              ) : (
-                <div className="h-full w-full mx-auto justify-center items-center text-center ">
-                  {stacksAddress ? "" : <ConnectWalletPrompt />}
-                </div>
-              )}
-              {stacksAddress ? (
+
                 <div className="sticky-div lg:max-w-[50%] w-full mx-auto mt-20  justify-start items-start lg:text-left text-center">
                   <section className="lg:min-h-[80px]p-5  pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white"></section>
                   <section className="p-0 lg:flex ">
                     <ReviewCard genesisNFT={genesisNFT} />
                   </section>
                 </div>
-              ) : (
+
                 <></>
-              )}
-            </div>
+              </div>
+            ) : (
+              <div className="h-full w-full mx-auto justify-center items-center text-center ">
+                <ConnectWalletPrompt />
+              </div>
+            )}
             <section className=" p-5">{/*transaction*/}</section>
           </div>
         </div>
       </div>
-      {stacksAddress && genesisNFT ? (
+      {connected && genesisNFT ? (
         <div className="w-full sticky-bottom  lg:hidden md:hidden flex bg-custom-blue  min-h-[120px]">
           <BuyButton />
         </div>

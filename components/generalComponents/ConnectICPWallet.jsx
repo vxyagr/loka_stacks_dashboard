@@ -115,7 +115,7 @@ const ConnectWallet = () => {
   const [appLoaded, setAppLoaded] = useState(false);
 
   useEffect(() => {
-    if (ICPaddr) setConnected(true);
+    if (ICPaddr && ICPaddr != "") setConnected(true);
     console.log("ip " + ICPaddr);
     dispatch(changeICPAddress(ICPaddr));
   }, [ICPaddr]);

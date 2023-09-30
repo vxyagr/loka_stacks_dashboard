@@ -2,11 +2,11 @@ import type { NextPage } from "next";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import NavigationBar from "../components/Navigation";
+import NavigationBar from "../components/generalComponents/Navigation";
 import NFTDashboard from "../components/home/NFTDashboard";
 import TokenDashboard from "../components/home/TokenDashboard";
 import MiningDashboard from "../components/home/MiningDashboard";
-import DashboardMenu from "../components/DashboardMenu";
+import DashboardMenu from "../components/generalComponents/DashboardMenu";
 import ConnectWalletPrompt from "../components/generalComponents/ConnectWalletPrompt";
 import { useConnect } from "@stacks/connect-react";
 import { cvToString } from "@stacks/transactions";
@@ -18,7 +18,7 @@ import {
   makeStandardSTXPostCondition,
   FungibleConditionCode,
 } from "@stacks/transactions";
-import { userSession } from "../components/generalComponents/ConnectHiroWallet";
+
 import Head from "next/head";
 
 const Dashboard: NextPage = () => {
@@ -32,6 +32,7 @@ const Dashboard: NextPage = () => {
   /*const stacksAddress = useSelector(
     (state: any) => state.rootReducer.stacksAddress
   ); */
+
   const stacksAddress = 1;
   return (
     <div className="bg-btc-pattern w-full">
@@ -57,7 +58,7 @@ const Dashboard: NextPage = () => {
         <div className="flex-grow flex flex-col md:flex-row lg:max-w-[90%]  mx-auto  ">
           <div className="w-full flex-grow flex flex-col ">
             {" "}
-            {currentICPAddress != "" ? (
+            {currentICPAddress != "" && currentICPAddress != null ? (
               <div className="flex-grow flex flex-col md:flex-row md:min-w-[700px] h-full w-full justify-start items-start text-left  mx-auto">
                 <div className="hidden lg:flex items-end ">
                   <DashboardMenu selectedMenu={"Dashboard"} />

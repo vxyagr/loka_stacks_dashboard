@@ -1,3 +1,5 @@
+//This is a component for Loka next js app to connect to smart contract / canister on ICP, by creating "Actor"
+//this component should only be accessed once user have connected their ICP wallet and have ICP wallet address
 import { Actor, HttpAgent } from "@dfinity/agent";
 
 // Imports and re-exports candid interface
@@ -15,7 +17,7 @@ export const canisterId =
 export const createActor = (canisterId, options = {}) => {
   // const agent = options.agent || new HttpAgent({ ...options.agentOptions });
   var args = {};
-  args["host"] = "https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/";
+  args["host"] = "https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/"; //canister deploy location on ICP - ask canister developer for this
   args["identity"] = options.identity;
   const agent = new HttpAgent(args);
 
@@ -43,4 +45,4 @@ export const createActor = (canisterId, options = {}) => {
   });
 };
 
-export const icLoka = createActor("bkyz2-fmaaa-aaaaa-qaaaq-cai");
+export const icLoka = createActor("bkyz2-fmaaa-aaaaa-qaaaq-cai"); //parameter is Loka canister ID - ask canister developer for this

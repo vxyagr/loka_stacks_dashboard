@@ -6,11 +6,11 @@ import { createActor } from "../ic/icloka";
 import { library, config } from "@fortawesome/fontawesome-svg-core";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import BackgroundWrapper from "../components/BGWrapper";
+import BackgroundWrapper from "../components/generalComponents/BGWrapper";
 import { wrapper } from "../redux/store";
 import { Connect } from "@stacks/connect-react";
 import { useSelector, useDispatch } from "react-redux";
-import { userSession } from "../components/ConnectHiroWallet";
+
 config.autoAddCss = false;
 library.add(faBars);
 import { changeBTCPriceToday } from "../redux/actions";
@@ -44,21 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
   return (
     <BackgroundWrapper>
-      <Connect
-        authOptions={{
-          appDetails: {
-            name: "Loka",
-            icon,
-          },
-          redirectTo: "/",
-          onFinish: () => {
-            window.location.reload();
-          },
-          userSession,
-        }}
-      >
-        <Component {...pageProps} />
-      </Connect>
+      <Component {...pageProps} />
     </BackgroundWrapper>
   );
 }
