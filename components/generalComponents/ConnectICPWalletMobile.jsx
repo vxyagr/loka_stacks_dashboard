@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { AppConfig, showConnect, UserSession } from "@stacks/connect";
 import { useSelector, useDispatch } from "react-redux";
-const appConfig = new AppConfig(["store_write", "publish_data"]);
+import { changeICPAddress, changeLokaCanister } from "../../redux/actions";
+//import { StoicIdentity } from "ic-stoic-identity";
+import { Route, Routes, useLocation } from "react-router-dom";
+//const StoicIdentity = dynamic(() => import(
+import dynamic from "next/dynamic";
 import { createActor } from "../../ic/icloka";
-//import StoicIdentity from "./ICPWalletComponents";
+
+const appConfig = new AppConfig(["store_write", "publish_data"]);
+
 export const userSession = new UserSession({ appConfig });
 
 function authenticate() {
@@ -20,35 +26,17 @@ function authenticate() {
   });
 }
 
-function disconnect() {
-  userSession.signUserOut("/");
-}
-
 const ConnectWalletMobile = () => {
-  const stacksAddress = useSelector((state) => state.rootReducer.stacksAddress);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log(JSON.stringify(userSession.isUserSignedIn()));
-    if (userSession.isUserSignedIn()) {
-      dispatch({
-        type: "SET_STACKS_ADDRESS",
-        payload: userSession.loadUserData().profile.stxAddress.testnet,
-      });
-    }
-  }, [userSession.isUserSignedIn()]);
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
   const [loka, setLoka] = useState(null);
   const [identity, setIdentity] = useState(false);
   const [connected, setConnected] = useState(false);
   const [stoicWallet, setStoicWallet] = useState(null);
-  const [db, setDB] = useState("");
+  const [ICPaddr, setICPaddr] = useState(null);
 
   useEffect(() => {
     // Load the client side components dynamically ONLY after the window is loaded
     loadWalletComponents();
+    //console.log("type of window " + typeof window);
   }, [typeof window]);
 
   const loadWalletComponents = () => {
@@ -59,7 +47,6 @@ const ConnectWalletMobile = () => {
       import("./ICPWalletComponents").then((module) => {
         setStoicWallet(() => module.default);
       });
-      if (stoicWallet == null) setDB("none");
       //});
       //console.log("dynamic component loaded");
     }
@@ -71,43 +58,49 @@ const ConnectWalletMobile = () => {
         if (identity !== false) {
           //ID is a already connected wallet!
           setIdentity(identity);
-          setConnected(true);
+          setICPaddr(identity.getPrincipal().toText());
+          //setConnected(true);
         }
       });
     }
-    if (stoicWallet == null) setDB("none");
-    else setDB(JSON.stringify(stoicWallet));
   }, [stoicWallet]);
 
   const connectLokaCanister = async () => {
+    if (!identity || !stoicWallet) return;
     var options = {};
     options["identity"] = identity;
-    var loka_ = createActor("bkyz2-fmaaa-aaaaa-qaaaq-cai", options);
-    //const greeting = await loka_.greet("yes");
-    //console.log(greeting);
+    var loka_ = createActor("af353-wyaaa-aaaak-qcmtq-cai", options);
+    //const greeting = await loka_.mintContract();
+    const greeting = await loka_.greet();
+    console.log(greeting);
     setLoka(loka_);
   };
 
   useEffect(() => {
     if (identity) {
-      console.log(identity.getPrincipal().toText() + " connected " + connected);
+      //console.log(identity.getPrincipal().toText() + " connected " + connected);
       connectLokaCanister();
     }
   }, [connected]);
 
+  useEffect(() => {
+    if (loka) dispatch(changeLokaCanister(loka));
+  }, [loka]);
+
   const login = async (t) => {
-    if (!stoicWallet || stoicWallet === "undefined") return;
+    //console.log("lol");
     stoicWallet.load().then(async (identity) => {
+      var identity_ = "";
       if (identity !== false) {
         //ID is a already connected wallet!
+        setIdentity(identity);
       } else {
         //No existing connection, lets make one!
-        try {
-          var identity = await stoicWallet.connect();
-        } catch (err) {}
+        identity_ = await stoicWallet.connect();
+        setIdentity(identity_);
       }
-      setIdentity(identity);
-      setConnected(true);
+      dispatch(changeICPAddress(identity_.getPrincipal().toText()));
+      setICPaddr(identity_.getPrincipal().toText());
       //Lets display the connected principal!
     });
   };
@@ -115,8 +108,30 @@ const ConnectWalletMobile = () => {
     userSession.signUserOut("/");
     stoicWallet.disconnect();
     setConnected(false);
+    dispatch(changeICPAddress(""));
   }
   const [appLoaded, setAppLoaded] = useState(false);
+
+  useEffect(() => {
+    if (ICPaddr && ICPaddr != "") setConnected(true);
+    console.log("ip " + ICPaddr);
+    dispatch(changeICPAddress(ICPaddr));
+  }, [ICPaddr]);
+
+  const stacksAddress = useSelector((state) => state.rootReducer.stacksAddress);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // console.log(JSON.stringify(userSession.isUserSignedIn()));
+    if (userSession.isUserSignedIn()) {
+      dispatch({
+        type: "SET_STACKS_ADDRESS",
+        payload: userSession.loadUserData().profile.stxAddress.testnet,
+      });
+    }
+  }, [userSession.isUserSignedIn()]);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   if (connected) {
     return (
@@ -125,7 +140,7 @@ const ConnectWalletMobile = () => {
           onClick={disconnect}
           className="w-full  bg-gradient-to-r from-blue-500 rounded-full to-purple-600 text-white lg:text-lg md:text-base text-base  lg:py-1 lg:px-4 py-3 px-4 leading-none tracking-tight hover:bg-left hover:shadow-xl hover:shadow-blue-400/20 active:scale-95 sm:text-2xl  transition duration-300 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-500"
         >
-          Disconnect
+          Disconnect {ICPaddr}
         </button>
         {/*<p>mainnet: {userSession.loadUserData().profile.stxAddress.mainnet}</p>
         <p>testnet: {userSession.loadUserData().profile.stxAddress.testnet}</p>*/}
@@ -140,7 +155,7 @@ const ConnectWalletMobile = () => {
         onClick={login}
         className="w-full  bg-gradient-to-r from-blue-500 rounded-full to-purple-600 text-white lg:text-lg md:text-base text-base lg:py-1 lg:px-4 py-3 px-4 leading-none tracking-tight hover:bg-left hover:shadow-xl hover:shadow-blue-400/20 active:scale-95 sm:text-2xl  transition duration-300 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-500"
       >
-        Connect {db}
+        Connect
       </button>
     </div>
   );
