@@ -43,7 +43,7 @@ const ROICard = ({ nft, update }) => {
       <div className="w-full p-0 grid pt-4   border-t-[1px] border-gray-500 h-1/6">
         <div className="grid w-full justify-center items-center ">
           <div className="w-full justify-start text-sm text-white text-center p-2">
-            {(nft.daysLeft * 28).toString()} days left
+            {(formatFloat(nft.daysLeft) * 28).toString()} days left
           </div>
         </div>
       </div>
