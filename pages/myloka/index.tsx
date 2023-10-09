@@ -25,32 +25,55 @@ import Head from "next/head";
 
 const MyLoka: NextPage = () => {
   const dispatch = useDispatch();
-  const [nftList, setNFTList] = useState([]);
+  const [nftList, setNFTList] = useState<any[]>([]);
+  const [emptyList, setEmptyList] = useState<any[]>([]);
   const currentInvestmentValue = useSelector(
     (state: any) => state.rootReducer.investment
   );
-
   const currentICPAddress = useSelector(
     (state: any) => state.rootReducer.icpAddress
   );
-
-  const loka = useSelector((state: any) => state.rootReducer.lokaCanister);
   /*const stacksAddress = useSelector(
     (state: any) => state.rootReducer.stacksAddress
-
   ); */
+  const loka = useSelector((state: any) => state.rootReducer.lokaCanister);
+  const controllers = useSelector(
+    (state: any) => state.rootReducer.controllers
+  );
 
-  const getNFTList = async () => {
-    if (loka && currentICPAddress) {
-      const nftList_ = await loka.getOwnedContracts();
-      setNFTList(nftList_);
+  // getting all NFT from all mining sites
+  const getAllNFTList = async () => {
+    if (loka && controllers && currentICPAddress) {
+      controllers.forEach((item: any, index: any) => {
+        var nftList_: any = getNFTList(item);
+      });
+      //const nftList_ = await loka.getOwnedContracts();
+      setNFTList(emptyList);
+      setEmptyList([]);
+      console.log("done fetching all NFT");
       console.log(nftList);
     }
   };
 
+  const getNFTList = async (canister: any) => {
+    console.log("getting NFT from a site..");
+    var nftList_ = await canister.getOwnedContracts();
+    console.log("fetched " + nftList_.length + " contracts");
+    console.log(nftList_);
+    if (nftList_.length > 0) setNFTList(emptyList.concat(nftList_));
+    return nftList_;
+  };
+
   useEffect(() => {
-    getNFTList();
-  }, [loka]);
+    if (controllers) getAllNFTList();
+  }, [controllers]);
+
+  useEffect(() => {
+    if (nftList.length > 0) {
+      console.log("found " + nftList.length + " NFT ");
+      console.log(nftList);
+    }
+  }, [nftList]);
   const stacksAddress = 1;
   return (
     <div className="bg-btc-pattern w-full">

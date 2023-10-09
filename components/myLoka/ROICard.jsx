@@ -1,4 +1,8 @@
 const ROICard = ({ nft, update }) => {
+  function formatFloat(number) {
+    var numb_ = parseFloat(number).toFixed(2);
+    return numb_;
+  }
   return (
     <div className="flex-col w-full py-4   ">
       <div className="w-full p-0  text-white font-medium ">
@@ -7,7 +11,7 @@ const ROICard = ({ nft, update }) => {
             ${nft.amount.toString()}
           </div>
           <div className="w-full justify-start text-center text-sm text-[#e68e46] p-0 ">
-            {nft.hashrate.toString()} TH/s
+            {formatFloat(nft.hashrate).toString()} TH/s
           </div>
           <div className="w-full justify-start text-right pb-2  ">
             <div className="bg-custom-green rounded-xl  px-2 text-sm  text-white text-right">

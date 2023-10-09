@@ -3,12 +3,22 @@ import RechargeButton from "./RechargeButton";
 
 import { faBolt } from "@fortawesome/free-solid-svg-icons";
 const EnergyCard = ({ nft }) => {
-  const condition =
-    nft.daysLeft * nft.electricityPerDay > nft.LETBalance ? false : true;
-  const remaining =
-    nft.daysLeft * nft.electricityPerDay > nft.LETBalance
-      ? "LET depleted"
-      : nft.LETBalance / nft.electricityPerDay + " days remaining";
+  function formatFloat(number) {
+    var numb_ = parseFloat(number).toFixed(2);
+    return numb_;
+  }
+  const condition = formatFloat(
+    formatFloat(nft.daysLeft) * formatFloat(nft.electricityPerDay) >
+      formatFloat(nft.LETBalance)
+  )
+    ? false
+    : true;
+  const remaining = formatFloat(
+    formatFloat(nft.daysLeft) * formatFloat(nft.electricityPerDay) >
+      formatFloat(nft.LETBalance)
+  )
+    ? "LET depleted"
+    : formatFloat(nft.LETBalance / nft.electricityPerDay) + " days remaining";
   return (
     <div className="flex-col w-full p-0 justify-center items-center text-center   ">
       <div className="w-full p-2  text-yellow-400 font-medium h-2/6">
@@ -23,7 +33,7 @@ const EnergyCard = ({ nft }) => {
       </div>
       <div className="inline-block px-2 pt-2 w-full  text-white text-xs h-2/6 ">
         <span className="text-yellow-400">
-          {nft.electricityPerDay.toString()}
+          {formatFloat(nft.electricityPerDay).toString()}
         </span>{" "}
         LET / day
       </div>
