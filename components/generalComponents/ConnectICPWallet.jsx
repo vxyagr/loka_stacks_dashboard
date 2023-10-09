@@ -75,7 +75,7 @@ const ConnectWallet = () => {
     var options = {};
     options["identity"] = identity; //bnz7o-iuaaa-aaaaa-qaaaa-cai    b77ix-eeaaa-aaaaa-qaada-cai
     console.log("connecting to canister");
-    var loka_ = createActor("c2lt4-zmaaa-aaaaa-qaaiq-cai", options);
+    var loka_ = createActor("l4mjr-aiaaa-aaaak-qcnmq-cai", options);
     setLoka(loka_);
   };
 
