@@ -25,7 +25,7 @@ const Slider = () => {
         var btc = response.data.bitcoin.usd;
         setValue(btc);
 
-        console.log("btc price today " + btc);
+        //console.log("btc price today " + btc);
       })
       .catch((error) => {
         console.error("Error fetching Bitcoin price:", error);

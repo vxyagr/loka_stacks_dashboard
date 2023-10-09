@@ -1,39 +1,33 @@
 export const idlFactory = ({ IDL }) => {
-  const NFTContract = IDL.Record({
+  const MiningSite = IDL.Record({
     id: IDL.Nat,
-    end: IDL.Nat,
-    durationText: IDL.Text,
-    claimedBTC: IDL.Nat,
-    claimedLOM: IDL.Nat,
-    duration: IDL.Nat,
-    hashrate: IDL.Nat,
-    owner: IDL.Text,
-    metadata: IDL.Text,
-    electricityPerDay: IDL.Nat,
-    start: IDL.Nat,
-    LETBalance: IDL.Nat,
-    amount: IDL.Nat,
-    daysLeft: IDL.Nat,
-    claimableBTC: IDL.Nat,
-    claimableLOM: IDL.Nat,
+    controllerCanisterId: IDL.Text,
+    dollarPerHashrate: IDL.Float64,
+    name: IDL.Text,
+    totalHashrate: IDL.Nat,
+    electricityPerKwh: IDL.Float64,
+    nftCanisterId: IDL.Text,
+    location: IDL.Text,
   });
-  return IDL.Service({
-    claimBTC: IDL.Func([IDL.Nat], [IDL.Nat], []),
-    claimLOM: IDL.Func([IDL.Nat], [IDL.Nat], []),
-    distributeBTC: IDL.Func([IDL.Nat, IDL.Nat], [IDL.Nat], []),
-    distributeLOM: IDL.Func([IDL.Nat], [IDL.Nat], []),
-    getContractAmount: IDL.Func([IDL.Nat], [IDL.Text], ["query"]),
-    getNFTContract: IDL.Func([IDL.Nat], [NFTContract], ["query"]),
-    getOwnedContracts: IDL.Func([], [IDL.Vec(NFTContract)], ["query"]),
-    greet: IDL.Func([], [IDL.Text], ["query"]),
-    mintContract: IDL.Func(
-      [IDL.Nat, IDL.Nat, IDL.Text, IDL.Nat, IDL.Nat, IDL.Nat, IDL.Nat, IDL.Nat],
+  const Loka = IDL.Service({
+    addMiningSite: IDL.Func(
+      [
+        IDL.Text,
+        IDL.Text,
+        IDL.Float64,
+        IDL.Float64,
+        IDL.Nat,
+        IDL.Text,
+        IDL.Text,
+      ],
       [IDL.Nat],
       []
     ),
-    pauseContract: IDL.Func([IDL.Bool], [IDL.Bool], []),
-    rechargeLET: IDL.Func([IDL.Nat, IDL.Nat], [IDL.Nat], []),
+    getMiningSiteStatus: IDL.Func([IDL.Nat], [IDL.Bool], ["query"]),
+    getMiningSites: IDL.Func([], [IDL.Vec(MiningSite)], ["query"]),
+    setMiningStatus: IDL.Func([IDL.Nat, IDL.Bool], [IDL.Bool], []),
   });
+  return Loka;
 };
 export const init = ({ IDL }) => {
   return [];

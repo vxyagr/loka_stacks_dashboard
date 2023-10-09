@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 
-const ReviewCard = ({ genesisNFT }) => {
+const ReviewCard = ({ genesisNFT, selectedMiningSite }) => {
   const hardwareEfficiency = useSelector(
     (state) => state.rootReducer.hardwareEfficiency
   );
@@ -26,10 +26,16 @@ const ReviewCard = ({ genesisNFT }) => {
   const currentICPAddress = useSelector(
     (state) => state.rootReducer.icpAddress
   );
+  const btcPriceToday = useSelector((state) => state.rootReducer.btcPriceToday);
+  const satsUSD = btcPriceToday / 100006400;
 
-  const loka = useSelector((state) => state.rootReducer.lokaCanister);
+  const loka = useSelector((state) => state.rootReducer.selectedController);
 
   const totalTHRented = useSelector((state) => state.rootReducer.totalTHRented);
+  const thRentPerDay = useSelector((state) => state.rootReducer.thRentPerDay);
+  const selectedSite = useSelector(
+    (state) => state.rootReducer.selectedMiningSite
+  );
   const currentDurationDiscount = useSelector(
     (state) => state.rootReducer.durationDiscount
   );
@@ -40,7 +46,11 @@ const ReviewCard = ({ genesisNFT }) => {
   const [investmentValue, setInvestmentValue] = useState(0);
   useEffect(() => {
     setInvestmentValue(currentInvestmentValue);
-  }, [currentInvestmentValue]);
+  }, [currentInvestmentValue, thRentPerDay]);
+
+  useEffect(() => {
+    console.log("review " + thRentPerDay + " " + totalTHRented);
+  }, [thRentPerDay]);
 
   const [durationValue, setDurationValue] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -56,6 +66,7 @@ const ReviewCard = ({ genesisNFT }) => {
     setDurationValue(currentDurationValue);
     setDuration(currentDuration);
   }, [currentDurationValue, currentDuration]);
+  const loc = selectedSite ? selectedSite.location.toString() : "";
   const info_cards = [
     {
       title: "Projected BTC yield",
@@ -67,7 +78,12 @@ const ReviewCard = ({ genesisNFT }) => {
     },
     {
       title: "Energy price",
-      val: "3 LET ($0.03)/KWh",
+      val: selectedSite
+        ? selectedSite.electricityPerKwh * 1000 +
+          " LET ($" +
+          selectedSite.electricityPerKwh +
+          ")/KWh"
+        : "",
     },
     {
       title: "Energy Consumption",
@@ -93,7 +109,7 @@ const ReviewCard = ({ genesisNFT }) => {
     },
     {
       title: "Mining Location",
-      val: "Gayo Lues",
+      val: loc,
     },
   ];
 
@@ -104,15 +120,15 @@ const ReviewCard = ({ genesisNFT }) => {
     setShowOverlay(true);
     //amount_: Nat, duration_: Nat, hashrate_ : Nat, elec_ : Nat, genesis_ : Nat, start_ : Nat, end_ : N
     console.log("minting " + parseInt(totalTHRented));
+    //amount_: Nat, duration_: Nat, durationText_ : Text, genesis_ : Nat, start_ : Nat, end_ : Nat, satsUSD : Float
     const mint = await loka.mintContract(
       investmentValue,
-      currentDurationValue * 28,
+      currentDurationValue,
       currentDuration.toString(),
-      parseInt(totalTHRented),
-      parseInt(Math.ceil(LETperDay).toFixed(0)),
-      0,
       1,
-      1
+      1,
+      1,
+      satsUSD
     );
 
     setLatestNFTid(parseInt(mint));

@@ -69,10 +69,8 @@ const ConnectWalletMobile = () => {
     if (!identity || !stoicWallet) return;
     var options = {};
     options["identity"] = identity;
-    var loka_ = createActor("af353-wyaaa-aaaak-qcmtq-cai", options);
-    //const greeting = await loka_.mintContract();
-    const greeting = await loka_.greet();
-    console.log(greeting);
+    var loka_ = createActor("a4tbr-q4aaa-aaaaa-qaafq-cai", options);
+
     setLoka(loka_);
   };
 

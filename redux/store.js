@@ -23,6 +23,11 @@ const initialState = {
   totalTHRented: 0,
   icpAddress: "",
   lokaCanister: null,
+  connected: false,
+  controllers: null,
+  miningSites: null,
+  selectedMiningSite: null,
+  selectedController: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -57,6 +62,20 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, icpAddress: action.payload };
     case "SET_LOKA_CANISTER":
       return { ...state, lokaCanister: action.payload };
+    case "SET_CONNECTED":
+      return { ...state, connected: action.payload };
+    case "SET_CONTROLLERS":
+      return { ...state, controllers: action.payload };
+    case "SET_MINING_SITES":
+      return { ...state, miningSites: action.payload };
+    case "SET_SELECTED_SITE":
+      return { ...state, selectedMiningSite: action.payload };
+    case "SET_ELECTRICITY_PER_KWH":
+      return { ...state, electricityCostPerKwh: action.payload };
+    case "SET_HASHRATE_COST_PERDAY":
+      return { ...state, thRentPerDay: action.payload };
+    case "SET_SELECTED_CONTROLLER":
+      return { ...state, selectedController: action.payload };
     default:
       return state;
   }

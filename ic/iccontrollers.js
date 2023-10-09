@@ -3,8 +3,8 @@
 import { Actor, HttpAgent } from "@dfinity/agent";
 
 // Imports and re-exports candid interface
-import { idlFactory } from "./candid/loka.did.js";
-export { idlFactory } from "./candid/loka.did.js";
+import { idlFactory } from "./candid/controllers.did.js";
+export { idlFactory } from "./candid/controllers.did.js";
 
 /* CANISTER_ID is replaced by webpack based on node environment
  * Note: canister environment variable will be standardized as

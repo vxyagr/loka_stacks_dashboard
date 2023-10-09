@@ -21,7 +21,7 @@ import { useState, useEffect } from "react";
 function MyApp({ Component, pageProps }: AppProps) {
   const dispatch = useDispatch();
   const [bitcoinPrice, setBitcoinPrice] = useState(null);
-
+  const [stoicWallet, setStoicWallet] = useState(null);
   useEffect(() => {
     // Fetch Bitcoin price from CoinGecko API
     axios
@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         var btc = response.data.bitcoin.usd;
         setBitcoinPrice(btc);
         dispatch(changeBTCPriceToday(btc));
-        console.log("btc price today " + btc);
+        // console.log("btc price today " + btc);
       })
       .catch((error) => {
         console.error("Error fetching Bitcoin price:", error);

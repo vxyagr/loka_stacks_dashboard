@@ -61,3 +61,38 @@ export const changeLokaCanister = (newValue) => ({
   type: "SET_LOKA_CANISTER",
   payload: newValue,
 });
+
+export const changeConnected = (newValue) => ({
+  type: "SET_CONNECTED",
+  payload: newValue,
+});
+
+export const changeControllers = (newValue) => ({
+  type: "SET_CONTROLLERS",
+  payload: newValue,
+});
+
+export const changeMiningSites = (newValue) => ({
+  type: "SET_MINING_SITES",
+  payload: newValue,
+});
+
+export const changeSelectedSites = (newValue) => ({
+  type: "SET_SELECTED_SITE",
+  payload: newValue,
+});
+
+export const changeElectricityPerKwh = (newValue) => ({
+  type: "SET_ELECTRICITY_PER_KWH",
+  payload: newValue,
+});
+
+export const changeHashrateRentPerDay = (newValue) => ({
+  type: "SET_HASHRATE_COST_PERDAY",
+  payload: newValue,
+});
+
+export const changeSelectedController = (newValue) => ({
+  type: "SET_SELECTED_CONTROLLER",
+  payload: newValue,
+});

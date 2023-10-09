@@ -23,6 +23,9 @@ const ContractCalculatorAndChart = ({
   const currentDuration = useSelector(
     (state) => state.rootReducer.durationTitle
   );
+  const electricityPerKwh = useSelector(
+    (state) => state.rootReducer.electricityCostPerKwh
+  );
   const hardwareEfficiency = useSelector(
     (state) => state.rootReducer.hardwareEfficiency
   );
@@ -32,6 +35,14 @@ const ContractCalculatorAndChart = ({
   const currentDurationDiscount = useSelector(
     (state) => state.rootReducer.durationDiscount
   );
+
+  const selectedSite = useSelector(
+    (state) => state.rootReducer.selectedMiningSite
+  );
+
+  useEffect(() => {
+    console.log("calculate " + currentThRentPerDay);
+  }, [selectedSite]);
   const btcSliderValue = useSelector((state) => state.rootReducer.btcSimulated);
   useEffect(() => {
     setDurationValue(currentDurationValue);
@@ -44,6 +55,7 @@ const ContractCalculatorAndChart = ({
     hardwareEfficiency,
     currentDurationDiscount,
   ]);
+
   //constants
   const [miningResult, setMiningResult] = useState(0);
   const [exchangeResult, setExchangeResult] = useState(0);
@@ -81,37 +93,7 @@ const ContractCalculatorAndChart = ({
     setInvestmentValue(currentInvestmentValue);
     calculateAndgenerateDataSets(currentDurationValue, currentInvestmentValue);
     //console.log("investment value " + currentInvestmentValue);
-  }, [currentInvestmentValue, btcSim, investmentValue]);
-
-  function recalculate(investment, duration, thrented, electricityperday) {
-    var check = false;
-    var threntupdate = thrented;
-    var electricityupdate = 0;
-    var newInvestment = investment;
-    while (!check) {
-      if (check) break;
-      newInvestment -= 1;
-
-      var THrented_ =
-        newInvestment /
-        (duration * 28) /
-        currentThRentPerDay /
-        (1 - currentDurationDiscount / 100);
-      var electricityPerDay_ = THrented_ * hardwareEfficiency * 24; // Watt
-
-      var electricityCostPerDay_ = (electricityPerDay_ / 1000) * 0.03; //$ value per day
-      var totalNewInvestment = newInvestment + 28 * electricityCostPerDay_;
-      check = totalNewInvestment < investment ? true : false;
-      //console.log("new " + newInvestment + " check " + check);
-      threntupdate = THrented_;
-      electricityupdate = electricityCostPerDay_;
-    }
-
-    //return { threntupdate, electricityupdate };
-    var THrented = threntupdate; // thrented;
-    var electricityCostPerDay = electricityupdate; // electricityperday;
-    return { THrented, electricityCostPerDay };
-  }
+  }, [currentInvestmentValue, btcSim, investmentValue, selectedSite]);
 
   const calculateAndgenerateDataSets = (duration, investment) => {
     const days = currentDurationValue * 28;
@@ -139,19 +121,12 @@ const ContractCalculatorAndChart = ({
 
     const THrented_ = finalSats / (currentDurationValue * 28) / satsPerHashDay;
 
-    {
-      /*} const THrented_ =
-      investmentValue /
-      days /
-      currentThRentPerDay /
-      (1 - currentDurationDiscount / 100); //TH's with discount
-  //console.log("rented " + THrented); */
-    }
     if (THrented_ <= 0) return;
 
     const electricityPerDay_ = THrented_ * hardwareEfficiency * 24; // Watt
 
-    const electricityCostPerDay_ = (electricityPerDay_ / 1000) * 0.03; //$ value per day
+    const electricityCostPerDay_ =
+      (electricityPerDay_ / 1000) * electricityPerKwh; //$ value per day
 
     if (
       isNaN(electricityCostPerDay_) ||
@@ -159,14 +134,6 @@ const ContractCalculatorAndChart = ({
       electricityCostPerDay_ <= 0
     )
       return;
-    {
-      /*const { THrented, electricityCostPerDay } = recalculate(
-      investmentValue,
-      currentDurationValue,
-      THrented_,
-      electricityCostPerDay_
-    ); */
-    }
 
     const THrented = THrented_;
     const electricityCostPerDay = electricityCostPerDay_;
@@ -174,7 +141,7 @@ const ContractCalculatorAndChart = ({
     const electricityPerDay = THrented * hardwareEfficiency * 24; // Watt
     dispatch(changeTotalTHRented(THrented.toFixed(0)));
     dispatch(changeElectricityPerDay(electricityPerDay));
-
+    console.log("calculate dispatched " + THrented);
     const electricityCostPerWeek = electricityCostPerDay * 7; //value per week
 
     const yieldPerDay = THrented * satsPerHashDay;

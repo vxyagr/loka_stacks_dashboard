@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import NavigationBar from "../../components/generalComponents/Navigation";
 import AmountCard from "../../components/buyLoka/AmountCard";
+import MiningSiteCard from "../../components/buyLoka/MiningSiteCard";
 import DurationCard from "../../components/buyLoka/DurationCard";
 import ReviewCard from "../../components/buyLoka/ReviewCard";
 import SimulationCard from "../../components/buyLoka/SimulationCard";
@@ -35,6 +36,8 @@ const BuyLoka: NextPage = () => {
   const stacksAddress = 1;
   const genesisNFT = true;
   const dispatch = useDispatch();
+  const [nftList, setNFTList] = useState<any[]>([]);
+
   /*const stacksAddress = useSelector(
     (state: any) => state.rootReducer.stacksAddress
   ); */
@@ -63,6 +66,8 @@ const BuyLoka: NextPage = () => {
   const totalTHRented = useSelector(
     (state: any) => state.rootReducer.totalTHRented
   );
+
+  const thrented = useSelector((state: any) => state.rootReducer.thRentPerDay);
   const currentDurationDiscount = useSelector(
     (state: any) => state.rootReducer.durationDiscount
   );
@@ -119,6 +124,8 @@ const BuyLoka: NextPage = () => {
 
   useEffect(() => {
     // Fetch Bitcoin price from CoinGecko API
+    console.log("getting all");
+    if (controllers) getAllNFTList();
     axios
       .get(
         "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
@@ -127,7 +134,7 @@ const BuyLoka: NextPage = () => {
         var btc = response.data.bitcoin.usd;
         setBitcoinPrice(btc);
         dispatch(changeBTCPriceToday(btc));
-        console.log("btc price today " + btc);
+        //console.log("btc price today " + btc);
       })
       .catch((error) => {
         console.error("Error fetching Bitcoin price:", error);
@@ -141,6 +148,47 @@ const BuyLoka: NextPage = () => {
       setConnected(false);
     }
   }, [currentICPAddress]);
+
+  //const loka = useSelector((state: any) => state.rootReducer.lokaCanister);
+  const controllers = useSelector(
+    (state: any) => state.rootReducer.controllers
+  );
+
+  const selectedMiningSite = useSelector(
+    (state: any) => state.rootReducer.selectedMiningSite
+  );
+
+  // getting all NFT from all mining sites
+  const getAllNFTList = async () => {
+    if (loka && controllers && currentICPAddress) {
+      controllers.forEach((item: any, index: any) => {
+        var nftList_ = getNFTList(item);
+      });
+      //const nftList_ = await loka.getOwnedContracts();
+      //setNFTList(nftList_);
+    }
+  };
+
+  const getNFTList = async (canister: any) => {
+    console.log("getting NFT from a site..");
+    var nftList_ = await canister.getOwnedContracts();
+    var newNftList = nftList; //nftList? newNftList.push(nftList_) : null;
+    newNftList.push(nftList_);
+    setNFTList(newNftList);
+    console.log(newNftList);
+    return nftList_;
+  };
+
+  useEffect(() => {
+    console.log("thrented " + thrented);
+  }, [thrented]);
+
+  useEffect(() => {
+    if (nftList.length > 0) {
+      console.log("found " + nftList.length + " NFT ");
+      console.log(nftList);
+    }
+  }, [nftList]);
 
   return (
     <div className="bg-btc-pattern w-full">
@@ -178,6 +226,9 @@ const BuyLoka: NextPage = () => {
                     BUY LOKA
                   </section>
                   <section className="lg:flex ">
+                    <MiningSiteCard />
+                  </section>
+                  <section className="lg:flex ">
                     <AmountCard />
                   </section>
                   <section className="lg:flex ">
@@ -192,7 +243,10 @@ const BuyLoka: NextPage = () => {
                 <div className="sticky-div lg:max-w-[50%] w-full mx-auto mt-20  justify-start items-start lg:text-left text-center">
                   <section className="lg:min-h-[80px]p-5  pb-0 lg:flex justify-start text-3xl text-center  lg:text-left text-white"></section>
                   <section className="p-0 lg:flex ">
-                    <ReviewCard genesisNFT={genesisNFT} />
+                    <ReviewCard
+                      genesisNFT={genesisNFT}
+                      selectedMiningSite={selectedMiningSite}
+                    />
                   </section>
                 </div>
 

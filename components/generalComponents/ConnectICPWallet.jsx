@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { AppConfig, showConnect, UserSession } from "@stacks/connect";
 import { useSelector, useDispatch } from "react-redux";
-import { changeICPAddress, changeLokaCanister } from "../../redux/actions";
+import {
+  changeConnected,
+  changeControllers,
+  changeICPAddress,
+  changeLokaCanister,
+  changeMiningSites,
+} from "../../redux/actions";
 //import { StoicIdentity } from "ic-stoic-identity";
 import { Route, Routes, useLocation } from "react-router-dom";
 //const StoicIdentity = dynamic(() => import(
 import dynamic from "next/dynamic";
 import { createActor } from "../../ic/icloka";
+import { createActor as createControllers } from "../../ic/iccontrollers";
+import { list } from "postcss";
 
 const appConfig = new AppConfig(["store_write", "publish_data"]);
 
@@ -29,37 +37,34 @@ function authenticate() {
 const ConnectWallet = () => {
   const [loka, setLoka] = useState(null);
   const [identity, setIdentity] = useState(false);
-  const [connected, setConnected] = useState(false);
+
   const [stoicWallet, setStoicWallet] = useState(null);
   const [ICPaddr, setICPaddr] = useState(null);
-
+  const reduxConnected = useSelector((state) => state.rootReducer.connected);
+  const [connected, setConnected] = useState(reduxConnected);
   useEffect(() => {
     // Load the client side components dynamically ONLY after the window is loaded
     loadWalletComponents();
-    //console.log("type of window " + typeof window);
   }, [typeof window]);
 
   const loadWalletComponents = () => {
-    //console.log("type of window 2 " + typeof window);
     if (typeof window !== "undefined") {
-      //console.log("type of window 3 " + typeof window);
-      //window.addEventListener("load", () => {
       import("./ICPWalletComponents").then((module) => {
         setStoicWallet(() => module.default);
       });
-      //});
-      //console.log("dynamic component loaded");
     }
   };
 
   useEffect(() => {
+    console.log("setting identity");
     if (stoicWallet) {
       stoicWallet.load().then(async (identity) => {
         if (identity !== false) {
-          //ID is a already connected wallet!
+          console.log("logged in");
           setIdentity(identity);
           setICPaddr(identity.getPrincipal().toText());
-          //setConnected(true);
+        } else {
+          console.log("not logged in");
         }
       });
     }
@@ -68,31 +73,49 @@ const ConnectWallet = () => {
   const connectLokaCanister = async () => {
     if (!identity || !stoicWallet) return;
     var options = {};
-    options["identity"] = identity;
-    var loka_ = createActor("af353-wyaaa-aaaak-qcmtq-cai", options);
-    //const greeting = await loka_.mintContract();
-    const greeting = await loka_.greet();
-    console.log(greeting);
+    options["identity"] = identity; //bnz7o-iuaaa-aaaaa-qaaaa-cai    b77ix-eeaaa-aaaaa-qaada-cai
+    console.log("connecting to canister");
+    var loka_ = createActor("c2lt4-zmaaa-aaaaa-qaaiq-cai", options);
     setLoka(loka_);
   };
 
   useEffect(() => {
+    console.log("checking identity");
     if (identity) {
-      //console.log(identity.getPrincipal().toText() + " connected " + connected);
       connectLokaCanister();
+    } else {
+      console.log("identity not foud");
     }
-  }, [connected]);
+  }, [connected, identity]);
 
   useEffect(() => {
-    if (loka) dispatch(changeLokaCanister(loka));
+    if (loka) {
+      dispatch(changeLokaCanister(loka));
+      getAllControllers();
+    }
   }, [loka]);
 
+  const getAllControllers = async () => {
+    console.log("getting list of loka mining site controllers");
+    var controllers = [];
+    var listOfControllers = await loka.getMiningSites();
+    var miningSites = [];
+    listOfControllers.forEach((item, index) => {
+      var cont_ = createControllers(item.controllerCanisterId.toString());
+      controllers.push(cont_);
+      miningSites.push(item);
+    });
+    dispatch(changeControllers(controllers));
+    dispatch(changeMiningSites(miningSites));
+    console.log(
+      "found " + controllers.length + " mining sites and Loka NFT series"
+    );
+  };
+
   const login = async (t) => {
-    //console.log("lol");
     stoicWallet.load().then(async (identity) => {
       var identity_ = "";
       if (identity !== false) {
-        //ID is a already connected wallet!
         setIdentity(identity);
       } else {
         //No existing connection, lets make one!
@@ -101,21 +124,24 @@ const ConnectWallet = () => {
       }
       dispatch(changeICPAddress(identity_.getPrincipal().toText()));
       setICPaddr(identity_.getPrincipal().toText());
-      //Lets display the connected principal!
     });
   };
+
   function disconnect() {
     userSession.signUserOut("/");
     stoicWallet.disconnect();
     setConnected(false);
+    dispatch(changeConnected(false));
     dispatch(changeICPAddress(""));
   }
-  const [appLoaded, setAppLoaded] = useState(false);
 
   useEffect(() => {
-    if (ICPaddr && ICPaddr != "") setConnected(true);
-    console.log("ip " + ICPaddr);
-    dispatch(changeICPAddress(ICPaddr));
+    if (ICPaddr && ICPaddr != "") {
+      setConnected(true);
+      dispatch(changeConnected(true));
+      console.log("ip " + ICPaddr);
+      dispatch(changeICPAddress(ICPaddr));
+    }
   }, [ICPaddr]);
 
   const stacksAddress = useSelector((state) => state.rootReducer.stacksAddress);
@@ -133,7 +159,6 @@ const ConnectWallet = () => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  // if (mounted && userSession.isUserSignedIn()) {
   if (connected) {
     return (
       <div>

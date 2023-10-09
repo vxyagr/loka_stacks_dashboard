@@ -3,8 +3,8 @@ import "tailwindcss/tailwind.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
-const TokenDashboard = () => {
-  const [nftList, setNFTList] = useState([]);
+const TokenDashboard = ({ nftList_ }) => {
+  const [nftList, setNFTList] = useState(nftList_);
   const [totalLOMClaimed, setTotalLOMClaimed] = useState(0);
   const [totalLOMClaimable, setTotalLOMClaimable] = useState(0);
   const [totalContractAmount, setTotalContractAmount] = useState(0);
@@ -29,9 +29,9 @@ const TokenDashboard = () => {
 
   const getNFTList = async () => {
     if (loka && currentICPAddress) {
-      const nftList_ = await loka.getOwnedContracts();
-      setNFTList(nftList_);
-      console.log(nftList);
+      //const nftList_ = await loka.getOwnedContracts();
+      //setNFTList(nftList_);
+      //console.log(nftList);
     }
   };
 
@@ -43,7 +43,7 @@ const TokenDashboard = () => {
     var expired_ = 0;
     var active_ = 0;
     var staked_ = 0;
-    console.log("calculating " + nftList.length);
+    //console.log("calculating " + nftList.length);
     nftList.forEach((item, index) => {
       totalLOMClaimed_ += parseInt(item.claimedLOM);
       totalLOMClaimable_ += parseInt(item.claimableLOM);
@@ -63,7 +63,7 @@ const TokenDashboard = () => {
   };
 
   useEffect(() => {
-    getNFTList();
+    // getNFTList();
   }, [loka]);
 
   useEffect(() => {
