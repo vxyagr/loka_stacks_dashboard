@@ -110,7 +110,11 @@ const MyLoka: NextPage = () => {
                   </section>
                   {nftList.map((nft, index) => (
                     <section key={index} className="lg:flex p-5 ">
-                      <ContractDashboard image={"lokaNFT.png"} nft={nft} />
+                      <ContractDashboard
+                        image={"lokaNFT.png"}
+                        nft={nft}
+                        controller={controllers[index]}
+                      />
                     </section>
                   ))}
                 </div>

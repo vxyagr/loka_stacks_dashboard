@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AppConfig, showConnect, UserSession } from "@stacks/connect";
+import { AuthClient } from "@dfinity/auth-client";
 import { useSelector, useDispatch } from "react-redux";
 import {
   changeConnected,
@@ -57,6 +58,7 @@ const ConnectWallet = () => {
 
   useEffect(() => {
     console.log("setting identity");
+
     if (stoicWallet) {
       stoicWallet.load().then(async (identity) => {
         if (identity !== false) {
@@ -74,8 +76,13 @@ const ConnectWallet = () => {
     if (!identity || !stoicWallet) return;
     var options = {};
     options["identity"] = identity; //bnz7o-iuaaa-aaaaa-qaaaa-cai    b77ix-eeaaa-aaaaa-qaada-cai
-    console.log("connecting to canister");
-    var loka_ = createActor("l4mjr-aiaaa-aaaak-qcnmq-cai", options);
+    console.log("connecting to main canister with identity " + identity);
+    var canisterAddress = process.env.LOKA_CANISTER;
+    //c2lt4-zmaaa-aaaaa-qaaiq-cai
+    canisterAddress = "l4mjr-aiaaa-aaaak-qcnmq-cai";
+    //canisterAddress = "c2lt4-zmaaa-aaaaa-qaaiq-cai";
+    console.log("canister address " + canisterAddress);
+    var loka_ = createActor(canisterAddress, options);
     setLoka(loka_);
   };
 
@@ -100,8 +107,13 @@ const ConnectWallet = () => {
     var controllers = [];
     var listOfControllers = await loka.getMiningSites();
     var miningSites = [];
+    var options = {};
+    options["identity"] = identity;
     listOfControllers.forEach((item, index) => {
-      var cont_ = createControllers(item.controllerCanisterId.toString());
+      var cont_ = createControllers(
+        item.controllerCanisterId.toString(),
+        options
+      );
       controllers.push(cont_);
       miningSites.push(item);
     });

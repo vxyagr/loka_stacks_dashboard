@@ -10,16 +10,35 @@ export { idlFactory } from "./candid/controllers.did.js";
  * Note: canister environment variable will be standardized as
  * process.env.CANISTER_ID_<CANISTER_NAME_UPPERCASE>
  * beginning in dfx 0.15.0
- */
-export const canisterId =
+ * export const canisterId =
   process.env.CANISTER_ID_HELLO || process.env.HELLO_CANISTER_ID;
+ */
 
 export const createActor = (canisterId, options = {}) => {
   // const agent = options.agent || new HttpAgent({ ...options.agentOptions });
   var args = {};
   args["host"] = "https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/"; //canister deploy location on ICP - ask canister developer for this
+  console.log("making sure identity is not null " + options.identity);
   //args["host"] = "http://192.168.1.8:8000/"; //canister deploy location on ICP - ask canister developer for this
   args["identity"] = options.identity;
+
+  // Fetch root key for certificate validation during development
+
+  /*
+
+   const agentOptions: HttpAgentOptions = {
+                    host: "https://" + puppyCanisterId + ".raw.ic0.app/",
+                    identity: this.identity,
+                };
+
+                const agent = new HttpAgent(agentOptions);
+
+                const puppyCanisterActor = Actor.createActor<PuppyCanisterApi>(idlPuppy, {
+                    agent,
+                    canisterId: puppyCanisterId,
+                });
+
+  */
   const agent = new HttpAgent(args);
   //af353-wyaaa-aaaak-qcmtq-cai
   if (options.agent && options.agentOptions) {
@@ -27,7 +46,6 @@ export const createActor = (canisterId, options = {}) => {
       "Detected both agent and agentOptions passed to createActor. Ignoring agentOptions and proceeding with the provided agent."
     );
   }
-
   // Fetch root key for certificate validation during development
   if (process.env.DFX_NETWORK !== "ic") {
     agent.fetchRootKey().catch((err) => {
@@ -37,7 +55,6 @@ export const createActor = (canisterId, options = {}) => {
       console.error(err);
     });
   }
-
   // Creates an actor with using the candid interface and the HttpAgent
   return Actor.createActor(idlFactory, {
     agent,

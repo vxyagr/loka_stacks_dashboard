@@ -7,12 +7,12 @@ import LargeButton from "../../components/generalComponents/LargeButton";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
-const ContractDashboard = ({ image, nft }) => {
+const ContractDashboard = ({ image, nft, controller }) => {
   const currentICPAddress = useSelector(
     (state) => state.rootReducer.icpAddress
   );
 
-  const loka = useSelector((state) => state.rootReducer.lokaCanister);
+  const loka = controller;
 
   const [currentNFT, setCurrentNFT] = useState(nft);
   const updateNFTState = async () => {
@@ -26,6 +26,7 @@ const ContractDashboard = ({ image, nft }) => {
           image={image}
           nft={currentNFT}
           update={updateNFTState}
+          controller={controller}
         />
       </div>
 

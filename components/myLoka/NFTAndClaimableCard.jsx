@@ -2,14 +2,14 @@ import SmallButton from "../../components/generalComponents/SmallButton";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
-const NFTAndClaimableCard = ({ image, nft, update }) => {
+const NFTAndClaimableCard = ({ image, nft, update, controller }) => {
   const [claimBTCLoading, setClaimBTCLoading] = useState(false);
   const [claimLOMLoading, setClaimLOMLoading] = useState(false);
   const currentICPAddress = useSelector(
     (state) => state.rootReducer.icpAddress
   );
 
-  const loka = useSelector((state) => state.rootReducer.lokaCanister);
+  const loka = controller;
 
   const claimBTC = async () => {
     if (parseInt(nft.claimableBTC) <= 0) return;
