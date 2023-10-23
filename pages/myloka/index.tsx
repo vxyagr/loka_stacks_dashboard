@@ -26,6 +26,7 @@ import Head from "next/head";
 const MyLoka: NextPage = () => {
   const dispatch = useDispatch();
   const [nftList, setNFTList] = useState<any[]>([]);
+  const [controllerList, setControllerList] = useState<any[]>([]);
   const [emptyList, setEmptyList] = useState<any[]>([]);
   const currentInvestmentValue = useSelector(
     (state: any) => state.rootReducer.investment
@@ -59,6 +60,10 @@ const MyLoka: NextPage = () => {
     console.log("getting NFT from a site..");
     var nftList_ = await canister.getOwnedContracts();
     console.log("fetched " + nftList_.length + " contracts");
+    nftList_.forEach((item: any, index: any) => {
+      //var nftList_: any = getNFTList(item);
+      item.controller = canister;
+    });
     console.log(nftList_);
     if (nftList_.length > 0) setNFTList(emptyList.concat(nftList_));
     return nftList_;
@@ -113,7 +118,7 @@ const MyLoka: NextPage = () => {
                       <ContractDashboard
                         image={"lokaNFT.png"}
                         nft={nft}
-                        controller={controllers[index]}
+                        controller={nft.controller}
                       />
                     </section>
                   ))}

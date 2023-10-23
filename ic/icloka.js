@@ -17,8 +17,8 @@ export const canisterId =
 export const createActor = (canisterId, options = {}) => {
   // const agent = options.agent || new HttpAgent({ ...options.agentOptions });
   var args = {};
-  args["host"] = "https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/"; //canister deploy location on ICP - ask canister developer for this
-  //args["host"] = "http://192.168.1.8:8000/"; //canister deploy location on ICP - ask canister developer for this
+  //args["host"] = "https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/"; //canister deploy location on ICP - ask canister developer for this
+  args["host"] = "http://192.168.1.8:8000/"; //canister deploy location on ICP - ask canister developer for this
   args["identity"] = options.identity;
   const agent = new HttpAgent(args);
   //af353-wyaaa-aaaak-qcmtq-cai

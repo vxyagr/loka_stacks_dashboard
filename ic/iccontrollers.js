@@ -17,9 +17,9 @@ export { idlFactory } from "./candid/controllers.did.js";
 export const createActor = (canisterId, options = {}) => {
   // const agent = options.agent || new HttpAgent({ ...options.agentOptions });
   var args = {};
-  args["host"] = "https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/"; //canister deploy location on ICP - ask canister developer for this
+  //args["host"] = "https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/"; //canister deploy location on ICP - ask canister developer for this
   console.log("making sure identity is not null " + options.identity);
-  //args["host"] = "http://192.168.1.8:8000/"; //canister deploy location on ICP - ask canister developer for this
+  args["host"] = "http://192.168.1.8:8000/"; //canister deploy location on ICP - ask canister developer for this
   args["identity"] = options.identity;
 
   // Fetch root key for certificate validation during development

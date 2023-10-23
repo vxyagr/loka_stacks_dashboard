@@ -1,6 +1,7 @@
 import SmallButton from "../../components/generalComponents/SmallButton";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+import { createActor as createControllers } from "../../ic/iccontrollers";
 
 const NFTAndClaimableCard = ({ image, nft, update, controller }) => {
   const [claimBTCLoading, setClaimBTCLoading] = useState(false);
@@ -9,12 +10,12 @@ const NFTAndClaimableCard = ({ image, nft, update, controller }) => {
     (state) => state.rootReducer.icpAddress
   );
 
-  const loka = controller;
+  const loka = nft.controller;
 
   const claimBTC = async () => {
     if (parseInt(nft.claimableBTC) <= 0) return;
     setClaimBTCLoading(true);
-    console.log("claiming BTC..");
+    console.log("claiming BTC.. " + nft.id.toString() + " " + loka);
     if (!loka || !currentICPAddress || parseInt(nft.claimableBTC) <= 0) return;
     var options = {};
     //options["identity"] = identity;
@@ -29,7 +30,7 @@ const NFTAndClaimableCard = ({ image, nft, update, controller }) => {
   const claimLOM = async () => {
     if (parseInt(nft.claimableLOM) <= 0) return;
     setClaimLOMLoading(true);
-    console.log("claiming LOM..");
+    console.log("claiming LOM.." + nft.id.toString());
     if (!loka || !currentICPAddress || parseInt(nft.claimableLOM) <= 0) return;
     var options = {};
     //options["identity"] = identity;

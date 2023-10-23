@@ -79,8 +79,8 @@ const ConnectWallet = () => {
     console.log("connecting to main canister with identity " + identity);
     var canisterAddress = process.env.LOKA_CANISTER;
     //c2lt4-zmaaa-aaaaa-qaaiq-cai
-    canisterAddress = "l4mjr-aiaaa-aaaak-qcnmq-cai";
-    //canisterAddress = "c2lt4-zmaaa-aaaaa-qaaiq-cai";
+    //canisterAddress = "l4mjr-aiaaa-aaaak-qcnmq-cai";
+    canisterAddress = "c2lt4-zmaaa-aaaaa-qaaiq-cai";
     console.log("canister address " + canisterAddress);
     var loka_ = createActor(canisterAddress, options);
     setLoka(loka_);
