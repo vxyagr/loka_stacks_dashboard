@@ -29,7 +29,7 @@ const DashboardMenu = ({ selectedMenu }) => {
       link_address: "#",
     },
     {
-      title: "Guides",
+      title: "Guides ",
       link_address: "#",
     },
     {
