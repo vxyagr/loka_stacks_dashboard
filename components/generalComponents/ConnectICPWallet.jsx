@@ -15,6 +15,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import dynamic from "next/dynamic";
 import { createActor } from "../../ic/icloka";
 import { createActor as createControllers } from "../../ic/iccontrollers";
+import { createActor as ckBTC } from "../../ic/icckbtc";
 import { list } from "postcss";
 
 const appConfig = new AppConfig(["store_write", "publish_data"]);
@@ -79,10 +80,17 @@ const ConnectWallet = () => {
     console.log("connecting to main canister with identity " + identity);
     var canisterAddress = process.env.LOKA_CANISTER;
     //c2lt4-zmaaa-aaaaa-qaaiq-cai
-    canisterAddress = "l4mjr-aiaaa-aaaak-qcnmq-cai";
+    canisterAddress = "6ag2j-tqaaa-aaaam-ab2cq-cai";
     //canisterAddress = "c2lt4-zmaaa-aaaaa-qaaiq-cai";
     console.log("canister address " + canisterAddress);
     var loka_ = createActor(canisterAddress, options);
+    var ckbtc_ = ckBTC("mqygn-kiaaa-aaaar-qaadq-cai", options);
+    var acc_ = {};
+    acc_["owner"] = 'principal "' + ICPaddr + '"';
+    acc_["subaccount"] = null;
+
+    var balance_ = await ckbtc_.get_btc_address(acc_);
+    console.log("addr = " + balance_);
     setLoka(loka_);
   };
 
